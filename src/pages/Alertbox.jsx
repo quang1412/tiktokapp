@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from '../logo.svg';
 import '../style/Alertbox.css';
 import { io } from "socket.io-client";
 
 const socket = io("https://tiktoktool.glitch.me");
 
-function Alertbox() {
+const Alertbox = () => {
   return (
       <div className="App">
       <header className="App-header">
