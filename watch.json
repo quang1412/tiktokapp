@@ -9,7 +9,8 @@
     "exclude": [
       "^public/",
       "^dist/",
-      "^build/"
+      "^build/",
+      "\\.jxs"
     ],
     "include": [
       "\\.json"

@@ -4,7 +4,11 @@ import '../style/Alertbox.css';
 import { io } from "socket.io-client";
 
 const socket = io("https://tiktoktool.glitch.me");
+
+const socketConnect = () => {
   
+}
+
 const Alertbox = () => {
   return (
       <div className="App">
