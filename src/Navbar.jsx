@@ -1,13 +1,13 @@
 import React from "react";
-import {  Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light position-absolute w-100" style={{ 'z-index':'1' }}>
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light position-absolute w-100" style={{ 'zIndex':'1' }}>
+  <div className="container-fluid">
+    <a className="navbar-brand" href="#">Home</a>
     <button
-      class="navbar-toggler"
+      className="navbar-toggler"
       type="button"
       data-mdb-toggle="collapse"
       data-mdb-target="#navbarNav"
@@ -15,21 +15,18 @@ function Navbar() {
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <i class="fas fa-bars"></i>
+      <i className="fas fa-bars"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <Link to="/" class="nav-link">Home</Link>
+    <div className="collapse navbar-collapse" id="navbarNav">
+      <ul className="navbar-nav"> 
+        <li className="nav-item">
+          <Link to="/alertbox" className="nav-link">Alertbox</Link>
         </li>
-        <li class="nav-item">
-          <Link to="/alertbox" class="nav-link">Alertbox</Link>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Pricing</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled"
+        <li className="nav-item">
+          <a className="nav-link disabled"
             >Disabled</a
           >
         </li>
