@@ -3,7 +3,7 @@ import logo from '../logo.svg';
 import '../style/Alertbox.css';
 import { io } from "socket.io-client";
 
-
+const [log, changeLog] = useState([]);
 
 const socketConnect = () => {
   let socket = io("https://tiktoktool.glitch.me");
@@ -17,14 +17,12 @@ const Alertbox = () => {
   socketConnect();
   
   return (
-      <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code>
-        </p>
-        <a className="App-link" href="/" rel="noopener noreferrer"> Alertbox </a>
-      </header>
+    <div className="App">
+      <div className="layer" id="log" style={{"display":"none"}}>
+        {log.map((l, i) => (<p>l</p>))}
+      </div>
+      <div className="layer" id="play" style={{"display":"none"}}></div>
+      <div className="layer" id="setting" style={{"display":"none"}}></div>
     </div>
   );
 }
