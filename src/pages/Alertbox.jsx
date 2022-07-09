@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../logo.svg';
-import '../style/Home.css';
+import '../style/Alertbox.css';
 
 function Home() {
   return (

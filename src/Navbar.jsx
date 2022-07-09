@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light position-absolute w-100" style={{ 'z-index':'1' }}>
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
     <button

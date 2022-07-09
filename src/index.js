@@ -6,6 +6,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
+import Alertbox from "./pages/Alertbox";
 
 
 // ReactDOM.render(<App />, document.getElementById('root'));
