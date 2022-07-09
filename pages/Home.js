@@ -2,8 +2,7 @@ import React, { Component, useState, useEffect, useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { io } from "socket.io-client";
-import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home';
+
 
 
 // class App extends Component {
@@ -31,17 +30,7 @@ import Home from '../pages/Home';
 
 
 
-function App() { 
-
-  const socketRef = useRef();
-
-  useEffect(() => {
-    socketRef.current = io.connect('https://tiktoktool.glitch.me')
-    
-    socketRef.current.on('connect', () => {
-      console.log('connect')
-    })
-  }, []);
+function Home() {  
 
 
   return (
@@ -57,7 +46,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            Home
           </a>
         </header>      
       </div>
@@ -65,4 +54,4 @@ function App() {
 }
 
 
-export default App;
+export default Home;
