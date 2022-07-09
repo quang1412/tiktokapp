@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 const [log, changeLog] = useState([]);
 
 const socketConnect = () => {
-  let socket = io("https://tiktoktool.glitch.me");
+  let socket = io("https://tiktoktool.glitch.me",  {query: `id=dongnguyenchat`});
   socket.on('connect', () => {
     console.log('connected')
   })
