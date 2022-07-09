@@ -15,7 +15,7 @@ const socketConnect = () => {
 const askId = async () => {
   var id = new URLSearchParams(document.location.search).get("id");
   if(!id){
-    id = prompt('Enter tiktok id without "@" (eg: tiktok)', "");
+    id = window.prompt('Enter tiktok id without "@" (eg: tiktok)', "");
     if (id == null || id == "") {
       return false;
     }
@@ -25,7 +25,8 @@ const askId = async () => {
 }
 
 
-const Alertbox = () => {
+const Alertbox = async () => {
+  let id = await askId();
   
   socketConnect();
   
