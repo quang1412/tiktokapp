@@ -14,9 +14,9 @@ export default function Main() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="alertbox" element={<Alertbox />} />
+          <Route index element={<Home />}/>
         </Route>
+        <Route path="alertbox" element={<Alertbox />}/>
       </Routes>
     </BrowserRouter>
   );
