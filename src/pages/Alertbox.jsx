@@ -4,7 +4,7 @@ import '../style/Alertbox.css';
 import { io } from "socket.io-client";
 
 const socket = io("https://tiktoktool.glitch.me");
-
+  
 const Alertbox = () => {
   return (
       <div className="App">
@@ -13,14 +13,8 @@ const Alertbox = () => {
         <p>
           Edit <code>src/App.js</code>
         </p>
-        <a
-          className="App-link"
-          href="javascript:;" 
-          rel="noopener noreferrer"
-        >
-          Alertbox
-        </a>
-      </header>      
+        <a className="App-link" href="/" rel="noopener noreferrer"> Alertbox </a>
+      </header>
     </div>
   );
 }

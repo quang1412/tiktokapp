@@ -12,7 +12,7 @@ function Home() {
         </p>
         <a
           className="App-link"
-          href="javascript:;" 
+          href="/"  
           rel="noopener noreferrer"
         >
           Learn React
