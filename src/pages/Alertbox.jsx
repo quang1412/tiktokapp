@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../logo.svg';
 import '../style/Alertbox.css';
 
-function Home() {
+function Alertbox() {
   return (
       <div className="App">
       <header className="App-header">
@@ -23,4 +23,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Alertbox;

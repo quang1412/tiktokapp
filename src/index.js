@@ -21,7 +21,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} /> 
+          <Route index element={<Home />} />
+          <Route path="alertbox" element={<Alertbox />} />
         </Route>
       </Routes>
     </BrowserRouter>
