@@ -20,10 +20,10 @@ function Navbar() {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <Link to="/" class="nav-link">Home</Link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <Link to="/alertbox" class="nav-link">Alertbox</Link>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
