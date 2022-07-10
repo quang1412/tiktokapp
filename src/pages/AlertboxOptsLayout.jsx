@@ -1,4 +1,5 @@
 import React from "react";
+import Select from 'react-select';
 
 export default function alertboxOptsLayout(data){
   const options = data.opts; 
@@ -87,7 +88,7 @@ export default function alertboxOptsLayout(data){
                     </div>
                     <div className="col-8">
                       <div className="form-check d-inline-block">
-                        <input className="form-check-input" type="radio" defaultValue="true" name="active" checked/>
+                        <input className="form-check-input" type="radio" defaultValue="true" name="active" defaultChecked/>
                         <label className="form-check-label">
                           On
                         </label>
@@ -106,7 +107,7 @@ export default function alertboxOptsLayout(data){
                     </div>
                     <div className="col-8">
                       <div className="form-check d-inline-block">
-                        <input className="form-check-input" type="radio" defaultValue="above" name="layout" checked/>
+                        <input className="form-check-input" type="radio" defaultValue="above" name="layout" defaultChecked/>
                         <label className="form-check-label">
                           Above
                         </label>
@@ -167,16 +168,12 @@ export default function alertboxOptsLayout(data){
                       <label className="form-label mb-0">Template</label>
                     </div>
                     <div className="col-8"> 
-                      {
-                        type == 'gift' && (
-                          <>
-                            <div className="input-group">
-                              <input name="message_template" type="text" className="form-control" placeholder="{username} send {giftcount} {giftname}"/>
-                            </div>
-                            <small>Keys: &#123nickname&#125 / &#123username&#125 / &#123giftname&#125 / &#123giftcount&#125 / &#123amount&#125</small>
-                          </>
-                        )
-                      }
+                      { type == 'gift' && (<>
+                          <div className="input-group">
+                            <input name="message_template" type="text" className="form-control" placeholder="{username} send {giftcount} {giftname}"/>
+                          </div>
+                          <small>Keys: &#123nickname&#125 / &#123username&#125 / &#123giftname&#125 / &#123giftcount&#125 / &#123amount&#125</small>
+                        </>) }
                     </div>
                   </div>
                   <div className="row mb-3">
@@ -213,7 +210,7 @@ export default function alertboxOptsLayout(data){
                     </div>
                     <div className="col-8">
                       <div className="input-group">
-                        <span className="input-group-text p-0" style="background-image:url(https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif);background-size: contain;background-position: center;background-repeat: no-repeat;"><div style="width: 3rem;height: 100%;"></div></span>
+                        <span className="input-group-text p-0" style={{"background-image":"url(https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif)", "background-size":"contain", "background-position": "center", "background-repeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
                         <input name="image_url" type="text" className="form-control" placeholder="Image URL" defaultValue="https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif"/>
                       </div>
                     </div>
@@ -224,7 +221,7 @@ export default function alertboxOptsLayout(data){
                     </div>
                     <div className="col-8">
                       <div className="input-group">
-                        <span className="input-group-text p-0"><div className="d-flex justify-content-center align-items-center" style="width: 3rem;height: 100%;"><i className="fas fa-music mauto" aria-hidden="true"></i></div></span>
+                        <span className="input-group-text p-0"><div className="d-flex justify-content-center align-items-center" style={{"width": "3rem","height": "100%"}}><i className="fas fa-music mauto" aria-hidden="true"></i></div></span>
                         <input name="sound_url" type="text" className="form-control" placeholder="Image URL" defaultValue="https://isetup.vn/tiktok/assets/sound/new-message-4.ogg"/>
                       </div>
                     </div>
@@ -281,7 +278,7 @@ export default function alertboxOptsLayout(data){
                         </div>
                         <div className="col-8">
                           <div className="input-group mb-3">
-                            <span className="input-group-text p-0" style="background-color:#ffffff"><div style="width:3rem"></div></span>
+                            <span className="input-group-text p-0" style={{"background-color":"#ffffff"}}><div style={{"width":"3rem"}}></div></span>
                             <input name="text_color" type="text" className="form-control" placeholder="#ffffff" defaultValue="#ffffff"  title="Set text color"/>
                           </div>
                         </div>
@@ -292,7 +289,7 @@ export default function alertboxOptsLayout(data){
                         </div>
                         <div className="col-8">
                           <div className="input-group mb-3">
-                            <span className="input-group-text p-0" style="background-color:#32c3a6"><div style="width:3rem"></div></span>
+                            <span className="input-group-text p-0" style={{"background-color":"#32c3a6"}}><div style={{"width":"3rem"}}></div></span>
                             <input name="text_highlight_color" type="text" className="form-control" placeholder="#32c3a6" defaultValue="#32c3a6"  title="Set text color"/>
                           </div>
                         </div>
