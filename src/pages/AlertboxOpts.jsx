@@ -244,22 +244,22 @@ export default function AlertboxOpts(props){
                       <option defaultValue='wiggle'>Wiggle</option>
                       <option defaultValue="wave">Wave</option>
                       <option defaultValue="wobble">Wobble</option>
-                      <option defaultValue="rubberBand">Rubberband</option>
+                      <option defaultValue="rubberband">Rubberband</option>
                       <option defaultValue="bounce">Bounce</option>
                       <option defaultValue="tada">Tada</option>
                     </select>
                     <div className="fw-bold text-nowrap text-primary">
-                      <span className={`animated-letter ${options[type].text_animation}`}>S</span>
-                      <span className={`animated-letter ${options[type].text_animation}`}>A</span>
-                      <span className={`animated-letter ${options[type].text_animation}`}>M</span>
-                      <span className={`animated-letter ${options[type].text_animation}`}>P</span>
-                      <span className={`animated-letter ${options[type].text_animation}`}>L</span>
-                      <span className={`animated-letter ${options[type].text_animation}`}>E</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>S</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>A</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>M</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>P</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>L</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>E</span>
                       <span className="p-1"></span>
-                      <span className={`animated-letter ${options[type].text_animation}`}>T</span>
-                      <span className={`animated-letter ${options[type].text_animation}`}>E</span>
-                      <span className={`animated-letter ${options[type].text_animation}`}>X</span>
-                      <span className={`animated-letter ${options[type].text_animation}`}>T</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>T</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>E</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>X</span>
+                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>T</span>
                     </div>
                   </div>
                 </div>
