@@ -14,26 +14,26 @@ export default function AlertboxOpts(props){
     
     switch(type){
       case 'number':
-        value = value.replace('e', '') || 0
-        value = parseInt(value)
+        value = parseInt(value.replace('e', '') || options[optType][optName]);
+        target.value = value;
         break;
       case 'range':
-        value = parseInt(value)
+        value = parseInt(value);
         break;
       case 'radio':
-        (value === "true" || value === "false") && (value = (value == 'true'))
+        (value === "true" || value === "false") && (value = (value == 'true'));
         break;
     }
     
     switch(optName){
       case "image_url":
-        let check = await checkImage(value)
+        let check = await checkImage(value);
         if(!check){
           target.value = options[optType][optName];
-          return
+          return;
         }
-        console.log('done')
         break;
+        
     }
     
     console.log(optType, optName, value);
@@ -44,10 +44,20 @@ export default function AlertboxOpts(props){
   const checkImage = async url => {
     return new Promise((resolve) => {
       console.log(url)
-      let image = new Image();
-      image.addEventListener('load', () => {image = null; return resolve(true)});
-      image.addEventListener('error', () => {image = null; return resolve(false)});
+      var image = new Image();
+      image.addEventListener('load', () => resolve(true));
+      image.addEventListener('error', () => resolve(false));
       image.src = url;
+    })
+  }
+  
+  const checkAudio = async url => {
+    return new Promise((resolve) => {
+      console.log(url)
+      var audio = new Audio();
+      audio.addEventListener('load', () => resolve(true));
+      audio.addEventListener('error', () => resolve(false));
+      audio.src = url;
     })
   }
   
