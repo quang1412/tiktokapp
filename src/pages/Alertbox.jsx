@@ -10,14 +10,15 @@ const Alertbox = () => {
   
   const socketConnect = () => {
     let socket = io("https://tiktoktool.glitch.me",  {query: `id=dongnguyenchat`});
-    socket.on('connect', () => {
-      // log.push('connected')
+    socket.on('connect', () => { 
+      
       console.log('connected')
     })
   }
   
   const handleOptions = options => {
     console.log(options)
+    setOptions(options)
     localStorage.alertboxOpts = JSON.stringify(options)
   }
   
