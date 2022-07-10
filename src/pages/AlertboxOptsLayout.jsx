@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 
-export default class alertboxOptsLayout extends Component (){
-  constructor(props,data){
+export default class alertboxOptsLayout extends Component{
+  constructor(props){
     super(props);
-    this.options = data.opts; 
+    this.options = this.props.opts; 
     this.intro = ["fade In","fade In Down","fade In Down Big","fade In Left","fade In Left Big","fade In Right","fade In Right Big","fade In Up","fade In Up Big","fade In Top Left","fade In Top Right","fade In Bottom Left","fade In Bottom Right","back In Down","back In Left","back In Right","back In Up","bounce In","bounce In Down","bounce In Left","bounce In Right","bounce In Up","flip In X","flip In Y","light Speed In Right","light Speed In Left","rotate In","rotate In Down Left","rotate In Down Right","rotate In Up Left","rotate In Up Right","roll In","zoom In","zoom In Down","zoom In Left","zoom In Right","zoom In Up","slide In Down","slide In Left","slide In Right","slide In Up"];
     this.outro = ["fade Out","fade Out Down","fade Out Down Big","fade Out Left","fade Out Left Big","fade Out Right","fade Out Right Big","fade Out Up","fade Out Up Big","fade Out Top Left","fade Out Top Right","fade Out Bottom Right","fade Out Bottom Left","back Out Down","back Out Left","back Out Right","back Out Up","bounce Out","bounce Out Down","bounce Out Left","bounce Out Right","bounce Out Up","flip Out X","flip Out Y","light Speed Out Right","light Speed Out Left","rotate Out","rotate Out Down Left","rotate Out Down Right","rotate Out Up Left","rotate Out Up Right","roll Out","zoom Out","zoom Out Down","zoom Out Left","zoom Out Right","zoom Out Up","slide Out Down","slide Out Left","slide Out Right","slide Out Up"];
   }
@@ -48,7 +48,7 @@ export default class alertboxOptsLayout extends Component (){
                 </div>
                 <div className="col-8">
                   <div className="range">
-                      <input defaultValue={this.options.general.alert_delay} onChange={this.handleChange} type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
+                      <input onChange={this.handleChange} defaultValue={this.options.general.alert_delay} type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
                   </div>
                   </div>
               </div>
@@ -58,13 +58,13 @@ export default class alertboxOptsLayout extends Component (){
                 </div>
                 <div className="col-8">
                   <div className="form-check d-inline-block">
-                    <input className="form-check-input" type="radio" defaultValue="true" name="alert_parries" onChange={this.handleChange} />
+                    <input onChange={this.handleChange} className="form-check-input" type="radio" defaultValue="true" name="alert_parries"/>
                     <label className="form-check-label">
                       On
                     </label>
                   </div>
                   <div className="form-check d-inline-block ms-3">
-                    <input className="form-check-input" type="radio" defaultValue="false" name="alert_parries" onChange={this.handleChange} defaultChecked={true}/>
+                    <input onChange={this.handleChange} className="form-check-input" type="radio" defaultValue="false" name="alert_parries" defaultChecked={true}/>
                     <label className="form-check-label">
                       Off
                     </label>
@@ -77,7 +77,7 @@ export default class alertboxOptsLayout extends Component (){
                 </div>
                 <div className="col-8">
                   <div className="range">
-                    <input name="parry_alert_delay" type="range" className="form-range" min="1" max="20" step="1" defaultValue="4" onChange={this.handleChange} data-before="1" data-before-subfix="s"/>
+                    <input onChange={this.handleChange} name="parry_alert_delay" type="range" className="form-range" min="1" max="20" step="1" defaultValue="4" data-before="1" data-before-subfix="s"/>
                   </div>
                   </div>
               </div>
@@ -95,13 +95,13 @@ export default class alertboxOptsLayout extends Component (){
                     </div>
                     <div className="col-8">
                       <div className="form-check d-inline-block">
-                        <input className="form-check-input" type="radio" defaultValue="true" name="active" defaultChecked/>
+                        <input onChange={this.handleChange} className="form-check-input" type="radio" defaultValue="true" name="active" defaultChecked/>
                         <label className="form-check-label">
                           On
                         </label>
                       </div>
                       <div className="form-check d-inline-block ms-3">
-                        <input className="form-check-input" type="radio" defaultValue="false" name="active"/>
+                        <input onChange={this.handleChange} className="form-check-input" type="radio" defaultValue="false" name="active"/>
                         <label className="form-check-label">
                           Off
                         </label>
@@ -114,19 +114,19 @@ export default class alertboxOptsLayout extends Component (){
                     </div>
                     <div className="col-8">
                       <div className="form-check d-inline-block">
-                        <input className="form-check-input" type="radio" defaultValue="above" name="layout" defaultChecked/>
+                        <input onChange={this.handleChange} className="form-check-input" type="radio" defaultValue="above" name="layout" defaultChecked/>
                         <label className="form-check-label">
                           Above
                         </label>
                       </div>
                       <div className="form-check d-inline-block ms-3">
-                        <input className="form-check-input" type="radio" defaultValue="banner" name="layout"/>
+                        <input onChange={this.handleChange} className="form-check-input" type="radio" defaultValue="banner" name="layout"/>
                         <label className="form-check-label">
                           Banner
                         </label>
                       </div>
                       <div className="form-check d-inline-block ms-3">
-                        <input className="form-check-input" type="radio" defaultValue="side" name="layout"/>
+                        <input onChange={this.handleChange} className="form-check-input" type="radio" defaultValue="side" name="layout"/>
                         <label className="form-check-label">
                           Side
                         </label>
@@ -138,37 +138,36 @@ export default class alertboxOptsLayout extends Component (){
                       <label className="form-label mb-0">Effects</label>
                     </div>
                     <div className="col-8 d-flex">
-                      <select className="form-select me-1" name="alert_animation_in">{
+                      <select className="form-select me-1" defaultValue="fadeInLeftBig" name="alert_animation_in">{
                         this.intro.map((e, i) => {
                           return (<option value={e.replaceAll(' ','')}>{e}</option>)
                         }) 
                       }</select>
-                      <select className="form-select ms-1" name="alert_animation_out">{
+                      <select className="form-select ms-1" defaultValue="fadeOutLeftBig" name="alert_animation_out">{
                         this.outro.map((e, i) => {
-                          return (<option value={e.replaceAll(" ","")}>{e}</option>)
+                          return (<option key={} value={e.replaceAll(" ","")}>{e}</option>)
                         }) 
                       }</select> 
                     </div>
                   </div>
-                  {
-                    type == "gift" && (<div className="row mb-3">
+                  { type == "gift" && (
+                    <div className="row mb-3">
                       <div className="col-4">
                         <label className="form-label mb-0">Min. donate</label>
                       </div>
                       <div className="col-8">
                         <div className="input-group w-50">
-                          <input name="alert_min_amount" type="number" className="form-control" placeholder="1"/>
+                          <input onChange={this.handleChange} name="alert_min_amount" type="number" className="form-control" placeholder="1"/>
                         </div>
                       </div>
-                    </div>)
-                  } 
+                    </div>) } 
                   <div className="row mb-3">
                     <div className="col-4">
                       <label className="form-label mb-0">Template</label>
                     </div>
                     <div className="col-8"> 
                       <div className="input-group">
-                        <input name="message_template" type="text" className="form-control" 
+                        <input onChange={this.handleChange} name="message_template" type="text" className="form-control" 
                           placeholder=
                           {(type == "gift" ? "{username} send {giftcount} {giftname}" : 
                             type == "follow" ? "{username} followed host" : 
@@ -190,8 +189,8 @@ export default class alertboxOptsLayout extends Component (){
                       <label className="form-label mb-0">Text effect</label>
                     </div>
                     <div className="col-8 d-flex align-items-center">
-                      <select className="form-select me-2" name="text_animation">
-                        <option defaultValue='wiggle' selected>Wiggle</option>
+                      <select defaultValue="wiggle" className="form-select me-2" name="text_animation">
+                        <option defaultValue='wiggle'>Wiggle</option>
                         <option defaultValue="wave">Wave</option>
                         <option defaultValue="wobble">Wobble</option>
                         <option defaultValue="rubberBand">Rubberband</option>
@@ -219,8 +218,8 @@ export default class alertboxOptsLayout extends Component (){
                     </div>
                     <div className="col-8">
                       <div className="input-group">
-                        <span className="input-group-text p-0" style={{"background-image":"url(https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif)", "background-size":"contain", "background-position": "center", "background-repeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
-                        <input name="image_url" type="text" className="form-control" placeholder="Image URL" defaultValue="https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif"/>
+                        <span className="input-group-text p-0" style={{"backgroundImage":"url(https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif)", "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
+                        <input onChange={this.handleChange} name="image_url" type="text" className="form-control" placeholder="Image URL" defaultValue="https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif"/>
                       </div>
                     </div>
                   </div>
@@ -231,7 +230,7 @@ export default class alertboxOptsLayout extends Component (){
                     <div className="col-8">
                       <div className="input-group">
                         <span className="input-group-text p-0"><div className="d-flex justify-content-center align-items-center" style={{"width": "3rem","height": "100%"}}><i className="fas fa-music mauto" aria-hidden="true"></i></div></span>
-                        <input name="sound_url" type="text" className="form-control" placeholder="Image URL" defaultValue="https://isetup.vn/tiktok/assets/sound/new-message-4.ogg"/>
+                        <input onChange={this.handleChange} name="sound_url" type="text" className="form-control" placeholder="Image URL" defaultValue="https://isetup.vn/tiktok/assets/sound/new-message-4.ogg"/>
                       </div>
                     </div>
                   </div>
@@ -241,7 +240,7 @@ export default class alertboxOptsLayout extends Component (){
                     </div>
                     <div className="col-8">
                       <div className="range">
-                        <input name="sound_volume" type="range" className="form-range" min="0" max="100" step="1" defaultValue="50" data-before="1" data-before-subfix="%"/>
+                        <input onChange={this.handleChange} name="sound_volume" type="range" className="form-range" min="0" max="100" step="1" defaultValue="50" data-before="1" data-before-subfix="%"/>
                       </div>
                       </div>
                   </div>
@@ -251,7 +250,7 @@ export default class alertboxOptsLayout extends Component (){
                     </div>
                     <div className="col-8">
                       <div className="range">
-                        <input name="alert_duration" type="range" className="form-range" min="2" max="300" step="1" defaultValue="10" data-before="1" data-before-subfix="s"/>
+                        <input onChange={this.handleChange} name="alert_duration" type="range" className="form-range" min="2" max="300" step="1" defaultValue="10" data-before="1" data-before-subfix="s"/>
                       </div>
                       </div>
                   </div>
@@ -261,7 +260,7 @@ export default class alertboxOptsLayout extends Component (){
                     </div>
                     <div className="col-8">
                       <div className="range">
-                        <input name="alert_text_delay" type="range" className="form-range" min="0" max="60" step="1" defaultValue="0" data-before="1" data-before-subfix="s"/>
+                        <input onChange={this.handleChange} name="alert_text_delay" type="range" className="form-range" min="0" max="60" step="1" defaultValue="0" data-before="1" data-before-subfix="s"/>
                       </div>
                       </div>
                   </div>
@@ -277,7 +276,7 @@ export default class alertboxOptsLayout extends Component (){
                         </div>
                         <div className="col-8">
                           <div className="range">
-                            <input name="font_size" type="range" className="form-range" min="12" max="80" step="2" defaultValue="64" data-before="1" data-before-subfix=""/>
+                            <input onChange={this.handleChange} name="font_size" type="range" className="form-range" min="12" max="80" step="2" defaultValue="64" data-before="1" data-before-subfix=""/>
                           </div>
                           </div>
                       </div>
@@ -287,7 +286,7 @@ export default class alertboxOptsLayout extends Component (){
                         </div>
                         <div className="col-8">
                           <div className="range">
-                            <input name="font_weight" type="range" className="form-range" min="300" max="900" step="100" defaultValue="800" data-before="1" data-before-subfix=""/>
+                            <input onChange={this.handleChange} name="font_weight" type="range" className="form-range" min="300" max="900" step="100" defaultValue="800" data-before="1" data-before-subfix=""/>
                           </div>
                           </div>
                       </div>
@@ -297,8 +296,8 @@ export default class alertboxOptsLayout extends Component (){
                         </div>
                         <div className="col-8">
                           <div className="input-group mb-3">
-                            <span className="input-group-text p-0" style={{"background-color":"#ffffff"}}><div style={{"width":"3rem"}}></div></span>
-                            <input name="text_color" type="text" className="form-control" placeholder="#ffffff" defaultValue="#ffffff"  title="Set text color"/>
+                            <span className="input-group-text p-0" style={{"backgroundColor":"#ffffff"}}><div style={{"width":"3rem"}}></div></span>
+                            <input onChange={this.handleChange} name="text_color" type="text" className="form-control" placeholder="#ffffff" defaultValue="#ffffff"  title="Set text color"/>
                           </div>
                         </div>
                       </div>
@@ -308,8 +307,8 @@ export default class alertboxOptsLayout extends Component (){
                         </div>
                         <div className="col-8">
                           <div className="input-group mb-3">
-                            <span className="input-group-text p-0" style={{"background-color":"#32c3a6"}}><div style={{"width":"3rem"}}></div></span>
-                            <input name="text_highlight_color" type="text" className="form-control" placeholder="#32c3a6" defaultValue="#32c3a6"  title="Set text color"/>
+                            <span className="input-group-text p-0" style={{"backgroundColor":"#32c3a6"}}><div style={{"width":"3rem"}}></div></span>
+                            <input onChange={this.handleChange} name="text_highlight_color" type="text" className="form-control" placeholder="#32c3a6" defaultValue="#32c3a6"  title="Set text color"/>
                           </div>
                         </div>
                       </div>
