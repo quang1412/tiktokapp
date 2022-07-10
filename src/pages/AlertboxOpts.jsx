@@ -5,7 +5,7 @@ export default function AlertboxOpts(props){
   const intro = ["fade In","fade In Down","fade In Down Big","fade In Left","fade In Left Big","fade In Right","fade In Right Big","fade In Up","fade In Up Big","fade In Top Left","fade In Top Right","fade In Bottom Left","fade In Bottom Right","back In Down","back In Left","back In Right","back In Up","bounce In","bounce In Down","bounce In Left","bounce In Right","bounce In Up","flip In X","flip In Y","light Speed In Right","light Speed In Left","rotate In","rotate In Down Left","rotate In Down Right","rotate In Up Left","rotate In Up Right","roll In","zoom In","zoom In Down","zoom In Left","zoom In Right","zoom In Up","slide In Down","slide In Left","slide In Right","slide In Up"];
   const outro = ["fade Out","fade Out Down","fade Out Down Big","fade Out Left","fade Out Left Big","fade Out Right","fade Out Right Big","fade Out Up","fade Out Up Big","fade Out Top Left","fade Out Top Right","fade Out Bottom Right","fade Out Bottom Left","back Out Down","back Out Left","back Out Right","back Out Up","bounce Out","bounce Out Down","bounce Out Left","bounce Out Right","bounce Out Up","flip Out X","flip Out Y","light Speed Out Right","light Speed Out Left","rotate Out","rotate Out Down Left","rotate Out Down Right","rotate Out Up Left","rotate Out Up Right","roll Out","zoom Out","zoom Out Down","zoom Out Left","zoom Out Right","zoom Out Up","slide Out Down","slide Out Left","slide Out Right","slide Out Up"];
   
-  const handleOptionsChange = e => {
+  const handleOptionsChange = async e => {
     let type = e.target.type;
     let optType = e.target.closest("form").name;
     let optName = e.target.name;
@@ -22,7 +22,15 @@ export default function AlertboxOpts(props){
       case 'radio':
         (value === "true" || value === "false") && (value = (value == 'true'))
         break;
-    } 
+    }
+    
+    switch(optName){
+      case "image_url":
+        let check = await checkImage(value)
+        !check && ((value = options[optType][optName]), (e.target.value = value))
+        console.log('done')
+        break;
+    }
     
     console.log(optType, optName, value);
     options[optType][optName] = value;
@@ -30,7 +38,13 @@ export default function AlertboxOpts(props){
   } 
   
   const checkImage = async url => {
-    
+    return new Promise((resolve) => {
+      console.log(url)
+      let image = new Image();
+      image.addEventListener('load', () => {image = null; return resolve(true)});
+      image.addEventListener('error', () => {image = null; return resolve(false)});
+      image.src = url;
+    })
   }
   
   return (
