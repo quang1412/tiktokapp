@@ -10,21 +10,21 @@ export default function alertboxOptsLayout(data){
   return (
     <div className="card">
       <div className="card-header">
-        <ul className="nav nav-pills " id="pills-tab" role="tablist">
+        <ul className="nav nav-tabs" id="pills-tab" role="tablist">
           <li className="nav-item" role="presentation">
-            <button className="nav-link active" id="general" data-bs-toggle="pill" data-bs-target="#pills-general" type="button" role="tab" aria-controls="pills-general" aria-selected="true">General</button>
+            <button class="nav-link active" data-mdb-toggle="tab" href="#tab-general" role="tab" aria-controls="tab-general" aria-selected="true">General</button>
           </li>
           <li className="nav-item" role="presentation">
-            <button className="nav-link" id="gift" data-bs-toggle="pill" data-bs-target="#pills-gift" type="button" role="tab" aria-controls="pills-gift" aria-selected="false">Donate</button>
+            <button class="nav-link" data-mdb-toggle="tab" href="#tab-gift" role="tab" aria-controls="tab-gift" aria-selected="false">Donate</button>
           </li>
           <li className="nav-item" role="presentation">
-            <button className="nav-link" id="follow" data-bs-toggle="pill" data-bs-target="#pills-follow" type="button" role="tab" aria-controls="pills-follow" aria-selected="false">Follow</button>
+            <button class="nav-link" data-mdb-toggle="tab" href="#tab-follow" role="tab" aria-controls="tab-follow" aria-selected="false">Follow</button>
           </li>
           <li className="nav-item" role="presentation">
-            <button className="nav-link" id="like" data-bs-toggle="pill" data-bs-target="#pills-like" type="button" role="tab" aria-controls="pills-like" aria-selected="false">Like</button>
+            <button class="nav-link" data-mdb-toggle="tab" href="#tab-like" role="tab" aria-controls="tab-like" aria-selected="false">Like</button>
           </li>
           <li className="nav-item" role="presentation">
-            <button className="nav-link" id="share" data-bs-toggle="pill" data-bs-target="#pills-share" type="button" role="tab" aria-controls="pills-share" aria-selected="false">Share</button>
+            <button class="nav-link" data-mdb-toggle="tab" href="#tab-share" role="tab" aria-controls="tab-share" aria-selected="false">Share</button>
           </li>
           <li className="ms-auto d-flex align-items-center">
             <button id="close-setting" className="btn btn-sm btn-light text-secondary border lh-1 p-2"><i className="fas fa-times-circle"></i></button>
@@ -33,7 +33,7 @@ export default function alertboxOptsLayout(data){
       </div>
       <div className="card-body text-start overflow-auto">
         <div className="tab-content pt-3" id="pills-tabContent">
-          <div className="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="general">
+          <div className="tab-pane fade show active" id="tab-general" role="tabpanel" aria-labelledby="general">
             <form name="general">
               <div className="row mb-3">
                 <div className="col-4">
@@ -74,13 +74,14 @@ export default function alertboxOptsLayout(data){
               </div>
             </form>
           </div>
-          {Object.keys(options).map((type, i) => (
-            Object.keys(options[type]).map((name, j) => {
-              let value = options[type][name];
-              
-              return <span>{value}</span>
-            })
-          ))}
+          {Object.keys(options).map((type, i) => {
+            if(type == 'general') return;
+            return (
+              <div className="tab-pane fade" id={`tab-${type}`} role="tabpanel">
+
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>
