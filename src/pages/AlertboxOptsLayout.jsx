@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 
-export default function AlertboxOptsLayout(data){
-  const options = data.opts;
+export default function AlertboxOptsLayout(props){
+  const options = props.opts;
   const intro = ["fade In","fade In Down","fade In Down Big","fade In Left","fade In Left Big","fade In Right","fade In Right Big","fade In Up","fade In Up Big","fade In Top Left","fade In Top Right","fade In Bottom Left","fade In Bottom Right","back In Down","back In Left","back In Right","back In Up","bounce In","bounce In Down","bounce In Left","bounce In Right","bounce In Up","flip In X","flip In Y","light Speed In Right","light Speed In Left","rotate In","rotate In Down Left","rotate In Down Right","rotate In Up Left","rotate In Up Right","roll In","zoom In","zoom In Down","zoom In Left","zoom In Right","zoom In Up","slide In Down","slide In Left","slide In Right","slide In Up"];
   const outro = ["fade Out","fade Out Down","fade Out Down Big","fade Out Left","fade Out Left Big","fade Out Right","fade Out Right Big","fade Out Up","fade Out Up Big","fade Out Top Left","fade Out Top Right","fade Out Bottom Right","fade Out Bottom Left","back Out Down","back Out Left","back Out Right","back Out Up","bounce Out","bounce Out Down","bounce Out Left","bounce Out Right","bounce Out Up","flip Out X","flip Out Y","light Speed Out Right","light Speed Out Left","rotate Out","rotate Out Down Left","rotate Out Down Right","rotate Out Up Left","rotate Out Up Right","roll Out","zoom Out","zoom Out Down","zoom Out Left","zoom Out Right","zoom Out Up","slide Out Down","slide Out Left","slide Out Right","slide Out Up"];
   
@@ -20,16 +20,14 @@ export default function AlertboxOptsLayout(data){
         break;
       case 'range':
         value = parseInt(value)
-        console.log(optType, optName, value);
         break;
       case 'radio':
         value = (value == 'true')
         break;
-      }
-    
-    
-    console.log(type, optType, optName, value);
-    data.opts[optType][optName] = value;
+      } 
+    console.log(optType, optName, value);
+    options[optType][optName] = value;
+    props.onChangeOptions(options)
   }
 
   const toggleAlertParries = () => {
@@ -117,13 +115,13 @@ export default function AlertboxOptsLayout(data){
                   </div>
                   <div className="col-8">
                     <div className="form-check d-inline-block">
-                      <input name="active" defaultValue="true" onChange={handleChange} className="form-check-input" type="radio" defaultChecked/>
+                      <input name="active" defaultValue="true" onChange={handleChange} className="form-check-input" type="radio" defaultChecked={options[type].active}/>
                       <label className="form-check-label">
                         On
                       </label>
                     </div>
                     <div className="form-check d-inline-block ms-3">
-                      <input name="active" defaultValue="false" onChange={handleChange} className="form-check-input" type="radio"/>
+                      <input name="active" defaultValue="false" onChange={handleChange} className="form-check-input" type="radio" defaultChecked={!options[type].active}/>
                       <label className="form-check-label">
                         Off
                       </label>
@@ -136,19 +134,19 @@ export default function AlertboxOptsLayout(data){
                   </div>
                   <div className="col-8">
                     <div className="form-check d-inline-block">
-                      <input name="layout" defaultValue="above" onChange={handleChange} className="form-check-input" type="radio" defaultChecked/>
+                      <input name="layout" defaultValue="above" onChange={handleChange} className="form-check-input" type="radio" defaultChecked={options[type].layout === "above"}/>
                       <label className="form-check-label">
                         Above
                       </label>
                     </div>
                     <div className="form-check d-inline-block ms-3">
-                      <input name="layout" defaultValue="banner" onChange={handleChange} className="form-check-input" type="radio"/>
+                      <input name="layout" defaultValue="banner" onChange={handleChange} className="form-check-input" type="radio" defaultChecked={options[type].layout === "banner"}/>
                       <label className="form-check-label">
                         Banner
                       </label>
                     </div>
                     <div className="form-check d-inline-block ms-3">
-                      <input name="layout" defaultValue="side" onChange={handleChange} className="form-check-input" type="radio"/>
+                      <input name="layout" defaultValue="side" onChange={handleChange} className="form-check-input" type="radio" defaultChecked={options[type].layout === "side"}/>
                       <label className="form-check-label">
                         Side
                       </label>
@@ -160,12 +158,12 @@ export default function AlertboxOptsLayout(data){
                     <label className="form-label mb-0">Effects</label>
                   </div>
                   <div className="col-8 d-flex">
-                    <select name="alert_animation_in" defaultValue="fadeInLeftBig" className="form-select me-1">{
+                    <select name="alert_animation_in" defaultValue={options[type].alert_animation_in} className="form-select me-1">{
                       intro.map((e, i) => {
                         return (<option key={`alert_animation_in${i}`} value={e.replaceAll(' ','')}>{e}</option>)
                       }) 
                     }</select>
-                    <select name="alert_animation_out" defaultValue="fadeOutLeftBig" className="form-select ms-1">{
+                    <select name="alert_animation_out" defaultValue={options[type].alert_animation_out} className="form-select ms-1">{
                       outro.map((e, i) => {
                         return (<option key={`alert_animation_out${i}`} value={e.replaceAll(" ","")}>{e}</option>)
                       }) 
@@ -179,7 +177,7 @@ export default function AlertboxOptsLayout(data){
                     </div>
                     <div className="col-8">
                       <div className="input-group w-50">
-                        <input name="alert_min_amount" onChange={handleChange} type="number" className="form-control" placeholder="1"/>
+                        <input name="alert_min_amount" defaultValue={options[type].alert_min_amount} onChange={handleChange} type="number" className="form-control" placeholder="1"/>
                       </div>
                     </div>
                   </div>) } 
@@ -189,7 +187,7 @@ export default function AlertboxOptsLayout(data){
                   </div>
                   <div className="col-8"> 
                     <div className="input-group">
-                      <input name="message_template" onChange={handleChange} type="text" className="form-control" 
+                      <input name="message_template" defaultValue={options[type].message_template} onChange={handleChange} type="text" className="form-control" 
                         placeholder=
                         {(type === "gift" ? "{username} send {giftcount} {giftname}" : 
                           type === "follow" ? "{username} followed host" : 
@@ -211,7 +209,7 @@ export default function AlertboxOptsLayout(data){
                     <label className="form-label mb-0">Text effect</label>
                   </div>
                   <div className="col-8 d-flex align-items-center">
-                    <select name="text_animation" defaultValue="wiggle" className="form-select me-2">
+                    <select name="text_animation"  defaultValue={options[type].text_animation} className="form-select me-2">
                       <option defaultValue='wiggle'>Wiggle</option>
                       <option defaultValue="wave">Wave</option>
                       <option defaultValue="wobble">Wobble</option>

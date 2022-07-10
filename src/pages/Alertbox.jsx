@@ -18,6 +18,7 @@ const Alertbox = () => {
   
   const handleOptions = options => {
     console.log(options)
+    localStorage.alertboxOpts = JSON.stringify(options)
   }
   
   return (
@@ -27,7 +28,7 @@ const Alertbox = () => {
       </div>
       <div className="layer" id="play" style={{"display":"none"}}></div>
       <div className="layer" id="setting" style={{"display":"block"}}>
-        <AlertboxOptsLayout opts={options}/>
+        <AlertboxOptsLayout opts={options} onChangeOptions={handleOptions}/>
       </div>
     </div>
   );
