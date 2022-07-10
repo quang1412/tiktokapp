@@ -14,6 +14,7 @@ const Alertbox = () => {
     // changeLog(log.push("server connecting"));
     let socket = io("https://tiktoktool.glitch.me",  {query: `id=dongnguyenchat`});
     socket.on('connect', () => { 
+      changeLog([...log, 'connect']);
     })
     
     // var connecting = setInterval(() => {
@@ -27,8 +28,7 @@ const Alertbox = () => {
     
     socket.on('ttRoomInfo', data => {
       console.log(data);
-      changeLog([...log, 'server connected']);
-      clearInterval(connecting);
+      changeLog([...log, 'server connected']); 
     });
     
     socket.on('ttConnectFail', () => {
@@ -42,7 +42,7 @@ const Alertbox = () => {
     localStorage.alertboxOpts = JSON.stringify(newOptions)
   }
   
-  socketConnect();
+  // socketConnect();
   
   return (
     <div className="App">
