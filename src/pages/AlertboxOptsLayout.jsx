@@ -17,7 +17,7 @@ export default class alertboxOptsLayout extends Component{
   }
   
   handleChange(e){
-    console.log(e.target.value)
+    console.log(e.target.name, e.target.value)
   }
   
   render(){
@@ -55,7 +55,7 @@ export default class alertboxOptsLayout extends Component{
                 </div>
                 <div className="col-8">
                   <div className="range">
-                      <input onChange={this.handleChange} defaultValue={this.options.general.alert_delay} type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
+                      <input onChange={this.handleChange} defaultValue={this.options.general.alert_delay} name="alert_delay" type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
                   </div>
                   </div>
               </div>
@@ -91,7 +91,7 @@ export default class alertboxOptsLayout extends Component{
             </form>
           </div>
           {Object.keys(this.options).map((type, i) => {
-            if(type == 'general' || type == "comment") return;
+            if(type === 'general' || type === "comment") return;
             let opt = this.options[type];
             return (
               <div key={type} className="tab-pane fade" id={`tab-${type}`} role="tabpanel">
@@ -157,7 +157,7 @@ export default class alertboxOptsLayout extends Component{
                       }</select> 
                     </div>
                   </div>
-                  { type == "gift" && (
+                  { type === "gift" && (
                     <div className="row mb-3">
                       <div className="col-4">
                         <label className="form-label mb-0">Min. donate</label>
@@ -176,17 +176,17 @@ export default class alertboxOptsLayout extends Component{
                       <div className="input-group">
                         <input onChange={this.handleChange} name="message_template" type="text" className="form-control" 
                           placeholder=
-                          {(type == "gift" ? "{username} send {giftcount} {giftname}" : 
-                            type == "follow" ? "{username} followed host" : 
-                            type == "like" ? "{username} send {likecount} like" : 
-                            type == "share" ? "{username} shared host" : ""
+                          {(type === "gift" ? "{username} send {giftcount} {giftname}" : 
+                            type === "follow" ? "{username} followed host" : 
+                            type === "like" ? "{username} send {likecount} like" : 
+                            type === "share" ? "{username} shared host" : ""
                           )}/>
                       </div>
                       <small>Keys:
-                        {(type == "gift"   ? "{nickname} / {username} / {giftname} / {giftcount} / {amount}}" : 
-                          type == "follow" ? "{nickname} / {username} / {giftname} / {giftcount} / {amount}" : 
-                          type == "like"   ? "{nickname} / {username} / {likecount}" : 
-                          type == "share"  ? "{nickname} / {username}" : ""
+                        {(type === "gift"   ? "{nickname} / {username} / {giftname} / {giftcount} / {amount}}" : 
+                          type === "follow" ? "{nickname} / {username} / {giftname} / {giftcount} / {amount}" : 
+                          type === "like"   ? "{nickname} / {username} / {likecount}" : 
+                          type === "share"  ? "{nickname} / {username}" : ""
                         )} 
                       </small>
                     </div>
@@ -330,6 +330,4 @@ export default class alertboxOptsLayout extends Component{
     </div>
     )
   }
-}
-
-class tabContent()
+} 
