@@ -6,10 +6,11 @@ export default function AlertboxOpts(props){
   const outro = ["fade Out","fade Out Down","fade Out Down Big","fade Out Left","fade Out Left Big","fade Out Right","fade Out Right Big","fade Out Up","fade Out Up Big","fade Out Top Left","fade Out Top Right","fade Out Bottom Right","fade Out Bottom Left","back Out Down","back Out Left","back Out Right","back Out Up","bounce Out","bounce Out Down","bounce Out Left","bounce Out Right","bounce Out Up","flip Out X","flip Out Y","light Speed Out Right","light Speed Out Left","rotate Out","rotate Out Down Left","rotate Out Down Right","rotate Out Up Left","rotate Out Up Right","roll Out","zoom Out","zoom Out Down","zoom Out Left","zoom Out Right","zoom Out Up","slide Out Down","slide Out Left","slide Out Right","slide Out Up"];
   
   const handleOptionsChange = async e => {
-    let type = e.target.type;
-    let optType = e.target.closest("form").name;
-    let optName = e.target.name;
-    var value = e.target.value;
+    let target = e.target;
+    let type = target.type;
+    let optType = target.closest("form").name;
+    let optName = target.name;
+    var value = target.value;
     
     switch(type){
       case 'number':
@@ -28,7 +29,8 @@ export default function AlertboxOpts(props){
       case "image_url":
         let check = await checkImage(value)
         if(!check){
-          value = options[optType][optName]; 
+          target.value = options[optType][optName];
+          return
         }
         console.log('done')
         break;
