@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 import '../style/Alertbox.css';
 import { io } from "socket.io-client";
 
@@ -9,12 +9,12 @@ const Alertbox = () => {
   const socketConnect = () => {
     let socket = io("https://tiktoktool.glitch.me",  {query: `id=dongnguyenchat`});
     socket.on('connect', () => {
-      // changeLog([...log], 'connected')
+      // log.push('connected')
       console.log('connected')
     })
   }
   
-  socketConnect();
+  // socketConnect();
   
   return (
     <div className="App">
