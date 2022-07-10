@@ -160,13 +160,20 @@ export default function alertboxOptsLayout(data){
                     </div>
                     <div className="col-8"> 
                       <div className="input-group">
-                        <input name="message_template" type="text" className="form-control" placeholder="{username} send {giftcount} {giftname}"/>
+                        <input name="message_template" type="text" className="form-control" 
+                          placeholder=
+                          {(type == "gift" ? "{username} send {giftcount} {giftname}" : 
+                            type == "follow" ? "{username} followed host" : 
+                            type == "like" ? "{username} send {likecount} like" : 
+                            type == "share" ? "{username} shared host" : ""
+                          )}/>
                       </div>
-                      <small>Keys: 
-                        {type == "gift"   && "{nickname} / {username} / {giftname} / {giftcount} / {amount}"}
-                        {type == "follow"  && "{nickname} / {username} / {giftname} / {giftcount} / {amount}"}
-                        {type == "like"    && "{nickname} / {username} / {likecount}"}
-                        {type == "share"  && "{nickname} / {username}"}
+                      <small>Keys:
+                        {(type == "gift"   ? "{nickname} / {username} / {giftname} / {giftcount} / {amount}}" : 
+                          type == "follow" ? "{nickname} / {username} / {giftname} / {giftcount} / {amount}" : 
+                          type == "like"   ? "{nickname} / {username} / {likecount}" : 
+                          type == "share"  ? "{nickname} / {username}" : ""
+                        )} 
                       </small>
                     </div>
                   </div>
