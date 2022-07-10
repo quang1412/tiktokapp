@@ -12,8 +12,7 @@ export default function AlertboxOptsLayout(data){
   }
 
   const toggleAlertParries = () => {
-    setIsParries(1 - isParries);
-    console.log(isParries)
+    setIsParries(1 - isParries); 
   }
   
   return (
@@ -50,7 +49,7 @@ export default function AlertboxOptsLayout(data){
               </div>
               <div className="col-8">
                 <div className="range">
-                    <input onChange={handleChange} defaultValue={options.general.alert_delay} name="alert_delay" type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
+                    <input name="alert_delay" defaultValue={options.general.alert_delay} onChange={handleChange} type="range" className="form-range" min="0" max="30" step="1" />
                 </div>
                 </div>
             </div>
@@ -60,13 +59,13 @@ export default function AlertboxOptsLayout(data){
               </div>
               <div className="col-8">
                 <div className="form-check d-inline-block">
-                  <input onChange={handleChange, toggleAlertParries} className="form-check-input" type="radio" defaultValue="true" name="alert_parries"/>
+                  <input name="alert_parries" defaultValue="true" onChange={e => {this.handleChange(e); this.toggleAlertParries}} className="form-check-input" type="radio"/>
                   <label className="form-check-label">
                     On
                   </label>
                 </div>
                 <div className="form-check d-inline-block ms-3">
-                  <input onChange={handleChange, toggleAlertParries} className="form-check-input" type="radio" defaultValue="false" name="alert_parries" defaultChecked={true}/>
+                  <input name="alert_parries" defaultValue="false" onChange={e => {this.handleChange(e); this.toggleAlertParries}} className="form-check-input" type="radio" defaultChecked={true}/>
                   <label className="form-check-label">
                     Off
                   </label>
@@ -79,7 +78,7 @@ export default function AlertboxOptsLayout(data){
               </div>
               <div className="col-8">
                 <div className="range">
-                  <input onChange={handleChange} name="parry_alert_delay" type="range" className="form-range" min="1" max="20" step="1" defaultValue="4" data-before="1" data-before-subfix="s"/>
+                  <input name="parry_alert_delay" defaultValue="4" onChange={handleChange} type="range" className="form-range" min="1" max="20" step="1" data-before="1" data-before-subfix="s"/>
                 </div>
                 </div>
             </div>
@@ -97,13 +96,13 @@ export default function AlertboxOptsLayout(data){
                   </div>
                   <div className="col-8">
                     <div className="form-check d-inline-block">
-                      <input onChange={handleChange} className="form-check-input" type="radio" defaultValue="true" name="active" defaultChecked/>
+                      <input name="active" defaultValue="true" onChange={handleChange} className="form-check-input" type="radio" defaultChecked/>
                       <label className="form-check-label">
                         On
                       </label>
                     </div>
                     <div className="form-check d-inline-block ms-3">
-                      <input onChange={handleChange} className="form-check-input" type="radio" defaultValue="false" name="active"/>
+                      <input name="active" defaultValue="false" onChange={handleChange} className="form-check-input" type="radio"/>
                       <label className="form-check-label">
                         Off
                       </label>
@@ -116,19 +115,19 @@ export default function AlertboxOptsLayout(data){
                   </div>
                   <div className="col-8">
                     <div className="form-check d-inline-block">
-                      <input onChange={handleChange} className="form-check-input" type="radio" defaultValue="above" name="layout" defaultChecked/>
+                      <input name="layout" defaultValue="above" onChange={handleChange} className="form-check-input" type="radio" defaultChecked/>
                       <label className="form-check-label">
                         Above
                       </label>
                     </div>
                     <div className="form-check d-inline-block ms-3">
-                      <input onChange={handleChange} className="form-check-input" type="radio" defaultValue="banner" name="layout"/>
+                      <input name="layout" defaultValue="banner" onChange={handleChange} className="form-check-input" type="radio"/>
                       <label className="form-check-label">
                         Banner
                       </label>
                     </div>
                     <div className="form-check d-inline-block ms-3">
-                      <input onChange={handleChange} className="form-check-input" type="radio" defaultValue="side" name="layout"/>
+                      <input name="layout" defaultValue="side" onChange={handleChange} className="form-check-input" type="radio"/>
                       <label className="form-check-label">
                         Side
                       </label>
@@ -140,12 +139,12 @@ export default function AlertboxOptsLayout(data){
                     <label className="form-label mb-0">Effects</label>
                   </div>
                   <div className="col-8 d-flex">
-                    <select className="form-select me-1" defaultValue="fadeInLeftBig" name="alert_animation_in">{
+                    <select name="alert_animation_in" defaultValue="fadeInLeftBig" className="form-select me-1">{
                       intro.map((e, i) => {
                         return (<option key={`alert_animation_in${i}`} value={e.replaceAll(' ','')}>{e}</option>)
                       }) 
                     }</select>
-                    <select className="form-select ms-1" defaultValue="fadeOutLeftBig" name="alert_animation_out">{
+                    <select name="alert_animation_out" defaultValue="fadeOutLeftBig" className="form-select ms-1">{
                       outro.map((e, i) => {
                         return (<option key={`alert_animation_out${i}`} value={e.replaceAll(" ","")}>{e}</option>)
                       }) 
@@ -159,7 +158,7 @@ export default function AlertboxOptsLayout(data){
                     </div>
                     <div className="col-8">
                       <div className="input-group w-50">
-                        <input onChange={handleChange} name="alert_min_amount" type="number" className="form-control" placeholder="1"/>
+                        <input name="alert_min_amount" onChange={handleChange} type="number" className="form-control" placeholder="1"/>
                       </div>
                     </div>
                   </div>) } 
@@ -169,7 +168,7 @@ export default function AlertboxOptsLayout(data){
                   </div>
                   <div className="col-8"> 
                     <div className="input-group">
-                      <input onChange={handleChange} name="message_template" type="text" className="form-control" 
+                      <input name="message_template" onChange={handleChange} type="text" className="form-control" 
                         placeholder=
                         {(type === "gift" ? "{username} send {giftcount} {giftname}" : 
                           type === "follow" ? "{username} followed host" : 
@@ -191,7 +190,7 @@ export default function AlertboxOptsLayout(data){
                     <label className="form-label mb-0">Text effect</label>
                   </div>
                   <div className="col-8 d-flex align-items-center">
-                    <select defaultValue="wiggle" className="form-select me-2" name="text_animation">
+                    <select name="text_animation" defaultValue="wiggle" className="form-select me-2">
                       <option defaultValue='wiggle'>Wiggle</option>
                       <option defaultValue="wave">Wave</option>
                       <option defaultValue="wobble">Wobble</option>
@@ -221,7 +220,7 @@ export default function AlertboxOptsLayout(data){
                   <div className="col-8">
                     <div className="input-group">
                       <span className="input-group-text p-0" style={{"backgroundImage":"url(https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif)", "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
-                      <input onChange={handleChange} name="image_url" type="text" className="form-control" placeholder="Image URL" defaultValue="https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif"/>
+                      <input name="image_url" defaultValue="https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif" onChange={handleChange} type="text" className="form-control" placeholder="Image URL"/>
                     </div>
                   </div>
                 </div>
@@ -232,7 +231,7 @@ export default function AlertboxOptsLayout(data){
                   <div className="col-8">
                     <div className="input-group">
                       <span className="input-group-text p-0"><div className="d-flex justify-content-center align-items-center" style={{"width": "3rem","height": "100%"}}><i className="fas fa-music mauto" aria-hidden="true"></i></div></span>
-                      <input onChange={handleChange} name="sound_url" type="text" className="form-control" placeholder="Image URL" defaultValue="https://isetup.vn/tiktok/assets/sound/new-message-4.ogg"/>
+                      <input name="sound_url" defaultValue="https://isetup.vn/tiktok/assets/sound/new-message-4.ogg" onChange={handleChange} type="text" className="form-control" placeholder="Image URL"/>
                     </div>
                   </div>
                 </div>
@@ -242,7 +241,7 @@ export default function AlertboxOptsLayout(data){
                   </div>
                   <div className="col-8">
                     <div className="range">
-                      <input onChange={handleChange} name="sound_volume" type="range" className="form-range" min="0" max="100" step="1" defaultValue="50" data-before="1" data-before-subfix="%"/>
+                      <input name="sound_volume" defaultValue="50" onChange={handleChange} type="range" className="form-range" min="0" max="100" step="1" data-before="1" data-before-subfix="%"/>
                     </div>
                     </div>
                 </div>
@@ -252,7 +251,7 @@ export default function AlertboxOptsLayout(data){
                   </div>
                   <div className="col-8">
                     <div className="range">
-                      <input onChange={handleChange} name="alert_duration" type="range" className="form-range" min="2" max="300" step="1" defaultValue="10" data-before="1" data-before-subfix="s"/>
+                      <input name="alert_duration" defaultValue="10" onChange={handleChange} type="range" className="form-range" min="2" max="300" step="1" data-before="1" data-before-subfix="s"/>
                     </div>
                     </div>
                 </div>
@@ -262,7 +261,7 @@ export default function AlertboxOptsLayout(data){
                   </div>
                   <div className="col-8">
                     <div className="range">
-                      <input onChange={handleChange} name="alert_text_delay" type="range" className="form-range" min="0" max="60" step="1" defaultValue="0" data-before="1" data-before-subfix="s"/>
+                      <input name="alert_text_delay" defaultValue="0" onChange={handleChange} type="range" className="form-range" min="0" max="60" step="1" data-before="1" data-before-subfix="s"/>
                     </div>
                     </div>
                 </div>
@@ -278,7 +277,7 @@ export default function AlertboxOptsLayout(data){
                       </div>
                       <div className="col-8">
                         <div className="range">
-                          <input onChange={handleChange} name="font_size" type="range" className="form-range" min="12" max="80" step="2" defaultValue="64" data-before="1" data-before-subfix=""/>
+                          <input name="font_size" defaultValue="64" onChange={handleChange} type="range" className="form-range" min="12" max="80" step="2" data-before="1" data-before-subfix=""/>
                         </div>
                         </div>
                     </div>
@@ -288,7 +287,7 @@ export default function AlertboxOptsLayout(data){
                       </div>
                       <div className="col-8">
                         <div className="range">
-                          <input onChange={handleChange} name="font_weight" type="range" className="form-range" min="300" max="900" step="100" defaultValue="800" data-before="1" data-before-subfix=""/>
+                          <input name="font_weight" defaultValue="800" onChange={handleChange} type="range" className="form-range" min="300" max="900" step="100" data-before="1" data-before-subfix=""/>
                         </div>
                         </div>
                     </div>
@@ -299,7 +298,7 @@ export default function AlertboxOptsLayout(data){
                       <div className="col-8">
                         <div className="input-group mb-3">
                           <span className="input-group-text p-0" style={{"backgroundColor":"#ffffff"}}><div style={{"width":"3rem"}}></div></span>
-                          <input onChange={handleChange} name="text_color" type="text" className="form-control" placeholder="#ffffff" defaultValue="#ffffff"  title="Set text color"/>
+                          <input name="text_color" defaultValue="#ffffff" onChange={handleChange} type="text" className="form-control" placeholder="#ffffff" title="Set text color"/>
                         </div>
                       </div>
                     </div>
@@ -310,7 +309,7 @@ export default function AlertboxOptsLayout(data){
                       <div className="col-8">
                         <div className="input-group mb-3">
                           <span className="input-group-text p-0" style={{"backgroundColor":"#32c3a6"}}><div style={{"width":"3rem"}}></div></span>
-                          <input onChange={handleChange} name="text_highlight_color" type="text" className="form-control" placeholder="#32c3a6" defaultValue="#32c3a6"  title="Set text color"/>
+                          <input name="text_highlight_color" defaultValue="#32c3a6" onChange={handleChange} type="text" className="form-control" placeholder="#32c3a6" title="Set text color"/>
                         </div>
                       </div>
                     </div>
