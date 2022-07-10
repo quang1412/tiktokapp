@@ -27,13 +27,17 @@ export default function AlertboxOpts(props){
     
     switch(optName){
       case "image_url":
-        let check = await checkImage(value);
-        if(!check){
+        if(!await checkImage(value)){
           target.value = options[optType][optName];
           return;
         }
         break;
-        
+      case "audio_url":
+        if(!await checkAudio(value)){
+          target.value = options[optType][optName];
+          return;
+        }
+        break;
     }
     
     console.log(optType, optName, value);
@@ -185,12 +189,12 @@ export default function AlertboxOpts(props){
                     <label className="form-label mb-0">Effects</label>
                   </div>
                   <div className="col-8 d-flex">
-                    <select name="alert_animation_in" defaultValue={options[type].alert_animation_in} className="form-select me-1">{
+                    <select name="alert_animation_in" defaultValue={options[type].alert_animation_in} onChange={handleOptionsChange} className="form-select me-1">{
                       intro.map((e, i) => {
                         return (<option key={`alert_animation_in${i}`} value={e.replaceAll(' ','')}>{e}</option>)
                       }) 
                     }</select>
-                    <select name="alert_animation_out" defaultValue={options[type].alert_animation_out} className="form-select ms-1">{
+                    <select name="alert_animation_out" defaultValue={options[type].alert_animation_out} onChange={handleOptionsChange} className="form-select ms-1">{
                       outro.map((e, i) => {
                         return (<option key={`alert_animation_out${i}`} value={e.replaceAll(" ","")}>{e}</option>)
                       }) 
@@ -236,7 +240,7 @@ export default function AlertboxOpts(props){
                     <label className="form-label mb-0">Text effect</label>
                   </div>
                   <div className="col-8 d-flex align-items-center">
-                    <select name="text_animation"  defaultValue={options[type].text_animation} className="form-select me-2">
+                    <select name="text_animation"  defaultValue={options[type].text_animation}  onChange={handleOptionsChange} className="form-select me-2">
                       <option defaultValue='wiggle'>Wiggle</option>
                       <option defaultValue="wave">Wave</option>
                       <option defaultValue="wobble">Wobble</option>
