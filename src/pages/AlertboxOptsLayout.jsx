@@ -3,6 +3,11 @@ import React from "react";
 export default function alertboxOptsLayout(data){
   const options = data.opts;
   var a = 1;
+  
+  const handleChange = e => {
+    console.log(e.target)
+  }
+  
   return (
     <div className="card">
       <div className="card-header">
@@ -28,7 +33,7 @@ export default function alertboxOptsLayout(data){
         </ul>
       </div>
       <div className="card-body text-start overflow-auto">
-        <div className="tab-content" id="pills-tabContent">
+        <div className="tab-content " id="pills-tabContent">
           <div className="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="general">
             <form name="general">
               <div className="row mb-3">
@@ -36,7 +41,9 @@ export default function alertboxOptsLayout(data){
                   <label className="form-label mb-0">Alert delay</label>
                 </div>
                 <div className="col-8">
-                  <input name="alert_delay" type="range" className="form-range" min="0" max="30" step="1" value={options.general.alert_delay} data-before="1" data-before-subfix="s"/>
+                  <div className="range">
+                    <input defaultValue={options.general.alert_delay} onChange={handleChange} type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
+                  </div>
                 </div>
               </div>
               <div className="row mb-3">
@@ -45,13 +52,13 @@ export default function alertboxOptsLayout(data){
                 </div>
                 <div className="col-8">
                   <div className="form-check d-inline-block">
-                    <input className="form-check-input" type="radio" value="true" name="alert_parries" onChange={a = 0} />
+                    <input className="form-check-input" type="radio" defaultValue="true" name="alert_parries" onChange={handleChange} />
                     <label className="form-check-label">
                       On
                     </label>
                   </div>
                   <div className="form-check d-inline-block ms-3">
-                    <input className="form-check-input" type="radio" value="false" name="alert_parries" onChange={a = 0} checked/>
+                    <input className="form-check-input" type="radio" defaultValue="false" name="alert_parries" onChange={handleChange} checked/>
                     <label className="form-check-label">
                       Off
                     </label>
@@ -63,7 +70,7 @@ export default function alertboxOptsLayout(data){
                   <label className="form-label mb-0">Parry delay</label>
                 </div>
                 <div className="col-8">
-                  <input name="parry_alert_delay" type="range" className="form-range" min="1" max="20" step="1" value="4" data-before="1" data-before-subfix="s"/>
+                  <input name="parry_alert_delay" type="range" className="form-range" min="1" max="20" step="1" defaultValue="4" onChange={handleChange} data-before="1" data-before-subfix="s"/>
                 </div>
               </div>
             </form>
