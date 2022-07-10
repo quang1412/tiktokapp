@@ -1,15 +1,21 @@
-import React from "react";
+import React, {Component} from "react";
 
-export default function alertboxOptsLayout(data){
-  const options = data.opts; 
-  const intro = ["fade In","fade In Down","fade In Down Big","fade In Left","fade In Left Big","fade In Right","fade In Right Big","fade In Up","fade In Up Big","fade In Top Left","fade In Top Right","fade In Bottom Left","fade In Bottom Right","back In Down","back In Left","back In Right","back In Up","bounce In","bounce In Down","bounce In Left","bounce In Right","bounce In Up","flip In X","flip In Y","light Speed In Right","light Speed In Left","rotate In","rotate In Down Left","rotate In Down Right","rotate In Up Left","rotate In Up Right","roll In","zoom In","zoom In Down","zoom In Left","zoom In Right","zoom In Up","slide In Down","slide In Left","slide In Right","slide In Up"];
-  const outro = ["fade Out","fade Out Down","fade Out Down Big","fade Out Left","fade Out Left Big","fade Out Right","fade Out Right Big","fade Out Up","fade Out Up Big","fade Out Top Left","fade Out Top Right","fade Out Bottom Right","fade Out Bottom Left","back Out Down","back Out Left","back Out Right","back Out Up","bounce Out","bounce Out Down","bounce Out Left","bounce Out Right","bounce Out Up","flip Out X","flip Out Y","light Speed Out Right","light Speed Out Left","rotate Out","rotate Out Down Left","rotate Out Down Right","rotate Out Up Left","rotate Out Up Right","roll Out","zoom Out","zoom Out Down","zoom Out Left","zoom Out Right","zoom Out Up","slide Out Down","slide Out Left","slide Out Right","slide Out Up"];
-  const handleChange = e => {
+export default class alertboxOptsLayout extends Component (){
+  constructor(props,data){
+    super(props);
+    this.options = data.opts; 
+    this.intro = ["fade In","fade In Down","fade In Down Big","fade In Left","fade In Left Big","fade In Right","fade In Right Big","fade In Up","fade In Up Big","fade In Top Left","fade In Top Right","fade In Bottom Left","fade In Bottom Right","back In Down","back In Left","back In Right","back In Up","bounce In","bounce In Down","bounce In Left","bounce In Right","bounce In Up","flip In X","flip In Y","light Speed In Right","light Speed In Left","rotate In","rotate In Down Left","rotate In Down Right","rotate In Up Left","rotate In Up Right","roll In","zoom In","zoom In Down","zoom In Left","zoom In Right","zoom In Up","slide In Down","slide In Left","slide In Right","slide In Up"];
+    this.outro = ["fade Out","fade Out Down","fade Out Down Big","fade Out Left","fade Out Left Big","fade Out Right","fade Out Right Big","fade Out Up","fade Out Up Big","fade Out Top Left","fade Out Top Right","fade Out Bottom Right","fade Out Bottom Left","back Out Down","back Out Left","back Out Right","back Out Up","bounce Out","bounce Out Down","bounce Out Left","bounce Out Right","bounce Out Up","flip Out X","flip Out Y","light Speed Out Right","light Speed Out Left","rotate Out","rotate Out Down Left","rotate Out Down Right","rotate Out Up Left","rotate Out Up Right","roll Out","zoom Out","zoom Out Down","zoom Out Left","zoom Out Right","zoom Out Up","slide Out Down","slide Out Left","slide Out Right","slide Out Up"];
+  }
+  
+  
+  handleChange(e){
     console.log(e.target.value)
   }
   
-  return (
-    <div className="card">
+  render(){
+    return (
+      <div className="card">
       <div className="card-header">
         <ul className="nav nav-tabs" id="pills-tab" role="tablist">
           <li className="nav-item" role="presentation">
@@ -42,7 +48,7 @@ export default function alertboxOptsLayout(data){
                 </div>
                 <div className="col-8">
                   <div className="range">
-                      <input defaultValue={options.general.alert_delay} onChange={handleChange} type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
+                      <input defaultValue={this.options.general.alert_delay} onChange={this.handleChange} type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
                   </div>
                   </div>
               </div>
@@ -52,13 +58,13 @@ export default function alertboxOptsLayout(data){
                 </div>
                 <div className="col-8">
                   <div className="form-check d-inline-block">
-                    <input className="form-check-input" type="radio" defaultValue="true" name="alert_parries" onChange={handleChange} />
+                    <input className="form-check-input" type="radio" defaultValue="true" name="alert_parries" onChange={this.handleChange} />
                     <label className="form-check-label">
                       On
                     </label>
                   </div>
                   <div className="form-check d-inline-block ms-3">
-                    <input className="form-check-input" type="radio" defaultValue="false" name="alert_parries" onChange={handleChange} defaultChecked={true}/>
+                    <input className="form-check-input" type="radio" defaultValue="false" name="alert_parries" onChange={this.handleChange} defaultChecked={true}/>
                     <label className="form-check-label">
                       Off
                     </label>
@@ -71,15 +77,15 @@ export default function alertboxOptsLayout(data){
                 </div>
                 <div className="col-8">
                   <div className="range">
-                    <input name="parry_alert_delay" type="range" className="form-range" min="1" max="20" step="1" defaultValue="4" onChange={handleChange} data-before="1" data-before-subfix="s"/>
+                    <input name="parry_alert_delay" type="range" className="form-range" min="1" max="20" step="1" defaultValue="4" onChange={this.handleChange} data-before="1" data-before-subfix="s"/>
                   </div>
                   </div>
               </div>
             </form>
           </div>
-          {Object.keys(options).map((type, i) => {
+          {Object.keys(this.options).map((type, i) => {
             if(type == 'general' || type == "comment") return;
-            let opt = options[type];
+            let opt = this.options[type];
             return (
               <div key={type} className="tab-pane fade" id={`tab-${type}`} role="tabpanel">
                 <form name={type} >
@@ -133,12 +139,12 @@ export default function alertboxOptsLayout(data){
                     </div>
                     <div className="col-8 d-flex">
                       <select className="form-select me-1" name="alert_animation_in">{
-                        intro.map((e, i) => {
+                        this.intro.map((e, i) => {
                           return (<option value={e.replaceAll(' ','')}>{e}</option>)
                         }) 
                       }</select>
                       <select className="form-select ms-1" name="alert_animation_out">{
-                        outro.map((e, i) => {
+                        this.outro.map((e, i) => {
                           return (<option value={e.replaceAll(" ","")}>{e}</option>)
                         }) 
                       }</select> 
@@ -192,7 +198,7 @@ export default function alertboxOptsLayout(data){
                         <option defaultValue="bounce">Bounce</option>
                         <option defaultValue="tada">Tada</option>
                       </select>
-                      <div className="fw-bold text-nowrap">
+                      <div className="fw-bold text-nowrap text-primary">
                         <span className="animated-letter wiggle">S</span>
                         <span className="animated-letter wiggle">A</span>
                         <span className="animated-letter wiggle">M</span>
@@ -316,6 +322,6 @@ export default function alertboxOptsLayout(data){
         </div>
       </div>
     </div>
-  );
-};
-
+    )
+  }
+}
