@@ -16,7 +16,9 @@ const Alertbox = () => {
     })
   }
   
-  // socketConnect();
+  const handleOptions = options => {
+    console.log(options)
+  }
   
   return (
     <div className="App">

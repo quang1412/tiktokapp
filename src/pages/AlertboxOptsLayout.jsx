@@ -8,7 +8,7 @@ export default function AlertboxOptsLayout(data){
   const [isParries, setIsParries] = useState(options.general.alert_parries)
   
   const handleChange = e => {
-    let type = e.type;
+    let type = e.target.type;
     let optType = e.target.closest("form").name;
     let optName = e.target.name;
     var value = e.target.value;
@@ -20,6 +20,7 @@ export default function AlertboxOptsLayout(data){
         break;
       case 'range':
         value = parseInt(value)
+        console.log(optType, optName, value);
         break;
       case 'radio':
         value = (value == 'true')
@@ -27,7 +28,7 @@ export default function AlertboxOptsLayout(data){
       }
     
     
-    console.log(optType, optName, value);
+    console.log(type, optType, optName, value);
     data.opts[optType][optName] = value;
   }
 
