@@ -8,6 +8,13 @@ export default class alertboxOptsLayout extends Component{
     this.outro = ["fade Out","fade Out Down","fade Out Down Big","fade Out Left","fade Out Left Big","fade Out Right","fade Out Right Big","fade Out Up","fade Out Up Big","fade Out Top Left","fade Out Top Right","fade Out Bottom Right","fade Out Bottom Left","back Out Down","back Out Left","back Out Right","back Out Up","bounce Out","bounce Out Down","bounce Out Left","bounce Out Right","bounce Out Up","flip Out X","flip Out Y","light Speed Out Right","light Speed Out Left","rotate Out","rotate Out Down Left","rotate Out Down Right","rotate Out Up Left","rotate Out Up Right","roll Out","zoom Out","zoom Out Down","zoom Out Left","zoom Out Right","zoom Out Up","slide Out Down","slide Out Left","slide Out Right","slide Out Up"];
   }
   
+  componentDidMount(){
+    
+  }
+  
+  componentDidUpdate(){
+    
+  }
   
   handleChange(e){
     console.log(e.target.value)
@@ -140,12 +147,12 @@ export default class alertboxOptsLayout extends Component{
                     <div className="col-8 d-flex">
                       <select className="form-select me-1" defaultValue="fadeInLeftBig" name="alert_animation_in">{
                         this.intro.map((e, i) => {
-                          return (<option value={e.replaceAll(' ','')}>{e}</option>)
+                          return (<option key={`alert_animation_in${i}`} value={e.replaceAll(' ','')}>{e}</option>)
                         }) 
                       }</select>
                       <select className="form-select ms-1" defaultValue="fadeOutLeftBig" name="alert_animation_out">{
                         this.outro.map((e, i) => {
-                          return (<option key={} value={e.replaceAll(" ","")}>{e}</option>)
+                          return (<option key={`alert_animation_out${i}`} value={e.replaceAll(" ","")}>{e}</option>)
                         }) 
                       }</select> 
                     </div>
@@ -324,3 +331,5 @@ export default class alertboxOptsLayout extends Component{
     )
   }
 }
+
+class tabContent()
