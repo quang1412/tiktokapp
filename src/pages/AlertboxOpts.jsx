@@ -27,7 +27,9 @@ export default function AlertboxOpts(props){
     switch(optName){
       case "image_url":
         let check = await checkImage(value)
-        !check && ((value = options[optType][optName]), (e.target.value = value))
+        if(!check){
+          value = options[optType][optName]; 
+        }
         console.log('done')
         break;
     }
