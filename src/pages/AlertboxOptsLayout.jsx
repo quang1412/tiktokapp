@@ -22,7 +22,7 @@ export default function AlertboxOptsLayout(props){
         value = parseInt(value)
         break;
       case 'radio':
-        (value === "true" + value === "false") && (value = (value == 'true'))
+        (value === "true" || value === "false") && (value = (value == 'true'))
         break;
     } 
     
