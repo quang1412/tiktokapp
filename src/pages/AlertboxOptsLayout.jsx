@@ -5,7 +5,7 @@ export default function alertboxOptsLayout(data){
   const intro = ["fade In","fade In Down","fade In Down Big","fade In Left","fade In Left Big","fade In Right","fade In Right Big","fade In Up","fade In Up Big","fade In Top Left","fade In Top Right","fade In Bottom Left","fade In Bottom Right","back In Down","back In Left","back In Right","back In Up","bounce In","bounce In Down","bounce In Left","bounce In Right","bounce In Up","flip In X","flip In Y","light Speed In Right","light Speed In Left","rotate In","rotate In Down Left","rotate In Down Right","rotate In Up Left","rotate In Up Right","roll In","zoom In","zoom In Down","zoom In Left","zoom In Right","zoom In Up","slide In Down","slide In Left","slide In Right","slide In Up"];
   const outro = ["fade Out","fade Out Down","fade Out Down Big","fade Out Left","fade Out Left Big","fade Out Right","fade Out Right Big","fade Out Up","fade Out Up Big","fade Out Top Left","fade Out Top Right","fade Out Bottom Right","fade Out Bottom Left","back Out Down","back Out Left","back Out Right","back Out Up","bounce Out","bounce Out Down","bounce Out Left","bounce Out Right","bounce Out Up","flip Out X","flip Out Y","light Speed Out Right","light Speed Out Left","rotate Out","rotate Out Down Left","rotate Out Down Right","rotate Out Up Left","rotate Out Up Right","roll Out","zoom Out","zoom Out Down","zoom Out Left","zoom Out Right","zoom Out Up","slide Out Down","slide Out Left","slide Out Right","slide Out Up"];
   const handleChange = e => {
-    console.log(e.target.name)
+    console.log(e.target.value)
   }
   
   return (
@@ -42,9 +42,9 @@ export default function alertboxOptsLayout(data){
                 </div>
                 <div className="col-8">
                   <div className="range">
-                    <input defaultValue={options.general.alert_delay} onChange={handleChange} type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
+                      <input defaultValue={options.general.alert_delay} onChange={handleChange} type="range" className="form-range" min="0" max="30" step="1" id="customRange3" />
                   </div>
-                </div>
+                  </div>
               </div>
               <div className="row mb-3">
                 <div className="col-4">
@@ -70,8 +70,10 @@ export default function alertboxOptsLayout(data){
                   <label className="form-label mb-0">Parry delay</label>
                 </div>
                 <div className="col-8">
-                  <input name="parry_alert_delay" type="range" className="form-range" min="1" max="20" step="1" defaultValue="4" onChange={handleChange} data-before="1" data-before-subfix="s"/>
-                </div>
+                  <div className="range">
+                    <input name="parry_alert_delay" type="range" className="form-range" min="1" max="20" step="1" defaultValue="4" onChange={handleChange} data-before="1" data-before-subfix="s"/>
+                  </div>
+                  </div>
               </div>
             </form>
           </div>
@@ -79,7 +81,7 @@ export default function alertboxOptsLayout(data){
             if(type == 'general' || type == "comment") return;
             let opt = options[type];
             return (
-              <div className="tab-pane fade" id={`tab-${type}`} role="tabpanel">
+              <div key={type} className="tab-pane fade" id={`tab-${type}`} role="tabpanel">
                 <form name={type} >
                   <div className="row mb-3">
                     <div className="col-4">
@@ -197,7 +199,7 @@ export default function alertboxOptsLayout(data){
                         <span className="animated-letter wiggle">P</span>
                         <span className="animated-letter wiggle">L</span>
                         <span className="animated-letter wiggle">E</span>
-                        <span className="">&nbsp</span>
+                        <span className="p-1"></span>
                         <span className="animated-letter wiggle">T</span>
                         <span className="animated-letter wiggle">E</span>
                         <span className="animated-letter wiggle">X</span>
@@ -232,46 +234,56 @@ export default function alertboxOptsLayout(data){
                       <label className="form-label mb-0">Volume</label>
                     </div>
                     <div className="col-8">
-                      <input name="sound_volume" type="range" className="form-range" min="0" max="100" step="1" defaultValue="50" data-before="1" data-before-subfix="%"/>
-                    </div>
+                      <div className="range">
+                        <input name="sound_volume" type="range" className="form-range" min="0" max="100" step="1" defaultValue="50" data-before="1" data-before-subfix="%"/>
+                      </div>
+                      </div>
                   </div>
                   <div className="row mb-3">
                     <div className="col-4">
                       <label className="form-label mb-0">Duration</label>
                     </div>
                     <div className="col-8">
-                      <input name="alert_duration" type="range" className="form-range" min="2" max="300" step="1" defaultValue="10" data-before="1" data-before-subfix="s"/>
-                    </div>
+                      <div className="range">
+                        <input name="alert_duration" type="range" className="form-range" min="2" max="300" step="1" defaultValue="10" data-before="1" data-before-subfix="s"/>
+                      </div>
+                      </div>
                   </div>
                   <div className="row mb-3">
                     <div className="col-4">
                       <label className="form-label mb-0">Text delay</label>
                     </div>
                     <div className="col-8">
-                      <input name="alert_text_delay" type="range" className="form-range" min="0" max="60" step="1" defaultValue="0" data-before="1" data-before-subfix="s"/>
-                    </div>
+                      <div className="range">
+                        <input name="alert_text_delay" type="range" className="form-range" min="0" max="60" step="1" defaultValue="0" data-before="1" data-before-subfix="s"/>
+                      </div>
+                      </div>
                   </div>
                   <div className="card card-body"> 
-                    <a data-bs-toggle="collapse" href="#<%=type%>FontSettingCollapse" aria-expanded="false">
+                    <a data-mdb-toggle="collapse" href={`#${type}-FontSettingCollapse`} aria-expanded="false">
                       <i className="fas fa-plus-square me-1"></i> Font setting
                     </a> 
-                    <div className="collapse" id="<%=type%>FontSettingCollapse"> 
+                    <div className="collapse" id={`${type}-FontSettingCollapse`}> 
                       <div className="p-2"></div>
                       <div className="row mb-3">
                         <div className="col-4">
                           <label className="form-label mb-0">Font size</label>
                         </div>
                         <div className="col-8">
-                          <input name="font_size" type="range" className="form-range" min="12" max="80" step="2" defaultValue="64" data-before="1" data-before-subfix=""/>
-                        </div>
+                          <div className="range">
+                            <input name="font_size" type="range" className="form-range" min="12" max="80" step="2" defaultValue="64" data-before="1" data-before-subfix=""/>
+                          </div>
+                          </div>
                       </div>
                       <div className="row mb-3">
                         <div className="col-4">
                           <label className="form-label mb-0">Font weight</label>
                         </div>
                         <div className="col-8">
-                          <input name="font_weight" type="range" className="form-range" min="300" max="900" step="100" defaultValue="800" data-before="1" data-before-subfix=""/>
-                        </div>
+                          <div className="range">
+                            <input name="font_weight" type="range" className="form-range" min="300" max="900" step="100" defaultValue="800" data-before="1" data-before-subfix=""/>
+                          </div>
+                          </div>
                       </div>
                       <div className="row mb-3">
                         <div className="col-4">

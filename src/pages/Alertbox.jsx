@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import AlertboxOptsLayout from './AlertboxOptsLayout';
 import '../style/Alertbox.css';
+import '../style/TextAnimations.css';
 import { io } from "socket.io-client";
 
 const Alertbox = () => {
