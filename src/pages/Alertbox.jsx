@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import AlertboxOptsLayout from './AlertboxOptsLayout';
+import AlertboxOpts from './AlertboxOpts';
 import '../style/Alertbox.css';
 import '../style/TextAnimations.css';
 import { io } from "socket.io-client";
@@ -29,7 +29,7 @@ const Alertbox = () => {
       </div>
       <div className="layer" id="play" style={{"display":"none"}}></div>
       <div className="layer" id="setting" style={{"display":"block"}}>
-        <AlertboxOptsLayout opts={options} onChangeOptions={handleOptions}/>
+        <AlertboxOpts opts={options} onChangeOptions={handleOptions}/>
       </div>
     </div>
   );
