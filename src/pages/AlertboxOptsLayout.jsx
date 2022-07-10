@@ -239,7 +239,7 @@ export default function AlertboxOptsLayout(props){
                   </div>
                   <div className="col-8">
                     <div className="input-group">
-                      <span className="input-group-text p-0" style={{"backgroundImage":options[type].image_url, "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
+                      <span className="input-group-text p-0" style={{"backgroundImage":`url(${options[type].image_url})`, "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
                       <input name="image_url" defaultValue={options[type].image_url} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Image URL"/>
                     </div>
                   </div>

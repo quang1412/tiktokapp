@@ -16,10 +16,10 @@ const Alertbox = () => {
     })
   }
   
-  const handleOptions = options => {
-    console.log(options)
-    setOptions(options)
-    localStorage.alertboxOpts = JSON.stringify(options)
+  const handleOptions = newOptions => {
+    console.log(newOptions)
+    setOptions({...options, ...newOptions})
+    localStorage.alertboxOpts = JSON.stringify(newOptions)
   }
   
   return (
