@@ -1,8 +1,7 @@
 import React from "react";
 
 export default function alertboxOptsLayout(data){
-  const options = data.opts;
-  var a = 1;
+  const options = data.opts; 
   
   const handleChange = e => {
     console.log(e.target)
@@ -33,7 +32,7 @@ export default function alertboxOptsLayout(data){
         </ul>
       </div>
       <div className="card-body text-start overflow-auto">
-        <div className="tab-content " id="pills-tabContent">
+        <div className="tab-content pt-3" id="pills-tabContent">
           <div className="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="general">
             <form name="general">
               <div className="row mb-3">
@@ -58,7 +57,7 @@ export default function alertboxOptsLayout(data){
                     </label>
                   </div>
                   <div className="form-check d-inline-block ms-3">
-                    <input className="form-check-input" type="radio" defaultValue="false" name="alert_parries" onChange={handleChange} checked/>
+                    <input className="form-check-input" type="radio" defaultValue="false" name="alert_parries" onChange={handleChange} defaultChecked={true}/>
                     <label className="form-check-label">
                       Off
                     </label>
@@ -75,12 +74,13 @@ export default function alertboxOptsLayout(data){
               </div>
             </form>
           </div>
-          {Object.keys(options).forEach(type => {
-            let opts = options[type]
-            Object.keys(opts).forEach(name => (
-              <br/>
-            )) 
-          })}
+          {Object.keys(options).map((type, i) => (
+            Object.keys(options[type]).map((name, j) => {
+              let value = options[type][name];
+              
+              return <span>{value}</span>
+            })
+          ))}
         </div>
       </div>
     </div>

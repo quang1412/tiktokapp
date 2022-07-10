@@ -23,7 +23,7 @@ const Alertbox = () => {
         {log.map((l, i) => (<p>l</p>))}
       </div>
       <div className="layer" id="play" style={{"display":"none"}}></div>
-      <div className="layer" id="setting" style={{"display":"none"}}>
+      <div className="layer" id="setting" style={{"display":"block"}}>
         <AlertboxOptsLayout opts={options}/>
       </div>
     </div>
