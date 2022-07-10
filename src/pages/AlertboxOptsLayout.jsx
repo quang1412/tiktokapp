@@ -1,5 +1,4 @@
 import React from "react";
-import Select from 'react-select';
 
 export default function alertboxOptsLayout(data){
   const options = data.opts; 
@@ -77,7 +76,7 @@ export default function alertboxOptsLayout(data){
             </form>
           </div>
           {Object.keys(options).map((type, i) => {
-            if(type == 'general') return;
+            if(type == 'general' || type == "comment") return;
             let opt = options[type];
             return (
               <div className="tab-pane fade" id={`tab-${type}`} role="tabpanel">
@@ -131,24 +130,16 @@ export default function alertboxOptsLayout(data){
                       <label className="form-label mb-0">Effects</label>
                     </div>
                     <div className="col-8 d-flex">
-                      <select className="form-select me-1" name="alert_animation_in">
-                        {
-                          intro.map((e, i) => {
-                            return (
-                              <option defaultValue={e.replace(' ','')}>{e}</option>
-                            )
-                          }) 
-                        }
-                      </select>
-                      <select className="form-select ms-1" name="alert_animation_in">
-                        {
-                          outro.map((e, i) => {
-                            return (
-                              <option defaultValue={e.replace(' ','')}>{e}</option>
-                            )
-                          }) 
-                        }
-                      </select> 
+                      <select className="form-select me-1" name="alert_animation_in">{
+                        intro.map((e, i) => {
+                          return (<option value={e.replaceAll(' ','')}>{e}</option>)
+                        }) 
+                      }</select>
+                      <select className="form-select ms-1" name="alert_animation_out">{
+                        outro.map((e, i) => {
+                          return (<option value={e.replaceAll(" ","")}>{e}</option>)
+                        }) 
+                      }</select> 
                     </div>
                   </div>
                   {
@@ -168,12 +159,15 @@ export default function alertboxOptsLayout(data){
                       <label className="form-label mb-0">Template</label>
                     </div>
                     <div className="col-8"> 
-                      { type == 'gift' && (<>
-                          <div className="input-group">
-                            <input name="message_template" type="text" className="form-control" placeholder="{username} send {giftcount} {giftname}"/>
-                          </div>
-                          <small>Keys: &#123nickname&#125 / &#123username&#125 / &#123giftname&#125 / &#123giftcount&#125 / &#123amount&#125</small>
-                        </>) }
+                      <div className="input-group">
+                        <input name="message_template" type="text" className="form-control" placeholder="{username} send {giftcount} {giftname}"/>
+                      </div>
+                      <small>Keys: 
+                        {type == "gift"   && "{nickname} / {username} / {giftname} / {giftcount} / {amount}"}
+                        {type == "follow"  && "{nickname} / {username} / {giftname} / {giftcount} / {amount}"}
+                        {type == "like"    && "{nickname} / {username} / {likecount}"}
+                        {type == "share"  && "{nickname} / {username}"}
+                      </small>
                     </div>
                   </div>
                   <div className="row mb-3">
