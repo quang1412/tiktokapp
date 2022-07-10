@@ -3,16 +3,16 @@ import logo from '../logo.svg';
 import '../style/Alertbox.css';
 import { io } from "socket.io-client";
 
-const [log, changeLog] = useState([]);
-
-const socketConnect = () => {
-  let socket = io("https://tiktoktool.glitch.me",  {query: `id=dongnguyenchat`});
-  socket.on('connect', () => {
-    console.log('connected')
-  })
-}
-
 const Alertbox = () => {
+  const [log, changeLog] = useState([]);
+  
+  const socketConnect = () => {
+    let socket = io("https://tiktoktool.glitch.me",  {query: `id=dongnguyenchat`});
+    socket.on('connect', () => {
+      // changeLog([...log], 'connected')
+      console.log('connected')
+    })
+  }
   
   socketConnect();
   
