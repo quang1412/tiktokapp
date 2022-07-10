@@ -151,10 +151,7 @@ export default function alertboxOptsLayout(data){
                     </div>
                   </div>
                   {
-                    if(type == 'gift'){}
-                  }
-                  <% if (type=='gift') { %>
-                    <div className="row mb-3">
+                    type == "gift" && (<div className="row mb-3">
                       <div className="col-4">
                         <label className="form-label mb-0">Min. donate</label>
                       </div>
@@ -163,37 +160,23 @@ export default function alertboxOptsLayout(data){
                           <input name="alert_min_amount" type="number" className="form-control" placeholder="1"/>
                         </div>
                       </div>
-                    </div>
-                  <% } %>
+                    </div>)
+                  } 
                   <div className="row mb-3">
                     <div className="col-4">
                       <label className="form-label mb-0">Template</label>
                     </div>
-                    <div className="col-8">
-                      <% if(type=='gift'){%>
-                        <div className="input-group">
-                          <input name="message_template" type="text" className="form-control" placeholder="{username} send {giftcount} {giftname}"/>
-                        </div>
-                        <small>Keys: {nickname} / {username} / {giftname} / {giftcount} / {amount}</small>
-                      <% } %>
-                      <% if(type=='follow'){%>
-                        <div className="input-group">
-                          <input name="message_template" type="text" className="form-control" placeholder="{username} followed host"/>
-                        </div>
-                        <small>Keys: {nickname} / {username}</small>
-                      <% } %>
-                      <% if(type=='like'){%>
-                        <div className="input-group">
-                          <input name="message_template" type="text" className="form-control" placeholder="{username} send {likecount} like"/>
-                        </div>
-                        <small>Keys: {nickname} / {username} / {likecount}</small>
-                      <% } %>
-                      <% if(type=='share'){%>
-                        <div className="input-group">
-                          <input name="message_template" type="text" className="form-control" placeholder="{username} shared host"/>
-                        </div>
-                        <small>Keys: {nickname} / {username}</small>
-                      <% } %>
+                    <div className="col-8"> 
+                      {
+                        type == 'gift' && (
+                          <>
+                            <div className="input-group">
+                              <input name="message_template" type="text" className="form-control" placeholder="{username} send {giftcount} {giftname}"/>
+                            </div>
+                            <small>Keys: &#123nickname&#125 / &#123username&#125 / &#123giftname&#125 / &#123giftcount&#125 / &#123amount&#125</small>
+                          </>
+                        )
+                      }
                     </div>
                   </div>
                   <div className="row mb-3">
