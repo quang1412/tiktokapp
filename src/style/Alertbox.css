@@ -1,3 +1,18 @@
+html{
+  font-size:min(3vh, 3vw);
+}
+.App{
+  width: min(100vh, 100vw);
+  height: min(100vh, 100vw);
+  margin: auto;
+}
+.layer#play{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 body {
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
