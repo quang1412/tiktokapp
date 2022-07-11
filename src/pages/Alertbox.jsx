@@ -15,32 +15,36 @@ const Alertbox = () => {
 
   
   const socketConnect = (id) => {
-    return 
-    isLoading.current = true;
+    return new Promise((resolve, reject) => { 
+      isLoading.current = true;
     
-    changeLog(prevLog => [...prevLog, 'server connecting...']); 
-    let socket = io("https://tiktoktools.glitch.me/obs",  {query: `id=${id}`});
-    socket.on('connect', () => {  
-      changeLog(prevLog => [...prevLog, ...['server connected', 'tiktok connecting...']]);
-    });
-    
-    socket.on('ttConnectRetry', i => { 
-      changeLog(prevLog => [...prevLog, `trying to connect (${i}/10)`]);
-    });
-    
-    socket.on('ttRoomInfo', data => {
-      isLoading.current = false;
-      console.log(data);
-      changeLog(prevLog => [...prevLog, 'tiktok connected']);
-      setTimeout(() => {setLayer("setting")}, 3000)
-    });
-    
-    socket.on('ttConnectFail', () => {
-      isLoading.current = false;
-      console.log('server connect fail');
-      changeLog(prevLog => [...prevLog, 'tiktok connect fail']);
-    });
-    
+      changeLog(prevLog => [...prevLog, 'server connecting...']); 
+      let socket = io("https://tiktoktools.glitch.me/obs",  {query: `id=${id}`});
+      socket.on('connect', () => {  
+        changeLog(prevLog => [...prevLog, ...['server connected', 'tiktok connecting...']]);
+      });
+
+      socket.on('ttConnectRetry', i => { 
+        changeLog(prevLog => [...prevLog, `trying to connect (${i}/10)`]);
+      });
+
+      socket.on('ttRoomInfo', data => {
+        isLoading.current = false;
+        console.log(data);
+        changeLog(prevLog => [...prevLog, 'tiktok connected']);
+        return resolve(socket);
+      });
+
+      socket.on('ttConnectFail', () => {
+        isLoading.current = false;
+        changeLog(prevLog => [...prevLog, 'tiktok connect fail']);
+        return reject(false)
+      });
+      
+    })
+  }
+  
+  const listenSocket = socket => {
     socket.on('gift', data => {
       if(options.gift.active){
         console.log(data)
@@ -107,6 +111,7 @@ const Alertbox = () => {
   }
   
   const loopThroughEventQueue = () => {
+    console.log(eventQueue.length)
     if(!eventQueue.length){
       setTimeout(() => {loopThroughEventQueue()}, 1*1000)
     }
@@ -135,6 +140,11 @@ const Alertbox = () => {
     let id = new URLSearchParams(window.location.search).get('id');
     if(id){
       socketConnect(id)
+      .then(socket => {
+        listenSocket(socket);
+        loopThroughEventQueue();
+        setTimeout(() => {setLayer("setting")}, 3000);
+      })
     }
     else{
       changeLog(prevLog => [...prevLog, `URL invalid, please enter ULR like this: ${window.location.origin+window.location.pathname}?id={tiktok_id}`]);
