@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import AlertboxOpts from './AlertboxOpts';
 import '../style/Alertbox.css';
 import '../style/TextAnimations.css';
-import '../style/Aanimate.min.css';
+import '../style/Animate.min.css';
 import { io } from "socket.io-client";
 
 const Alertbox = () => {
