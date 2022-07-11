@@ -6,6 +6,7 @@ import { io } from "socket.io-client";
 
 const Alertbox = () => {
   const isLoading = useRef(false);
+  // const isPlaying = useRef(false);
   const [layer, setLayer] = useState("log");
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([])
@@ -14,6 +15,7 @@ const Alertbox = () => {
 
   
   const socketConnect = (id) => {
+    return 
     isLoading.current = true;
     
     changeLog(prevLog => [...prevLog, 'server connecting...']); 
@@ -102,7 +104,32 @@ const Alertbox = () => {
     return (
       log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))
     )
-  } 
+  }
+  
+  const loopThroughEventQueue = () => {
+    if(!eventQueue.length){
+      setTimeout(() => {loopThroughEventQueue()}, 1*1000)
+    }
+    else{
+      let events = [...eventQueue];
+      let event = events.shift();
+      console.log(event.type);
+      setEventQueue(events);
+      
+      let opt = options[event.type];
+      var delay = options.general.alert_delay+opt.alert_duration;
+      
+      if(options.general.alert_parries){
+        (delay = options.general.parry_alert_delay);
+      }
+      
+      playSound()
+      
+      setTimeout(() => {
+        loopThroughEventQueue()
+      }, 1*1000)
+    }
+  }
   
   useEffect(() => {
     let id = new URLSearchParams(window.location.search).get('id');
@@ -112,21 +139,7 @@ const Alertbox = () => {
     else{
       changeLog(prevLog => [...prevLog, `URL invalid, please enter ULR like this: ${window.location.origin+window.location.pathname}?id={tiktok_id}`]);
     }
-  }, []);
-  
-  useEffect(() => {
-    if(eventQueue.length){
-      let interval = setInterval(() => {
-        let events = [...eventQueue];
-        let event = events.shift();
-        console.log(event.type);
-        setEventQueue(events);
-        
-        playSound()
-      }, 1000); 
-      return () => clearInterval(interval);
-    }
-  }, [eventQueue])
+  }, []); 
  
   return (
     <div className="App">
