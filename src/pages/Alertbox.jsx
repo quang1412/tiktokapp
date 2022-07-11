@@ -130,7 +130,7 @@ const Alertbox = () => {
     let event = events.shift();
     if(event && !isPlaying.current){
       isPlaying.current = true;
-      console.log(event.type);
+      console.log(event.type, eventQueue.length);
       setEventQueue(events);
       
       let opt = options[event.type];
@@ -141,7 +141,7 @@ const Alertbox = () => {
       }
       playSound()
       
-      setTimeout(() => {isPlaying.current = false}, )
+      setTimeout(() => {isPlaying.current = false}, delay*1000 )
     }
     else{
       
