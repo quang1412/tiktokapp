@@ -21,7 +21,9 @@ export default function AlertboxOpts(props){
         value = parseInt(value);
         break;
       case 'radio':
-        (value === "true" || value === "false") && (value = (value == 'true'));
+        (value === "true" || value === "false") && (value = (value === 'true'));
+        break;
+      default:
         break;
     }
     
@@ -37,6 +39,8 @@ export default function AlertboxOpts(props){
           target.value = options[optType][optName];
           return;
         }
+        break;
+      default:
         break;
     }
     
@@ -131,7 +135,7 @@ export default function AlertboxOpts(props){
             </div>
           </form>
         </div>
-        {Object.keys(options).map((type, i) => {
+        {Object.keys(options).map(function(type, i){
           if(type === 'general' || type === "comment") return;
           let opt = options[type];
           return (
