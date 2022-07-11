@@ -8,7 +8,8 @@ import { io } from "socket.io-client";
 const Alertbox = () => {
   const isLoading = useRef(false);
 
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
   const [layer, setLayer] = useState("log");
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([]);
@@ -194,11 +195,13 @@ const Alertbox = () => {
     }
   }, []);
   
-  useEffect(() => { 
-    let events = [...eventQueue]; 
+  useEffect(() => {
+    let events = [...eventQueue];
     let event = events.pop();
-    if(event && !isPlaying){
-      setIsPlaying(true)
+    
+    
+    if(event && !isWaiting){
+      setIsWaiting(true);
       setEventQueue(events);
       
       let opt = options[event.type];
@@ -217,10 +220,10 @@ const Alertbox = () => {
       setAnimate(opt.alert_animation_in)
       playSound()
       
-      setTimeout(() => {setIsPlaying(false)}, delay*1000 )
+      setTimeout(() => {setIsWaiting(false)}, delay*1000 )
     }
     return;
-  }, [eventQueue, isPlaying])
+  }, [eventQueue, isWaiting, isPlaying])
  
   return (
     <div className="App">
