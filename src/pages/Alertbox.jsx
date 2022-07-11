@@ -122,69 +122,60 @@ const Alertbox = () => {
       return e.type !== type;
     })
     setEventQueue(list);
-  }
-  
-  // const animateCSS = (element, animation, prefix = 'animate__') => {
-  //   return new Promise((resolve, reject) => {
-  //     element.attr('class', (`${prefix}animated ${prefix}${animation}`));
-  //     element.one('animationend', event => {
-  //       event.stopPropagation();
-  //       element.removeClass(`${prefix}animated ${prefix}${animation}`);
-  //       resolve('Animation ended');
-  //     });
-  //   });
-  // }
-  
-  // const getTextTemplate = (type, event) =>{
-  //   var data;
-  //   switch(type){
-  //     case "gift":
-  //       let amount = event.gift.repeat_count * event.extendedGiftInfo.diamond_count;
-  //       data =  {
-  //         'checked': event.checked,
-  //         'messageHTML': (options.gift.message_template || '{username} send {giftcount} {giftname}')
-  //           .replace('{amount}', `<span  className="animated-letters">${amount}</span>`)
-  //           .replace('{giftcount}', `<span  className="animated-letters">${event.gift.repeat_count}</span>`)
-  //           .replace('{giftname}', `<span  className="animated-letters">${event.extendedGiftInfo.name}</span>`)
-  //           .replace('{giftimg}', `<span  className="${options.gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${event.extendedGiftInfo.image.url_list[0]}"></span>`),
-  //         'userMessage': ''
-  //       };
-  //       break;
-  //     case "like":
-  //       data =  {
-  //         'checked': event.checked,
-  //         'messageHTML': (options.like.message_template || '{username} send {likecount} heart!')
-  //           .replace('{likecount}', `<span className="animated-letters">${event.likeCount}</span>`),
-  //         'userMessage': ''
-  //       };
-  //       break;
-  //     case "share":
-  //       data =  {
-  //         'checked': event.checked,
-  //         'messageHTML': (options.share.message_template || '{username} just share livestream!'),
-  //         'userMessage': ''
-  //       };
-  //       break;
-  //     case "follow":
-  //       data =  {
-  //         'checked': event.checked,
-  //         'messageHTML': (options.follow.message_template || '{username} is now follower'),
-  //         'userMessage': ''
-  //       };
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   data.messageHTML = data.messageHTML.replace('{username}', `<span className="animated-letters">${event.uniqueId}</span>`)
-  //   .replace('{nickname}', `<span className="animated-letters">${event.nickname || event.uniqueId}</span>`)
-  //   return data
-  // }
+  } 
   
   const handleAnimationEnd = e => {  
     setAnimate("");
     if(isOutro.current){
       setIsShowing(false);
     }
+  }
+  
+  const messTemplate = () => {
+    var data;
+    let template = options[mainEvent.type].message_template
+    switch(mainEvent.type){
+      case "gift":
+        let amount = mainEvent.gift.repeat_count * mainEvent.extendedGiftInfo.diamond_count;
+        data =  {
+          'checked': mainEvent.checked,
+          'messageHTML': (template || '{username} send {giftcount} {giftname}')
+            .replace('{amount}', `<span  class="animated-letters">${amount}</span>`)
+            .replace('{giftcount}', `<span  class="animated-letters">${mainEvent.gift.repeat_count}</span>`)
+            .replace('{giftname}', `<span  class="animated-letters">${mainEvent.extendedGiftInfo.name}</span>`)
+            .replace('{giftimg}', `<span  class="${this.options.gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${mainEvent.extendedGiftInfo.image.url_list[0]}"></span>`),
+          'userMessage': ''
+        };
+        break;
+      case "like":
+        data =  {
+          'checked': mainEvent.checked,
+          'messageHTML': (this.options.like.message_template || '{username} send {likecount} heart!')
+            .replace('{likecount}', `<span class="animated-letters">${mainEvent.likeCount}</span>`),
+          'userMessage': ''
+        };
+        break;
+      case "share":
+        data =  {
+          'checked': mainEvent.checked,
+          'messageHTML': (this.options.share.message_template || '{username} just share livestream!'),
+          'userMessage': ''
+        };
+        break;
+      case "follow":
+        data =  {
+          'checked': mainEvent.checked,
+          'messageHTML': (this.options.follow.message_template || '{username} is now follower'),
+          'userMessage': ''
+        };
+        break;
+    }
+    data.messageHTML = data.messageHTML.replace('{username}', `<span class="animated-letters">${mainEvent.uniqueId}</span>`)
+    .replace('{nickname}', `<span class="animated-letters">${mainEvent.nickname || mainEvent.uniqueId}</span>`)
+    return data
+    
+    
+      // options[mainEvent.type].message_template
   }
   
   useEffect(() => {
@@ -199,11 +190,11 @@ const Alertbox = () => {
     else{
       changeLog(prevLog => [...prevLog, `URL invalid, please enter ULR like this: ${window.location.origin+window.location.pathname}?id={tiktok_id}`]);
     }
-  }, []); 
+  }, []);
   
   useEffect(() => {
     let events = [...eventQueue];
-    let event = events.shift();
+    let event = events.pop();
     if(!isDelay){
       var delay = options.general.alert_delay
       if(event){
@@ -262,7 +253,9 @@ const Alertbox = () => {
               </div>
               <div id="alert-text-wrap">
                 <div id="alert-text" className=" ">
-                  <div id="alert-message" style={{"fontSize": "64px","color": "rgb(255, 255, 255)","fontFamily": "&quot;Open Sans&quot","fontWeight": "800","textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>Đắc Quang is now following</div>
+                  <div id="alert-message" style={{"fontSize": "64px","color": "rgb(255, 255, 255)","fontFamily": "&quot;Open Sans&quot","fontWeight": "800","textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>
+                    <messTemplate />
+                  </div>
                   <div id="alert-user-message" className="hidden" style={{"fontWeight": "400","fontSize": "24px","color": "rgb(255, 0, 0)","fontFamily": "Oranienbaum","textShadow":"0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>Xin chào</div>
                 </div>
               </div>
