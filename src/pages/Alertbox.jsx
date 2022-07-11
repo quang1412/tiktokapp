@@ -132,12 +132,18 @@ const Alertbox = () => {
   }
   
   const MessTemplate = () => {
-    var data, amount;
+    var data;
     let template = options[mainEvent.type].message_template
     switch(mainEvent.type){
       case "gift":
-        amount = mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count;
+        let amount = mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count;
         data =  (template || '{username} send {giftcount} {giftname}')
+          .replace('{username}', `<span class="animated-letters">${mainEvent.data.uniqueId}</span>`)
+          .replace('{nickname}', `<span class="animated-letters">${mainEvent.data.nickname || mainEvent.data.uniqueId}</span>`)
+          .replace('{amount}', `<span  class="animated-letters">${amount}</span>`)
+          .replace('{giftcount}', `<span  class="animated-letters">${mainEvent.data.gift.repeat_count}</span>`)
+          .replace('{giftname}', `<span  class="animated-letters">${mainEvent.data.extendedGiftInfo.name}</span>`)
+          .replace('{giftimg}', `<span  class="${options[mainEvent.type].gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${mainEvent.data.extendedGiftInfo.image.url_list[0]}"></span>`);
         break;
       case "like":
         data =  (template || '{username} send {likecount} heart!')
@@ -153,15 +159,10 @@ const Alertbox = () => {
       case "follow":
         data =  (template || '{username} is now follower');
         break;
+      default:
+        break;
       
-    }
-    data.replace('{username}', `<span class="animated-letters">${mainEvent.data.uniqueId}</span>`)
-        .replace('{nickname}', `<span class="animated-letters">${mainEvent.data.nickname || mainEvent.data.uniqueId}</span>`)
-        .replace('{amount}', `<span  class="animated-letters">${amount}</span>`)
-        .replace('{giftcount}', `<span  class="animated-letters">${mainEvent.data.gift.repeat_count}</span>`)
-        .replace('{giftname}', `<span  class="animated-letters">${mainEvent.data.extendedGiftInfo.name}</span>`)
-        .replace('{giftimg}', `<span  class="${this.options.gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${mainEvent.data.extendedGiftInfo.image.url_list[0]}"></span>`)
-        .replace('{likecount}', `<span class="animated-letters">${mainEvent.data.likeCount}</span>`);
+    } 
     console.log(data)
     return data
     
