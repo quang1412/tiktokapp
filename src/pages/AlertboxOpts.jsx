@@ -84,9 +84,6 @@ export default function AlertboxOpts(props){
         <li className="nav-item" role="presentation">
           <button className="nav-link" data-mdb-toggle="tab" href="#tab-share" role="tab" aria-controls="tab-share" aria-selected="false">Share</button>
         </li>
-        <li className="ms-auto d-flex align-items-center">
-          <button id="close-setting" className="btn btn-sm btn-light text-secondary border lh-1 p-2"><i className="fas fa-times-circle"></i></button>
-        </li>
       </ul>
     </div>
     <div className="card-body text-start overflow-auto">

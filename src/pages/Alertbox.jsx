@@ -167,10 +167,10 @@ const Alertbox = () => {
         <LogLayer />
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
-      
-        <audio></audio>
+        <button onClick={e => {setLayer("setting")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
       </div>
       <div className="layer" id="setting" style={{"display":(layer === "setting" ? "block" : "none")}}>
+        <button onClick={e => {setLayer("play")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions}/>
       </div>
     </div>
