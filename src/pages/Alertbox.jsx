@@ -170,14 +170,15 @@ const Alertbox = () => {
           'userMessage': ''
         };
         break;
+      default:
+        break;
     }
     data.messageHTML = data.messageHTML.replace('{username}', `<span className="animated-letters">${event.uniqueId}</span>`)
     .replace('{nickname}', `<span className="animated-letters">${event.nickname || event.uniqueId}</span>`)
     return data
   }
   
-  const handleAnimationEnd = e => {
-    e.stopPropagation();
+  const handleAnimationEnd = e => { 
     setAnimate("");
   }
   
@@ -218,10 +219,12 @@ const Alertbox = () => {
         }
 
         setMainEvent(event);
-        setAnimate(opt.alert_animation_in);
+        setAnimate(`animate__animated animate__${opt.alert_animation_in}`);
         playSound();
         
-        setTimeout(() => {setIsPlaying(false)}, opt.alert_duration*1000)
+        setTimeout(() => {
+          setIsPlaying(false)
+        }, opt.alert_duration*1000)
         setTimeout(() => {setIsWaiting(false)}, delay*1000 );
       }
     }
@@ -236,7 +239,7 @@ const Alertbox = () => {
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
-        <div id="widget" className={`animate__animated animate__${animate}`} onAnimationEnd={handleAnimationEnd} style={{"display" : (isPlaying ? "block" : "none")}}>
+        <div id="widget" className={animate} onAnimationEnd={handleAnimationEnd} style={{"display" : (isPlaying ? "block" : "none")}}>
           <div id="alert-box">
             <div id="wrap">
               <div id="alert-image-wrap">
