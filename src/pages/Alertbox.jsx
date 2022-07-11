@@ -204,28 +204,36 @@ const Alertbox = () => {
   useEffect(() => {
     let events = [...eventQueue];
     let event = events.shift();
-    
-    if(event && !isShowing){
-      setIsShowing(true);
-      isOutro.current = false;
-      setEventQueue(events);
-
-      let opt = options[event.type];
-
-      !opt.active && delAllType(event.type)
+    if(!isDelay){
+      var delay = options.general.alert_delay
       
-      var delay = options.general.alert_delay+opt.alert_duration;
-      
-      options.general.alert_parries && (delay = options.general.parry_alert_delay)
+      if(event && !isShowing){
+        setIsDelay(true);
+        setIsShowing(true);
+        isOutro.current = false;
+        setEventQueue(events);
 
-      setMainEvent(event);
-      setAnimate(`animate__animated animate__${opt.alert_animation_in}`);
+        let opt = options[event.type];
 
-      playSound();
-      
+        !opt.active && delAllType(event.type)
+
+        delay += opt.alert_duration;
+
+        options.general.alert_parries && (delay = options.general.parry_alert_delay)
+
+        setMainEvent(event);
+        document.body.setAttribute("data-layout", opt.layout)
+        setAnimate(`animate__animated animate__${opt.alert_animation_in}`);
+
+        playSound();
+        
+        setTimeout(() => {
+          setAnimate(`animate__animated animate__${opt.alert_animation_out}`);
+          isOutro.current = true;
+        }, opt.alert_duration*1000)
+      }
       setTimeout(() => {
-        setAnimate(`animate__animated animate__${opt.alert_animation_out}`);
-        isOutro.current = true;
+        setIsDelay(false)
       }, delay*1000)
     }
   }, [eventQueue, isDelay, isShowing])
