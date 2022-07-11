@@ -11,24 +11,24 @@ const Alertbox = () => {
   
   const socketConnect = () => { 
     
-    changeLog(prevArray => [...prevArray, 'server connecting']); 
+    changeLog(prevLog => [...prevLog, 'server connecting...']); 
     let socket = io("https://tiktoktools.glitch.me/obs",  {query: `id=dongnguyenchat`});
     socket.on('connect', () => {  
-      changeLog(prevArray => [...prevArray, 'socket connected']);
+      changeLog(prevLog => [...prevLog, ...['server connected', 'tiktok connecting...']]);
     }) 
     
     socket.on('ttConnectRetry', i => { 
-      changeLog(prevArray => [...prevArray, `trying to connect (${i}/10)`]); 
+      changeLog(prevLog => [...prevLog, `trying to connect (${i}/10)`]); 
     });
     
     socket.on('ttRoomInfo', data => {
       console.log('server connected', data);
-      changeLog(prevArray => [...prevArray, 'server connected']);
+      changeLog(prevLog => [...prevLog, 'server connected']);
     });
     
     socket.on('ttConnectFail', () => {
       console.log('server connect fail');
-      changeLog(prevArray => [...prevArray, 'server connect fail']);
+      changeLog(prevLog => [...prevLog, 'server connect fail']);
     });
   }
   
@@ -42,7 +42,11 @@ const Alertbox = () => {
     socketConnect();
     
     const interval = setInterval(() => {
-      // changeLog(prevArray => [...prevArray, '.']); 
+      changeLog( prevState => {
+      const newState = [...prevState]
+      newState[newState.length - 1] += '.'
+      return newState
+    })
     }, 1000);
 
     return () => clearInterval(interval);
