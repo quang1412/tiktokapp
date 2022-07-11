@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 
 const Alertbox = () => {
   const isLoading = useRef(false);
-  // const isPlaying = useRef(false);
+  const isPlaying = useRef(false);
   const [layer, setLayer] = useState("log");
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([])
@@ -109,15 +109,27 @@ const Alertbox = () => {
       log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))
     )
   }
+   
   
-  const loopThroughEventQueue = () => {
-    let events = [...eventQueue];
-    console.log(events.lenght)
-    if(!events.length){
-      setTimeout(() => {loopThroughEventQueue()}, 1*1000)
+  useEffect(() => {
+    let id = new URLSearchParams(window.location.search).get('id');
+    if(id){
+      socketConnect(id)
+      .then(socket => {
+        listenSocket(socket); 
+        setTimeout(() => {setLayer("setting")}, 3000);
+      })
     }
     else{
-      let event = events.shift();
+      changeLog(prevLog => [...prevLog, `URL invalid, please enter ULR like this: ${window.location.origin+window.location.pathname}?id={tiktok_id}`]);
+    }
+  }, []);
+  
+  useEffect(() => {
+    let events = [...eventQueue]; 
+    let event = events.shift();
+    if(event && !isPlaying.current){
+      isPlaying.current = true;
       console.log(event.type);
       setEventQueue(events);
       
@@ -127,31 +139,14 @@ const Alertbox = () => {
       if(options.general.alert_parries){
         (delay = options.general.parry_alert_delay);
       }
-      
       playSound()
       
-      setTimeout(() => {
-        loopThroughEventQueue()
-      }, 1*1000)
-    }
-  }
-  
-  useEffect(() => {
-    let id = new URLSearchParams(window.location.search).get('id');
-    if(id){
-      socketConnect(id)
-      .then(socket => {
-        listenSocket(socket);
-        loopThroughEventQueue();
-        setTimeout(() => {setLayer("setting")}, 3000);
-      })
+      setTimeout(() => {isPlaying.current = false}, )
     }
     else{
-      changeLog(prevLog => [...prevLog, `URL invalid, please enter ULR like this: ${window.location.origin+window.location.pathname}?id={tiktok_id}`]);
+      
     }
-  }, []);
-  
-  useEffect(())
+  }, [eventQueue, isPlaying.current])
  
   return (
     <div className="App">
