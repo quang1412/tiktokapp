@@ -12,27 +12,24 @@ const Alertbox = () => {
   const socketConnect = () => {
     console.log(log)
     // changeLog(log.push("server connecting"));
-    let socket = io("https://tiktoktool.glitch.me",  {query: `id=dongnguyenchat`});
+    let socket = io("https://tiktoktools.glitch.me/obs",  {query: `id=dongnguyenchat`});
     socket.on('connect', () => { 
-      console.log()
+      console.log('socket connected')
       // changeLog([...log, 'connect']);
-    })
-    
-    // var connecting = setInterval(() => {
-    //   changeLog([...log, '.']);
-    //   console.log('.')
-    // },2000);
+    }) 
     
     socket.on('ttConnectRetry', i => {
+      console.log(`trying to connect (${i}/10)`)
       // changeLog([...log, `trying to connect (${i}/10)`]);
     });
     
     socket.on('ttRoomInfo', data => {
-      console.log(data);
+      console.log('server connected', data);
       // changeLog([...log, 'server connected']); 
     });
     
     socket.on('ttConnectFail', () => {
+      console.log('server connect fail');
       // changeLog([...log, 'server connect fail']);
     });
   }
@@ -44,8 +41,10 @@ const Alertbox = () => {
   }
   
   useEffect(() => {
+    socketConnect();
+    
     const interval = setInterval(() => {
-      changeLog([...log, '.']);
+      changeLog(prevArray => [...prevArray, '.']);
       console.log(log);
     }, 1000);
 
