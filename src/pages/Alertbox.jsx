@@ -175,7 +175,7 @@ const Alertbox = () => {
     return data
   }
   
-  const onAnimationend = e => {
+  const handleAnimationEnd = e => {
     e.stopPropagation();
     setAnimate("");
   }
@@ -195,7 +195,6 @@ const Alertbox = () => {
   }, []);
   
   useEffect(() => { 
-    console.log(!isPlaying, eventQueue.length);
     let events = [...eventQueue]; 
     let event = events.pop();
     if(event && !isPlaying){
@@ -219,7 +218,8 @@ const Alertbox = () => {
       playSound()
       
       setTimeout(() => {setIsPlaying(false)}, delay*1000 )
-    } 
+    }
+    return;
   }, [eventQueue, isPlaying])
  
   return (
@@ -229,7 +229,7 @@ const Alertbox = () => {
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
-        <div id="widget" className={"animate__animated animate__"+animate} onAnimationend={onAnimationend} style={{"display" : (isPlaying ? "block" : "none")}}>
+        <div id="widget" className={`animate__animated animate__${animate}`} onAnimationEnd={handleAnimationEnd} style={{"display" : (isPlaying ? "block" : "none")}}>
           <div id="alert-box">
             <div id="wrap">
               <div id="alert-image-wrap">
