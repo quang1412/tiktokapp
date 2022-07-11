@@ -73,5 +73,4 @@ const Alertbox = () => {
     </div>
   );
 }
-
 export default Alertbox;
