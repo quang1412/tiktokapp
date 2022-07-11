@@ -90,7 +90,7 @@ const Alertbox = () => {
     return (
       log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))
     )
-  }
+  } 
   
   useEffect(() => {
     let id = new URLSearchParams(window.location.search).get('id');
@@ -102,7 +102,17 @@ const Alertbox = () => {
     }
   }, []);
   
-  
+  useEffect(() => {
+    if(eventQueue.length){
+      let interval = setInterval(() => {
+        let events = [...eventQueue];
+        let event = events.shift();
+        console.log(event.type);
+        setEventQueue(events);
+      }, 1000); 
+      return () => clearInterval(interval);
+    }
+  }, [eventQueue])
  
   return (
     <div className="App">
