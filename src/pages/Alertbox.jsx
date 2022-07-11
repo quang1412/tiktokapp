@@ -35,6 +35,22 @@ const Alertbox = () => {
       console.log('server connect fail');
       changeLog(prevLog => [...prevLog, 'tiktok connect fail']);
     });
+    
+    socket.on('gift', () => {
+      
+    })
+    
+    socket.on('follow', () => {
+      
+    })
+    
+    socket.on('like', () => {
+      
+    })
+    
+    socket.on('share', () => {
+      
+    })
   }
   
   const handleOptions = newOptions => {
@@ -68,7 +84,7 @@ const Alertbox = () => {
   }, [isLoading.current])
   
   
-  const LogView = () => {
+  const LogLayer = () => {
     return (
       log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))
     )
@@ -77,7 +93,7 @@ const Alertbox = () => {
   return (
     <div className="App">
       <div className="layer text-start" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
-        <LogView />
+        <LogLayer />
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}></div>
       <div className="layer" id="setting" style={{"display":(layer === "setting" ? "block" : "none")}}>
