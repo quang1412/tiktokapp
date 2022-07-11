@@ -6,7 +6,7 @@ import './index.css';
 // import * as serviceWorker from './serviceWorker';
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
-import Alertbox from "./pages/Alertbox";
+import Alertbox from "./pages/Alertbox/";
 
 
 export default function Main() {

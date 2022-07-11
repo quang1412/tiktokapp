@@ -109,13 +109,7 @@ const Alertbox = () => {
       audio.volume = vol/100;
       audio.play();
     } catch(err){}
-  }
-  
-  const LogLayer = () => {
-    return (
-      log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))
-    )
-  }
+  } 
   
   const delAllType = type => {
     let list = [...eventQueue]
@@ -229,7 +223,7 @@ const Alertbox = () => {
   return (
     <div className="App">
       <div className="layer text-start" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
-        <LogLayer />
+        {log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))}
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
