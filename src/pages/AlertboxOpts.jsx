@@ -70,19 +70,19 @@ export default function AlertboxOpts(props){
     <div className="card-header">
       <ul className="nav nav-tabs" id="pills-tab" role="tablist">
         <li className="nav-item" role="presentation">
-          <button className="nav-link active" data-mdb-toggle="tab" href="#tab-general" role="tab" aria-controls="tab-general" aria-selected="true">General</button>
+          <button className="nav-link fs-6 p-3 active" data-mdb-toggle="tab" href="#tab-general" role="tab" aria-controls="tab-general" aria-selected="true">General</button>
         </li>
         <li className="nav-item" role="presentation">
-          <button className="nav-link" data-mdb-toggle="tab" href="#tab-gift" role="tab" aria-controls="tab-gift" aria-selected="false">Donate</button>
+          <button className="nav-link fs-6 p-3" data-mdb-toggle="tab" href="#tab-gift" role="tab" aria-controls="tab-gift" aria-selected="false">Donate</button>
         </li>
         <li className="nav-item" role="presentation">
-          <button className="nav-link" data-mdb-toggle="tab" href="#tab-follow" role="tab" aria-controls="tab-follow" aria-selected="false">Follow</button>
+          <button className="nav-link fs-6 p-3" data-mdb-toggle="tab" href="#tab-follow" role="tab" aria-controls="tab-follow" aria-selected="false">Follow</button>
         </li>
         <li className="nav-item" role="presentation">
-          <button className="nav-link" data-mdb-toggle="tab" href="#tab-like" role="tab" aria-controls="tab-like" aria-selected="false">Like</button>
+          <button className="nav-link fs-6 p-3" data-mdb-toggle="tab" href="#tab-like" role="tab" aria-controls="tab-like" aria-selected="false">Like</button>
         </li>
         <li className="nav-item" role="presentation">
-          <button className="nav-link" data-mdb-toggle="tab" href="#tab-share" role="tab" aria-controls="tab-share" aria-selected="false">Share</button>
+          <button className="nav-link fs-6 p-3" data-mdb-toggle="tab" href="#tab-share" role="tab" aria-controls="tab-share" aria-selected="false">Share</button>
         </li>
       </ul>
     </div>
