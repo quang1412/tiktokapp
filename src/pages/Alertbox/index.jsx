@@ -158,24 +158,20 @@ const Alertbox = () => {
         break;
       
     }  
-    return (<div>{data}</div>)
-    
-    
-      // options[mainEvent.type].message_template
+    return (<div>{data}</div>) 
   }
   
-  useEffect(() => {
+  useEffect(function(){
     let id = new URLSearchParams(window.location.search).get('id');
-    if(id){
-      socketConnect(id)
-      .then(socket => {
-        listenSocket(socket); 
-        setTimeout(() => {setLayer("play")}, 3000);
-      })
-    }
-    else{
+    if(!id){
       changeLog(prevLog => [...prevLog, `URL invalid, please enter ULR like this: ${window.location.origin+window.location.pathname}?id={tiktok_id}`]);
+      return;
     }
+    socketConnect(id)
+    .then(socket => {
+      listenSocket(socket); 
+      setTimeout(() => {setLayer("play")}, 3000);
+    }) 
   }, []);
   
   useEffect(() => {
@@ -233,15 +229,14 @@ const Alertbox = () => {
               <div id="alert-image-wrap">
                 <div id={mainEvent.data.id} className="d-none"></div>
                 <div id="alert-image" className="" style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
-                  <img style={{"height": "1px","opacity": "0","width": "1px"}} src="https://cdn.streamlabs.com/library/giflibrary/jumpy-t-rex.gif"/>
+                  <img style={{"height": "1px","opacity": "0","width": "1px"}} src={options[mainEvent.type].image_url}/>
                 </div>
               </div>
               <div id="alert-text-wrap">
                 <div id="alert-text" className=" ">
-                  <div id="alert-message" style={{"fontSize": "64px","color": "rgb(255, 255, 255)","fontFamily": "&quot;Open Sans&quot","fontWeight": "800","textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>
+                  <div id="alert-message" style={{"fontSize": `${options[mainEvent.type].font_size}px`,"color": `${options[mainEvent.type].text_color || "rgb(255, 255, 255)"}`,"fontFamily": "Open Sans&quot","fontWeight": `${options[mainEvent.type].font_weight}`,"textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>
                     <MessTemplate />
                   </div>
-                  <div id="alert-user-message" className="hidden" style={{"fontWeight": "400","fontSize": "24px","color": "rgb(255, 0, 0)","fontFamily": "Oranienbaum","textShadow":"0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>Xin chào</div>
                 </div>
               </div>
             </div>
