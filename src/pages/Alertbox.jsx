@@ -110,7 +110,14 @@ const Alertbox = () => {
       log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))
     )
   }
-   
+  
+  const delAllType = type => {
+    let list = [...eventQueue]
+    list = list.filter(e => {
+      return e.type !== type;
+    })
+    setEventQueue(list);
+  }
   
   useEffect(() => {
     let id = new URLSearchParams(window.location.search).get('id');
@@ -129,12 +136,17 @@ const Alertbox = () => {
   useEffect(() => { 
     console.log(!isPlaying, eventQueue.length);
     let events = [...eventQueue]; 
-    let event = events.shift();
+    let event = events.pop();
     if(event && !isPlaying){
       setIsPlaying(true)
       setEventQueue(events);
       
       let opt = options[event.type];
+      
+      if(!opt.active){
+        delAllType(event.type)
+      }
+      
       var delay = options.general.alert_delay+opt.alert_duration;
       
       if(options.general.alert_parries){
