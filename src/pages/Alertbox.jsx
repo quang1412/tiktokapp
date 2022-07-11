@@ -178,8 +178,7 @@ const Alertbox = () => {
   //   return data
   // }
   
-  const handleAnimationEnd = e => { 
-    animatePlaying.current = false
+  const handleAnimationEnd = e => {  
     setAnimate("");
   }
   
@@ -196,26 +195,6 @@ const Alertbox = () => {
       changeLog(prevLog => [...prevLog, `URL invalid, please enter ULR like this: ${window.location.origin+window.location.pathname}?id={tiktok_id}`]);
     }
   }, []); 
-  
-  const alertBox = () => {
-    
-    
-    return (
-      <div id="wrap">
-        <div id="alert-image-wrap">
-          <div id="alert-image" className="" style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
-            <img style={{"height": "1px","opacity": "0","width": "1px"}} src="https://cdn.streamlabs.com/library/giflibrary/jumpy-t-rex.gif"/>
-          </div>
-        </div>
-        <div id="alert-text-wrap">
-          <div id="alert-text" className=" ">
-            <div id="alert-message" style={{"fontSize": "64px","color": "rgb(255, 255, 255)","fontFamily": "&quot;Open Sans&quot","fontWeight": "800","textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>Đắc Quang is now following</div>
-            <div id="alert-user-message" className="hidden" style={{"fontWeight": "400","fontSize": "24px","color": "rgb(255, 0, 0)","fontFamily": "Oranienbaum","textShadow":"0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>Xin chào</div>
-          </div>
-        </div>
-      </div>
-    )
-  }
   
   useEffect(() => {
     let events = [...eventQueue];
@@ -252,7 +231,19 @@ const Alertbox = () => {
         <button onClick={e => {setLayer("setting")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
         <div id="widget" className={animate} onAnimationEnd={handleAnimationEnd} style={{"display" : (isDelay ? "block" : "none")}}>
           <div id="alert-box">
-            <alertBox /> 
+            <div id="wrap">
+              <div id="alert-image-wrap">
+                <div id="alert-image" className="" style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
+                  <img style={{"height": "1px","opacity": "0","width": "1px"}} src="https://cdn.streamlabs.com/library/giflibrary/jumpy-t-rex.gif"/>
+                </div>
+              </div>
+              <div id="alert-text-wrap">
+                <div id="alert-text" className=" ">
+                  <div id="alert-message" style={{"fontSize": "64px","color": "rgb(255, 255, 255)","fontFamily": "&quot;Open Sans&quot","fontWeight": "800","textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>Đắc Quang is now following</div>
+                  <div id="alert-user-message" className="hidden" style={{"fontWeight": "400","fontSize": "24px","color": "rgb(255, 0, 0)","fontFamily": "Oranienbaum","textShadow":"0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>Xin chào</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div> 
       </div>
