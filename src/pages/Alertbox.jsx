@@ -195,33 +195,37 @@ const Alertbox = () => {
     }
   }, []);
   
-  useEffect(() => {
-    let events = [...eventQueue];
-    let event = events.pop();
-    
-    
-    if(event && !isWaiting){
-      setIsWaiting(true);
-      setEventQueue(events);
+  useEffect(() => {  
+    if(!isWaiting){
+      let events = [...eventQueue];
+      let event = events.pop();
       
-      let opt = options[event.type];
-      
-      if(!opt.active){
-        delAllType(event.type)
+      if(event){
+        setIsWaiting(true);
+        setIsPlaying(true);
+        setEventQueue(events);
+
+        let opt = options[event.type];
+
+        if(!opt.active){
+          delAllType(event.type);
+        }
+
+        var delay = options.general.alert_delay+opt.alert_duration;
+
+        if(options.general.alert_parries){
+          (delay = options.general.parry_alert_delay);
+        }
+
+        setMainEvent(event);
+        setAnimate(opt.alert_animation_in);
+        playSound();
+        
+        setTimeout(() => {setIsPlaying(false)}, opt.alert_duration*1000)
+        setTimeout(() => {setIsWaiting(false)}, delay*1000 );
       }
-      
-      var delay = options.general.alert_delay+opt.alert_duration;
-      
-      if(options.general.alert_parries){
-        (delay = options.general.parry_alert_delay);
-      }
-      
-      setMainEvent(event);
-      setAnimate(opt.alert_animation_in)
-      playSound()
-      
-      setTimeout(() => {setIsWaiting(false)}, delay*1000 )
     }
+    
     return;
   }, [eventQueue, isWaiting, isPlaying])
  
