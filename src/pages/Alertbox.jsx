@@ -206,35 +206,38 @@ const Alertbox = () => {
     let event = events.shift();
     if(!isDelay){
       var delay = options.general.alert_delay
-      options.general.alert_parries && setIsShowing(false)
-      if(event && !isShowing){
-        setIsShowing(true);
-        isOutro.current = false;
-        setEventQueue(events);
+      if(event){
+        options.general.alert_parries && setIsShowing(false);
+        if(!isShowing){
+          setIsShowing(true);
+          isOutro.current = false;
+          setEventQueue(events);
 
-        let opt = options[event.type];
+          let opt = options[event.type];
 
-        !opt.active && delAllType(event.type)
+          !opt.active && delAllType(event.type)
 
-        delay += opt.alert_duration;
+          delay += opt.alert_duration;
 
-        options.general.alert_parries && (delay = options.general.parry_alert_delay)
+          options.general.alert_parries && (delay = options.general.parry_alert_delay)
 
-        setMainEvent(event);
-        document.body.setAttribute("data-layout", opt.layout)
-        setAnimate(`animate__animated animate__${opt.alert_animation_in}`);
+          setMainEvent(event);
+          document.body.setAttribute("data-layout", opt.layout)
+          setAnimate(`animate__animated animate__${opt.alert_animation_in}`);
 
-        playSound();
-        
-        setTimeout(() => {
-          setAnimate(`animate__animated animate__${opt.alert_animation_out}`);
-          isOutro.current = true;
-        }, opt.alert_duration*1000)
-      }
-      setIsDelay(true);
-      setTimeout(() => {
-        setIsDelay(false)
-      }, delay*1000)
+          playSound();
+
+          setTimeout(() => {
+            setAnimate(`animate__animated animate__${opt.alert_animation_out}`);
+            isOutro.current = true;
+          }, opt.alert_duration*1000)
+          
+          setIsDelay(true);
+          setTimeout(() => {
+            setIsDelay(false)
+          }, delay*1000)
+        }
+      } 
     }
   }, [eventQueue, isDelay, isShowing])
  
