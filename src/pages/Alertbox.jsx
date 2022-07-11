@@ -215,7 +215,7 @@ const Alertbox = () => {
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
-        <div id="widget">
+        <div id="widget" className={{}} style={{"display" : (isPlaying ? "block" : "none")}}>
           <div id="alert-box">
             <div id="wrap">
               <div id="alert-image-wrap">
