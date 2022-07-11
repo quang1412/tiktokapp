@@ -111,12 +111,12 @@ const Alertbox = () => {
   }
   
   const loopThroughEventQueue = () => {
-    console.log(eventQueue.length)
-    if(!eventQueue.length){
+    let events = [...eventQueue];
+    console.log(events.lenght)
+    if(!events.length){
       setTimeout(() => {loopThroughEventQueue()}, 1*1000)
     }
     else{
-      let events = [...eventQueue];
       let event = events.shift();
       console.log(event.type);
       setEventQueue(events);
@@ -149,7 +149,9 @@ const Alertbox = () => {
     else{
       changeLog(prevLog => [...prevLog, `URL invalid, please enter ULR like this: ${window.location.origin+window.location.pathname}?id={tiktok_id}`]);
     }
-  }, []); 
+  }, []);
+  
+  useEffect(())
  
   return (
     <div className="App">
