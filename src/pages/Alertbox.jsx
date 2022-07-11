@@ -7,6 +7,7 @@ import { io } from "socket.io-client";
 
 const Alertbox = () => {
   const isLoading = useRef(false);
+  const animatePlaying = useRef(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isWaiting, setIsWaiting] = useState(false);
@@ -122,65 +123,70 @@ const Alertbox = () => {
     setEventQueue(list);
   }
   
-  const animateCSS = (element, animation, prefix = 'animate__') => {
-    return new Promise((resolve, reject) => {
-      element.attr('class', (`${prefix}animated ${prefix}${animation}`));
-      element.one('animationend', event => {
-        event.stopPropagation();
-        element.removeClass(`${prefix}animated ${prefix}${animation}`);
-        resolve('Animation ended');
-      });
-    });
-  }
+  // const animateCSS = (element, animation, prefix = 'animate__') => {
+  //   return new Promise((resolve, reject) => {
+  //     element.attr('class', (`${prefix}animated ${prefix}${animation}`));
+  //     element.one('animationend', event => {
+  //       event.stopPropagation();
+  //       element.removeClass(`${prefix}animated ${prefix}${animation}`);
+  //       resolve('Animation ended');
+  //     });
+  //   });
+  // }
   
-  const getTextTemplate = (type, event) =>{
-    var data;
-    switch(type){
-      case "gift":
-        let amount = event.gift.repeat_count * event.extendedGiftInfo.diamond_count;
-        data =  {
-          'checked': event.checked,
-          'messageHTML': (options.gift.message_template || '{username} send {giftcount} {giftname}')
-            .replace('{amount}', `<span  className="animated-letters">${amount}</span>`)
-            .replace('{giftcount}', `<span  className="animated-letters">${event.gift.repeat_count}</span>`)
-            .replace('{giftname}', `<span  className="animated-letters">${event.extendedGiftInfo.name}</span>`)
-            .replace('{giftimg}', `<span  className="${options.gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${event.extendedGiftInfo.image.url_list[0]}"></span>`),
-          'userMessage': ''
-        };
-        break;
-      case "like":
-        data =  {
-          'checked': event.checked,
-          'messageHTML': (options.like.message_template || '{username} send {likecount} heart!')
-            .replace('{likecount}', `<span className="animated-letters">${event.likeCount}</span>`),
-          'userMessage': ''
-        };
-        break;
-      case "share":
-        data =  {
-          'checked': event.checked,
-          'messageHTML': (options.share.message_template || '{username} just share livestream!'),
-          'userMessage': ''
-        };
-        break;
-      case "follow":
-        data =  {
-          'checked': event.checked,
-          'messageHTML': (options.follow.message_template || '{username} is now follower'),
-          'userMessage': ''
-        };
-        break;
-      default:
-        break;
-    }
-    data.messageHTML = data.messageHTML.replace('{username}', `<span className="animated-letters">${event.uniqueId}</span>`)
-    .replace('{nickname}', `<span className="animated-letters">${event.nickname || event.uniqueId}</span>`)
-    return data
-  }
+  // const getTextTemplate = (type, event) =>{
+  //   var data;
+  //   switch(type){
+  //     case "gift":
+  //       let amount = event.gift.repeat_count * event.extendedGiftInfo.diamond_count;
+  //       data =  {
+  //         'checked': event.checked,
+  //         'messageHTML': (options.gift.message_template || '{username} send {giftcount} {giftname}')
+  //           .replace('{amount}', `<span  className="animated-letters">${amount}</span>`)
+  //           .replace('{giftcount}', `<span  className="animated-letters">${event.gift.repeat_count}</span>`)
+  //           .replace('{giftname}', `<span  className="animated-letters">${event.extendedGiftInfo.name}</span>`)
+  //           .replace('{giftimg}', `<span  className="${options.gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${event.extendedGiftInfo.image.url_list[0]}"></span>`),
+  //         'userMessage': ''
+  //       };
+  //       break;
+  //     case "like":
+  //       data =  {
+  //         'checked': event.checked,
+  //         'messageHTML': (options.like.message_template || '{username} send {likecount} heart!')
+  //           .replace('{likecount}', `<span className="animated-letters">${event.likeCount}</span>`),
+  //         'userMessage': ''
+  //       };
+  //       break;
+  //     case "share":
+  //       data =  {
+  //         'checked': event.checked,
+  //         'messageHTML': (options.share.message_template || '{username} just share livestream!'),
+  //         'userMessage': ''
+  //       };
+  //       break;
+  //     case "follow":
+  //       data =  {
+  //         'checked': event.checked,
+  //         'messageHTML': (options.follow.message_template || '{username} is now follower'),
+  //         'userMessage': ''
+  //       };
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   data.messageHTML = data.messageHTML.replace('{username}', `<span className="animated-letters">${event.uniqueId}</span>`)
+  //   .replace('{nickname}', `<span className="animated-letters">${event.nickname || event.uniqueId}</span>`)
+  //   return data
+  // }
   
   const handleAnimationEnd = e => { 
+    animatePlaying.current = false
     setAnimate("");
   }
+  
+  useEffect(() => {
+    if(!)
+  }, [animatePlaying.current])
   
   useEffect(() => {
     let id = new URLSearchParams(window.location.search).get('id');
@@ -220,10 +226,12 @@ const Alertbox = () => {
 
         setMainEvent(event);
         setAnimate(`animate__animated animate__${opt.alert_animation_in}`);
+        animatePlaying.current = true;
         playSound();
         
         setTimeout(() => {
-          setIsPlaying(false)
+          // setIsPlaying(false)
+          setAnimate(`animate__animated animate__${opt.alert_animation_out}`);
         }, opt.alert_duration*1000)
         setTimeout(() => {setIsWaiting(false)}, delay*1000 );
       }
