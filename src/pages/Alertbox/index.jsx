@@ -1,11 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
 import AlertboxOpts from './AlertboxOpts';
-import '../style/Alertbox.css';
-import '../style/TextAnimations.css';
-import '../style/Animate.min.css';
+import './style.css';
+import './TextAnimations.css';
+import './Animate.min.css';
 import { io } from "socket.io-client";
-
+ 
 const Alertbox = () => {
+  
   const isLoading = useRef(false);
   const isOutro = useRef(false);
  
