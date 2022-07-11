@@ -155,10 +155,7 @@ const Alertbox = () => {
       playSound()
       
       setTimeout(() => {setIsPlaying(false)}, delay*1000 )
-    }
-    else{
-      
-    }
+    } 
   }, [eventQueue, isPlaying])
  
   return (
