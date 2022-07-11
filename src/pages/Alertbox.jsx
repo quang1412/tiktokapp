@@ -119,6 +119,53 @@ const Alertbox = () => {
     setEventQueue(list);
   }
   
+  const getTextTemplate = (type, event) =>{
+    var data;
+    switch(type){
+      case "gift":
+        let amount = event.gift.repeat_count * event.extendedGiftInfo.diamond_count;
+        data =  {
+          'checked': event.checked,
+          'messageHTML': (options.gift.message_template || '{username} send {giftcount} {giftname}')
+            .replace('{amount}', `<span  className="animated-letters">${amount}</span>`)
+            .replace('{giftcount}', `<span  className="animated-letters">${event.gift.repeat_count}</span>`)
+            .replace('{giftname}', `<span  className="animated-letters">${event.extendedGiftInfo.name}</span>`)
+            .replace('{giftimg}', `<span  className="${options.gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${event.extendedGiftInfo.image.url_list[0]}"></span>`),
+          'userMessage': ''
+        };
+        break;
+      case "like":
+        data =  {
+          'checked': event.checked,
+          'messageHTML': (options.like.message_template || '{username} send {likecount} heart!')
+            .replace('{likecount}', `<span className="animated-letters">${event.likeCount}</span>`),
+          'userMessage': ''
+        };
+        break;
+      case "share":
+        data =  {
+          'checked': event.checked,
+          'messageHTML': (options.share.message_template || '{username} just share livestream!'),
+          'userMessage': ''
+        };
+        break;
+      case "follow":
+        data =  {
+          'checked': event.checked,
+          'messageHTML': (options.follow.message_template || '{username} is now follower'),
+          'userMessage': ''
+        };
+        break;
+    }
+    data.messageHTML = data.messageHTML.replace('{username}', `<span className="animated-letters">${event.uniqueId}</span>`)
+    .replace('{nickname}', `<span className="animated-letters">${event.nickname || event.uniqueId}</span>`)
+    return data
+  }
+  
+  const alertBox = () => {
+    
+  }
+  
   useEffect(() => {
     let id = new URLSearchParams(window.location.search).get('id');
     if(id){
@@ -165,6 +212,19 @@ const Alertbox = () => {
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
+        <div id="wrap">
+          <div id="alert-image-wrap">
+            <div id="alert-image" className="" style={{"backgroundImage": "url(&quot;https://cdn.streamlabs.com/library/giflibrary/jumpy-t-rex.gif&quot;)"}}>
+              <img style={{"height": "1px","opacity": "0","width": "1px"}} src="https://cdn.streamlabs.com/library/giflibrary/jumpy-t-rex.gif"/>
+            </div>
+          </div>
+          <div id="alert-text-wrap">
+            <div id="alert-text" className="hidden">
+              <div id="alert-message" style={{"fontSize": "64px","color": "rgb(255, 255, 255); font-family: &quot;Open Sans&quot;; font-weight: 800; text-shadow: 0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000;"}}>Đắc Quang is now following</div>
+              <div id="alert-user-message" className="hidden" style="font-weight: 400; font-size: 24px; color: rgb(255, 0, 0); font-family: Oranienbaum;text-shadow: 0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000;">Xin chào</div>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="layer" id="setting" style={{"display":(layer === "setting" ? "block" : "none")}}>
         <button onClick={e => {setLayer("play")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
