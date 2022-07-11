@@ -206,9 +206,8 @@ const Alertbox = () => {
     let event = events.shift();
     if(!isDelay){
       var delay = options.general.alert_delay
-      
+      options.general.alert_parries && setIsShowing(false)
       if(event && !isShowing){
-        setIsDelay(true);
         setIsShowing(true);
         isOutro.current = false;
         setEventQueue(events);
@@ -232,6 +231,7 @@ const Alertbox = () => {
           isOutro.current = true;
         }, opt.alert_duration*1000)
       }
+      setIsDelay(true);
       setTimeout(() => {
         setIsDelay(false)
       }, delay*1000)
