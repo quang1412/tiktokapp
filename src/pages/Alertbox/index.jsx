@@ -217,7 +217,7 @@ const Alertbox = () => {
   }, [eventQueue, isDelay, isShowing])
  
   return (
-    <div className="App Alertbox">
+    <div className="Alertbox">
       <div className="layer text-start" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
         {log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))}
       </div>
