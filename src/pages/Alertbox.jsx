@@ -223,13 +223,16 @@ const Alertbox = () => {
 
           setMainEvent(event);
           document.body.setAttribute("data-layout", opt.layout)
-          setAnimate(`animate__animated animate__${opt.alert_animation_in}`);
+          setAnimate(`animate__animated animate__${options.general.alert_parries ? "fadeIn" : opt.alert_animation_in}`);
 
           playSound();
-
+          
+          console.log(event.data.id)
           setTimeout(() => {
-            setAnimate(`animate__animated animate__${opt.alert_animation_out}`);
-            isOutro.current = true;
+            if(document.getElementById(event.data.id)){
+              setAnimate(`animate__animated animate__${options.general.alert_parries ? "fadeOut" : opt.alert_animation_out}`);
+              isOutro.current = true;
+            }
           }, opt.alert_duration*1000)
           
           setIsDelay(true);
@@ -252,6 +255,7 @@ const Alertbox = () => {
           <div id="alert-box">
             <div id="wrap">
               <div id="alert-image-wrap">
+                <div id={mainEvent.data.id} className="d-none"></div>
                 <div id="alert-image" className="" style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
                   <img style={{"height": "1px","opacity": "0","width": "1px"}} src="https://cdn.streamlabs.com/library/giflibrary/jumpy-t-rex.gif"/>
                 </div>
