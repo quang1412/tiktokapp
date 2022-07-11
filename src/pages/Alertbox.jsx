@@ -14,7 +14,8 @@ const Alertbox = () => {
     // changeLog(log.push("server connecting"));
     let socket = io("https://tiktoktool.glitch.me",  {query: `id=dongnguyenchat`});
     socket.on('connect', () => { 
-      changeLog([...log, 'connect']);
+      console.log()
+      // changeLog([...log, 'connect']);
     })
     
     // var connecting = setInterval(() => {
@@ -23,16 +24,16 @@ const Alertbox = () => {
     // },2000);
     
     socket.on('ttConnectRetry', i => {
-      changeLog([...log, `trying to connect (${i}/10)`]);
+      // changeLog([...log, `trying to connect (${i}/10)`]);
     });
     
     socket.on('ttRoomInfo', data => {
       console.log(data);
-      changeLog([...log, 'server connected']); 
+      // changeLog([...log, 'server connected']); 
     });
     
     socket.on('ttConnectFail', () => {
-      changeLog([...log, 'server connect fail']);
+      // changeLog([...log, 'server connect fail']);
     });
   }
   
@@ -41,6 +42,15 @@ const Alertbox = () => {
     setOptions({...options, ...newOptions})
     localStorage.alertboxOpts = JSON.stringify(newOptions)
   }
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      changeLog([...log, '.']);
+      console.log(log);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
   
   // socketConnect();
   
