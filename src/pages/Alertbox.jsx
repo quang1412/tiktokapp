@@ -16,6 +16,7 @@ const Alertbox = () => {
   const [mainEvent, setMainEvent] = useState({"type": "like", "data" : {}});
   const [animate, setAnimate] = useState("");
   const [isDelay, setIsDelay] = useState(false);
+  const [isShowing, setIsShowing] = useState(false);
   
   const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
 
@@ -181,6 +182,9 @@ const Alertbox = () => {
   
   const handleAnimationEnd = e => {  
     setAnimate("");
+    if(isOutro.current){
+      setIsShowing(false);
+    }
   }
   
   useEffect(() => {
@@ -200,8 +204,9 @@ const Alertbox = () => {
   useEffect(() => {
     let events = [...eventQueue];
     let event = events.shift();
-    if(event && !isDelay){
-      setIsDelay(true);
+    
+    if(event && !isShowing){
+      setIsShowing(true);
       isOutro.current = false;
       setEventQueue(events);
 
@@ -219,12 +224,11 @@ const Alertbox = () => {
       playSound();
       
       setTimeout(() => {
-        // setIsDelay(false)
         setAnimate(`animate__animated animate__${opt.alert_animation_out}`);
-        isOutro.current = false
+        isOutro.current = true;
       }, delay*1000)
     }
-  }, [eventQueue, isDelay])
+  }, [eventQueue, isDelay, isShowing])
  
   return (
     <div className="App">
@@ -233,7 +237,7 @@ const Alertbox = () => {
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
-        <div id="widget" className={animate} onAnimationEnd={handleAnimationEnd} style={{"display" : (isDelay ? "block" : "none")}}>
+        <div id="widget" className={animate} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
           <div id="alert-box">
             <div id="wrap">
               <div id="alert-image-wrap">
