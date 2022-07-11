@@ -34,7 +34,7 @@ export default function AlertboxOpts(props){
           return;
         }
         break;
-      case "audio_url":
+      case "sound_url":
         if(!await checkAudio(value)){
           target.value = options[optType][optName];
           return;
@@ -145,14 +145,14 @@ export default function AlertboxOpts(props){
                   <div className="col-4">
                     <label className="form-label mb-0">Active</label>
                   </div>
-                  <div className="col-8">
-                    <div className="form-check d-inline-block">
+                  <div className="col-8 d-flex flex-wrap">
+                    <div className="form-check me-2">
                       <input name="active" defaultValue="true" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options[type].active}/>
                       <label className="form-check-label">
                         On
                       </label>
                     </div>
-                    <div className="form-check d-inline-block ms-3">
+                    <div className="form-check me-2">
                       <input name="active" defaultValue="false" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={!options[type].active}/>
                       <label className="form-check-label">
                         Off
@@ -164,20 +164,20 @@ export default function AlertboxOpts(props){
                   <div className="col-4">
                     <label className="form-label mb-0">Layout</label>
                   </div>
-                  <div className="col-8">
-                    <div className="form-check d-inline-block">
+                  <div className="col-8 d-flex">
+                    <div className="form-check me-2">
                       <input name="layout" defaultValue="above" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options[type].layout === "above"}/>
                       <label className="form-check-label">
                         Above
                       </label>
                     </div>
-                    <div className="form-check d-inline-block ms-3">
+                    <div className="form-check me-2">
                       <input name="layout" defaultValue="banner" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options[type].layout === "banner"}/>
                       <label className="form-check-label">
                         Banner
                       </label>
                     </div>
-                    <div className="form-check d-inline-block ms-3">
+                    <div className="form-check me-2">
                       <input name="layout" defaultValue="side" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options[type].layout === "side"}/>
                       <label className="form-check-label">
                         Side
