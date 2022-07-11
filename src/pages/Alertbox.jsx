@@ -131,47 +131,32 @@ const Alertbox = () => {
     }
   }
   
-  const messTemplate = () => {
+  const MessTemplate = () => {
     var data;
     let template = options[mainEvent.type].message_template
     switch(mainEvent.type){
       case "gift":
-        let amount = mainEvent.gift.repeat_count * mainEvent.extendedGiftInfo.diamond_count;
-        data =  {
-          'checked': mainEvent.checked,
-          'messageHTML': (template || '{username} send {giftcount} {giftname}')
+        let amount = mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count;
+        data =  (template || '{username} send {giftcount} {giftname}')
             .replace('{amount}', `<span  class="animated-letters">${amount}</span>`)
-            .replace('{giftcount}', `<span  class="animated-letters">${mainEvent.gift.repeat_count}</span>`)
-            .replace('{giftname}', `<span  class="animated-letters">${mainEvent.extendedGiftInfo.name}</span>`)
-            .replace('{giftimg}', `<span  class="${this.options.gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${mainEvent.extendedGiftInfo.image.url_list[0]}"></span>`),
-          'userMessage': ''
-        };
+            .replace('{giftcount}', `<span  class="animated-letters">${mainEvent.data.gift.repeat_count}</span>`)
+            .replace('{giftname}', `<span  class="animated-letters">${mainEvent.data.extendedGiftInfo.name}</span>`)
+            .replace('{giftimg}', `<span  class="${this.options.gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${mainEvent.data.extendedGiftInfo.image.url_list[0]}"></span>`);
         break;
       case "like":
-        data =  {
-          'checked': mainEvent.checked,
-          'messageHTML': (this.options.like.message_template || '{username} send {likecount} heart!')
-            .replace('{likecount}', `<span class="animated-letters">${mainEvent.likeCount}</span>`),
-          'userMessage': ''
-        };
+        data =  (template || '{username} send {likecount} heart!').replace('{likecount}', `<span class="animated-letters">${mainEvent.data.likeCount}</span>`);
         break;
       case "share":
-        data =  {
-          'checked': mainEvent.checked,
-          'messageHTML': (this.options.share.message_template || '{username} just share livestream!'),
-          'userMessage': ''
-        };
+        data = (template || '{username} just share livestream!');
         break;
       case "follow":
-        data =  {
-          'checked': mainEvent.checked,
-          'messageHTML': (this.options.follow.message_template || '{username} is now follower'),
-          'userMessage': ''
-        };
+        data =  (template || '{username} is now follower');
         break;
+      
     }
-    data.messageHTML = data.messageHTML.replace('{username}', `<span class="animated-letters">${mainEvent.uniqueId}</span>`)
-    .replace('{nickname}', `<span class="animated-letters">${mainEvent.nickname || mainEvent.uniqueId}</span>`)
+    data.replace('{username}', `<span class="animated-letters">${mainEvent.data.uniqueId}</span>`)
+    .replace('{nickname}', `<span class="animated-letters">${mainEvent.data.nickname || mainEvent.data.uniqueId}</span>`)
+    console.log(data)
     return data
     
     
@@ -254,7 +239,7 @@ const Alertbox = () => {
               <div id="alert-text-wrap">
                 <div id="alert-text" className=" ">
                   <div id="alert-message" style={{"fontSize": "64px","color": "rgb(255, 255, 255)","fontFamily": "&quot;Open Sans&quot","fontWeight": "800","textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>
-                    <messTemplate />
+                    <MessTemplate />
                   </div>
                   <div id="alert-user-message" className="hidden" style={{"fontWeight": "400","fontSize": "24px","color": "rgb(255, 0, 0)","fontFamily": "Oranienbaum","textShadow":"0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>Xin chào</div>
                 </div>
