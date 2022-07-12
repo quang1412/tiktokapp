@@ -82,29 +82,29 @@ body[data-layout="above"] #alert-text-wrap{
 .hidden {
   opacity: 0;
 }
-#alert-box {
+.alert-box {
   height: 100%;
   width: 100%; 
 }
-#alert-text{
+.alert-text{
   padding:20px;
   position: relative;
 }
-#alert-image {
+.alert-image {
   position: relative;
 }
-#wrap {
+.wrap {
   position: relative;
   height: 100%;
   width: 100%;
 }
-#widget{
+.widget{
   width:100%;
   height:100%;
 }
 .animated-letter{
   color: #32C3A6;
 }
-#alert-message > span > span {
+.alert-message > span > span {
     display: inline-block;
 }
