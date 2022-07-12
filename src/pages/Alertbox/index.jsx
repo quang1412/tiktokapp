@@ -227,8 +227,8 @@ const Alertbox = () => {
         <span>Please enter streaming tiktok id</span>
         <div className="input-group mb-3">
           <input onChange={e => {setTiktokId(e.target.value)}} type="text" className="form-control" placeholder="Enter Tiktok id" aria-label="Enter Tiktok id"/>
-          <a href={"?id="+tiktokId} className="btn btn-outline-primary" type="button" data-mdb-ripple-color="dark">
-            Kết nối
+          <a href={"?id="+tiktokId} className="btn btn-outline-primary" type="button" style={{"paddingTop":"10px"}}>
+            <span>Connect</span>
           </a>
         </div>
       </div>

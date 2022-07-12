@@ -147,13 +147,13 @@ export default function AlertboxOpts(props){
                   </div>
                   <div className="col-8 d-flex flex-wrap">
                     <div className="form-check me-2">
-                      <input name="active" defaultValue="true" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options[type].active}/>
+                      <input name="active" defaultValue="true" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={opt.active}/>
                       <label className="form-check-label">
                         On
                       </label>
                     </div>
                     <div className="form-check me-2">
-                      <input name="active" defaultValue="false" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={!options[type].active}/>
+                      <input name="active" defaultValue="false" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={!opt.active}/>
                       <label className="form-check-label">
                         Off
                       </label>
@@ -166,19 +166,19 @@ export default function AlertboxOpts(props){
                   </div>
                   <div className="col-8 d-flex">
                     <div className="form-check me-2">
-                      <input name="layout" defaultValue="above" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options[type].layout === "above"}/>
+                      <input name="layout" defaultValue="above" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={opt.layout === "above"}/>
                       <label className="form-check-label">
                         Above
                       </label>
                     </div>
                     <div className="form-check me-2">
-                      <input name="layout" defaultValue="banner" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options[type].layout === "banner"}/>
+                      <input name="layout" defaultValue="banner" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={opt.layout === "banner"}/>
                       <label className="form-check-label">
                         Banner
                       </label>
                     </div>
                     <div className="form-check me-2">
-                      <input name="layout" defaultValue="side" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options[type].layout === "side"}/>
+                      <input name="layout" defaultValue="side" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={opt.layout === "side"}/>
                       <label className="form-check-label">
                         Side
                       </label>
@@ -190,12 +190,12 @@ export default function AlertboxOpts(props){
                     <label className="form-label mb-0">Effects</label>
                   </div>
                   <div className="col-8 d-flex">
-                    <select name="alert_animation_in" defaultValue={options[type].alert_animation_in} onChange={handleOptionsChange} className="form-select me-1">{
+                    <select name="alert_animation_in" defaultValue={opt.alert_animation_in} onChange={handleOptionsChange} className="form-select me-1">{
                       intro.map((e, i) => {
                         return (<option key={`alert_animation_in${i}`} value={e.replaceAll(' ','')}>{e}</option>)
                       }) 
                     }</select>
-                    <select name="alert_animation_out" defaultValue={options[type].alert_animation_out} onChange={handleOptionsChange} className="form-select ms-1">{
+                    <select name="alert_animation_out" defaultValue={opt.alert_animation_out} onChange={handleOptionsChange} className="form-select ms-1">{
                       outro.map((e, i) => {
                         return (<option key={`alert_animation_out${i}`} value={e.replaceAll(" ","")}>{e}</option>)
                       }) 
@@ -209,7 +209,7 @@ export default function AlertboxOpts(props){
                     </div>
                     <div className="col-8">
                       <div className="input-group w-50">
-                        <input name="alert_min_amount" defaultValue={options[type].alert_min_amount} onChange={handleOptionsChange} type="number" className="form-control" placeholder="1"/>
+                        <input name="alert_min_amount" defaultValue={opt.alert_min_amount} onChange={handleOptionsChange} type="number" className="form-control" placeholder="1"/>
                       </div>
                     </div>
                   </div>) } 
@@ -219,7 +219,7 @@ export default function AlertboxOpts(props){
                   </div>
                   <div className="col-8"> 
                     <div className="input-group">
-                      <input name="message_template" defaultValue={options[type].message_template} onChange={handleOptionsChange} type="text" className="form-control" 
+                      <input name="message_template" defaultValue={opt.message_template} onChange={handleOptionsChange} type="text" className="form-control" 
                         placeholder=
                         {(type === "gift" ? "{username} send {giftcount} {giftname}" : 
                           type === "follow" ? "{username} followed host" : 
@@ -241,7 +241,7 @@ export default function AlertboxOpts(props){
                     <label className="form-label mb-0">Text effect</label>
                   </div>
                   <div className="col-8 d-flex align-items-center">
-                    <select name="text_animation"  defaultValue={options[type].text_animation}  onChange={handleOptionsChange} className="form-select me-2">
+                    <select name="text_animation"  defaultValue={opt.text_animation}  onChange={handleOptionsChange} className="form-select me-2">
                       <option defaultValue='wiggle'>Wiggle</option>
                       <option defaultValue="wave">Wave</option>
                       <option defaultValue="wobble">Wobble</option>
@@ -250,17 +250,17 @@ export default function AlertboxOpts(props){
                       <option defaultValue="tada">Tada</option>
                     </select>
                     <div className="fw-bold text-nowrap text-primary">
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>S</span>
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>A</span>
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>M</span>
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>P</span>
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>L</span>
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>E</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>S</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>A</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>M</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>P</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>L</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>E</span>
                       <span className="p-1"></span>
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>T</span>
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>E</span>
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>X</span>
-                      <span className={`animated-letter ${options[type].text_animation.toLowerCase()}`}>T</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>T</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>E</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>X</span>
+                      <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>T</span>
                     </div>
                   </div>
                 </div>
@@ -270,8 +270,8 @@ export default function AlertboxOpts(props){
                   </div>
                   <div className="col-8">
                     <div className="input-group">
-                      <span className="input-group-text p-0" style={{"backgroundImage":`url(${options[type].image_url})`, "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
-                      <input name="image_url" defaultValue={options[type].image_url} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Image URL"/>
+                      <span className="input-group-text p-0" style={{"backgroundImage":`url(${opt.image_url})`, "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
+                      <input name="image_url" defaultValue={opt.image_url} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Image URL"/>
                     </div>
                   </div>
                 </div>
@@ -282,7 +282,7 @@ export default function AlertboxOpts(props){
                   <div className="col-8">
                     <div className="input-group">
                       <span className="input-group-text p-0"><div className="d-flex justify-content-center align-items-center" style={{"width": "3rem","height": "100%"}}><i className="fas fa-music mauto" aria-hidden="true"></i></div></span>
-                      <input name="sound_url" defaultValue={options[type].sound_url} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Image URL"/>
+                      <input name="sound_url" defaultValue={opt.sound_url} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Image URL"/>
                     </div>
                   </div>
                 </div>
@@ -292,7 +292,7 @@ export default function AlertboxOpts(props){
                   </div>
                   <div className="col-8">
                     <div className="range">
-                      <input name="sound_volume" defaultValue={options[type].sound_volume} onChange={handleOptionsChange} type="range" className="form-range" min="0" max="100" step="1" data-before="1" data-before-subfix="%"/>
+                      <input name="sound_volume" defaultValue={opt.sound_volume} onChange={handleOptionsChange} type="range" className="form-range" min="0" max="100" step="1" data-before="1" data-before-subfix="%"/>
                     </div>
                     </div>
                 </div>
@@ -302,7 +302,7 @@ export default function AlertboxOpts(props){
                   </div>
                   <div className="col-8">
                     <div className="range">
-                      <input name="alert_duration" defaultValue={options[type].alert_duration} onChange={handleOptionsChange} type="range" className="form-range" min="2" max="300" step="1" data-before="1" data-before-subfix="s"/>
+                      <input name="alert_duration" defaultValue={opt.alert_duration} onChange={handleOptionsChange} type="range" className="form-range" min="2" max="300" step="1" data-before="1" data-before-subfix="s"/>
                     </div>
                     </div>
                 </div>
@@ -312,7 +312,7 @@ export default function AlertboxOpts(props){
                   </div>
                   <div className="col-8">
                     <div className="range">
-                      <input name="alert_text_delay" defaultValue={options[type].alert_text_delay} onChange={handleOptionsChange} type="range" className="form-range" min="0" max="60" step="1" data-before="1" data-before-subfix="s"/>
+                      <input name="alert_text_delay" defaultValue={opt.alert_text_delay} onChange={handleOptionsChange} type="range" className="form-range" min="0" max="60" step="1" data-before="1" data-before-subfix="s"/>
                     </div>
                     </div>
                 </div>
@@ -328,7 +328,7 @@ export default function AlertboxOpts(props){
                       </div>
                       <div className="col-8">
                         <div className="range">
-                          <input name="font_size" defaultValue={options[type].font_size} onChange={handleOptionsChange} type="range" className="form-range" min="12" max="80" step="2" data-before="1" data-before-subfix=""/>
+                          <input name="font_size" defaultValue={opt.font_size} onChange={handleOptionsChange} type="range" className="form-range" min="12" max="80" step="2" data-before="1" data-before-subfix=""/>
                         </div>
                         </div>
                     </div>
@@ -338,7 +338,7 @@ export default function AlertboxOpts(props){
                       </div>
                       <div className="col-8">
                         <div className="range">
-                          <input name="font_weight" defaultValue={options[type].font_weight} onChange={handleOptionsChange} type="range" className="form-range" min="300" max="900" step="100" data-before="1" data-before-subfix=""/>
+                          <input name="font_weight" defaultValue={opt.font_weight} onChange={handleOptionsChange} type="range" className="form-range" min="300" max="900" step="100" data-before="1" data-before-subfix=""/>
                         </div>
                         </div>
                     </div>
@@ -349,7 +349,7 @@ export default function AlertboxOpts(props){
                       <div className="col-8">
                         <div className="input-group mb-3">
                           <span className="input-group-text p-0" style={{"backgroundColor":"#ffffff"}}><div style={{"width":"3rem"}}></div></span>
-                          <input name="text_color" defaultValue={options[type].text_color} onChange={handleOptionsChange} type="text" className="form-control" placeholder="#ffffff" title="Set text color"/>
+                          <input name="text_color" defaultValue={opt.text_color} onChange={handleOptionsChange} type="text" className="form-control" placeholder="#ffffff" title="Set text color"/>
                         </div>
                       </div>
                     </div>
@@ -360,7 +360,7 @@ export default function AlertboxOpts(props){
                       <div className="col-8">
                         <div className="input-group mb-3">
                           <span className="input-group-text p-0" style={{"backgroundColor":"#32c3a6"}}><div style={{"width":"3rem"}}></div></span>
-                          <input name="text_highlight_color" defaultValue={options[type].text_highlight_color} onChange={handleOptionsChange} type="text" className="form-control" placeholder="#32c3a6" title="Set text color"/>
+                          <input name="text_highlight_color" defaultValue={opt.text_highlight_color} onChange={handleOptionsChange} type="text" className="form-control" placeholder="#32c3a6" title="Set text color"/>
                         </div>
                       </div>
                     </div>
