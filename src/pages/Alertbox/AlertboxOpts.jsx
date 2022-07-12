@@ -30,13 +30,13 @@ export default function AlertboxOpts(props){
     switch(optName){
       case "image_url":
         if(!await checkImage(value)){
-          target.value = options[optType][optName];
+          // target.value = options[optType][optName];
           return;
         }
         break;
       case "sound_url":
         if(!await checkAudio(value)){
-          target.value = options[optType][optName];
+          // target.value = options[optType][optName];
           return;
         }
         break;
@@ -77,11 +77,8 @@ export default function AlertboxOpts(props){
   }
   
   const paste = async e => {
-    let target = e.target;
-    e.preventDefault();
-    const text = await navigator.clipboard.readText();
-    target.previousSibling.value = text;
-    console.log(text)
+    const userName = prompt('Please Enter your Name');
+    console.log
   }
   
   const corloValid = code => {
