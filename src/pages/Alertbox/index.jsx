@@ -197,7 +197,7 @@ const Alertbox = () => {
           options.general.alert_parries && (delay = options.general.parry_alert_delay)
 
           setMainEvent(event);
-          document.body.setAttribute("data-layout", opt.layout)
+          document.body.setAttribute("class", style[opt.layout])
           setAnimate(`animate__animated animate__${options.general.alert_parries ? "fadeIn" : opt.alert_animation_in}`);
 
           playSound();
@@ -236,18 +236,18 @@ const Alertbox = () => {
       </div>
       <div className={style.alertboxLayer} id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
-        <div className={['widget', animate].join(' ')} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
-          <div className="alert-box">
-            <div className="wrap">
-              <div className="alert-image-wrap">
+        <div className={[style.widget, animate].join(' ')} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
+          <div className={style.alertBox}>
+            <div className={style.wrap}>
+              <div className={style.alertImageWrap}>
                 <div id={mainEvent.data.id} ></div>
-                <div className="alert-image" style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
+                <div className={style.alertImage} style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
                   <img style={{"height": "1px","opacity": "0","width": "1px"}} src={options[mainEvent.type].image_url} alt="animate gif"/>
                 </div>
               </div>
-              <div className="alert-text-wrap">
-                <div className="alert-text">
-                  <div  className="alert-message" style={{"fontSize": `${options[mainEvent.type].font_size}px`,"color": `${options[mainEvent.type].text_color || "rgb(255, 255, 255)"}`,"fontFamily": "Open Sans&quot","fontWeight": `${options[mainEvent.type].font_weight}`,"textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>
+              <div className={style.alertTextWrap}>
+                <div className={style.alertText}>
+                  <div  className={style.alertMessage} style={{"fontSize": `${options[mainEvent.type].font_size}px`,"color": `${options[mainEvent.type].text_color || "rgb(255, 255, 255)"}`,"fontFamily": "Open Sans&quot","fontWeight": `${options[mainEvent.type].font_weight}`,"textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>
                     <MessTemplate />
                   </div>
                 </div>
