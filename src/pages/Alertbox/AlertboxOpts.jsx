@@ -42,11 +42,13 @@ export default function AlertboxOpts(props){
         break;
       case "text_color":
         if(!corloValid(value)){
+          target.value = options[optType][optName];
           return;
         } 
         break;
       case "text_highlight_color":
         if(!corloValid(value)){
+          target.value = options[optType][optName];
           return;
         } 
         break;
@@ -77,12 +79,14 @@ export default function AlertboxOpts(props){
   }
   
   const askInput = async e => {
-    let target = e.target
-    const input = prompt('Please Enter your Name');
-    if (input == null || input == "") {
-    } else {
-      target.value = input
-      handleOptionsChange(e);
+    if(window.navigator.userAgent.includes("OBS")){
+      let target = e.target
+      const input = prompt('Please Enter your Name');
+      if (input == null || input == "") {
+      } else {
+        target.value = input
+        handleOptionsChange(e);
+      }
     }
   }
   
@@ -295,7 +299,7 @@ export default function AlertboxOpts(props){
                   <div className="col-8">
                     <div className="input-group">
                       <span className="input-group-text p-0" style={{"backgroundImage":`url(${opt.image_url})`, "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
-                      <input name="image_url" defaultValue={opt.image_url} onChange={handleOptionsChange} onClick={askInput} disabled="" type="text" className="form-control" placeholder="Image URL"/>
+                      <input name="image_url" defaultValue={opt.image_url} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="Image URL"/>
                     </div>
                   </div>
                 </div>
@@ -306,7 +310,7 @@ export default function AlertboxOpts(props){
                   <div className="col-8">
                     <div className="input-group">
                       <span className="input-group-text p-0"><div className="d-flex justify-content-center align-items-center" style={{"width": "3rem","height": "100%"}}><i className="fas fa-music mauto" aria-hidden="true"></i></div></span>
-                      <input name="sound_url" defaultValue={opt.sound_url} onChange={handleOptionsChange} onClick={askInput} disabled="" type="text" className="form-control" placeholder="Sound URL"/>
+                      <input name="sound_url" defaultValue={opt.sound_url} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="Sound URL"/>
                     </div>
                   </div>
                 </div>
@@ -373,7 +377,7 @@ export default function AlertboxOpts(props){
                       <div className="col-8">
                         <div className="input-group mb-3">
                           <span className="input-group-text p-0" style={{"backgroundColor":opt.text_color}}><div style={{"width":"3rem"}}></div></span>
-                          <input name="text_color" defaultValue={opt.text_color} onChange={handleOptionsChange} onClick={askInput} disabled="" type="text" className="form-control" placeholder="#ffffff" title="Set text color"/>
+                          <input name="text_color" defaultValue={opt.text_color} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="#ffffff" title="Set text color"/>
                         </div>
                       </div>
                     </div>
@@ -384,7 +388,7 @@ export default function AlertboxOpts(props){
                       <div className="col-8">
                         <div className="input-group mb-3">
                           <span className="input-group-text p-0" style={{"backgroundColor":opt.text_highlight_color}}><div style={{"width":"3rem"}}></div></span>
-                          <input name="text_highlight_color" defaultValue={opt.text_highlight_color} onChange={handleOptionsChange} onClick={askInput} disabled="" type="text" className="form-control" placeholder="#32c3a6" title="Set text color"/>
+                          <input name="text_highlight_color" defaultValue={opt.text_highlight_color} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="#32c3a6" title="Set text color"/>
                         </div>
                       </div>
                     </div>
