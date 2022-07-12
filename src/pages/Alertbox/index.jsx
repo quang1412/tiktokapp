@@ -186,6 +186,7 @@ const Alertbox = () => {
         if(!isShowing){
           setIsShowing(true);
           isOutro.current = false;
+          setMainEvent(event);
           setEventQueue(events);
 
           let opt = options[event.type];
@@ -195,9 +196,7 @@ const Alertbox = () => {
           delay += opt.alert_duration;
 
           options.general.alert_parries && (delay = options.general.parry_alert_delay)
-
-          setMainEvent(event);
-          document.body.setAttribute("class", style[opt.layout])
+          
           setAnimate(`animate__animated animate__${options.general.alert_parries ? "fadeIn" : opt.alert_animation_in}`);
 
           playSound();
@@ -234,13 +233,13 @@ const Alertbox = () => {
             </div>
         </div>
       </div>
-      <div className={style.alertboxLayer} id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
+      <div className={[style.alertboxLayer, style[options[mainEvent.type].layout]].join(' ')} id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
         <div className={[style.widget, animate].join(' ')} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
           <div className={style.alertBox}>
             <div className={style.wrap}>
               <div className={style.alertImageWrap}>
-                <div id={mainEvent.data.id} ></div>
+                <div id={mainEvent.data.id} className="d-none" ></div>
                 <div className={style.alertImage} style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
                   <img style={{"height": "1px","opacity": "0","width": "1px"}} src={options[mainEvent.type].image_url} alt="animate gif"/>
                 </div>
