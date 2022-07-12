@@ -136,7 +136,10 @@ const Alertbox = () => {
     }
     
     const animateLetter = str => {
-      return str.split("").map(i => (<span className="animated-letter tada">{i}</span>))
+      if(!str){
+        return (<></>);
+      }
+      return str.split("").map(i => (<span className={"animated-letter "+options[mainEvent.type].text_animation}>{i}</span>))
     }
     
     let optsTemplate = options[mainEvent.type].message_template
@@ -148,7 +151,7 @@ const Alertbox = () => {
     
     return template.split(" ").map((text, i) => ( <span key={i}>{
       text === "{username}" ? animateLetter(mainEvent.data.uniqueId) :
-      text === "{nickname}" ? animateLetter(mainEvent.data.nickname) :
+      text === "{nickname}" ? animateLetter(mainEvent.data.nickname || mainEvent.data.uniqueId) :
       text === "{giftname}" ? animateLetter(mainEvent.data.extendedGiftInfo.name) :
       text === "{giftcount}" ? animateLetter(mainEvent.data.gift.repeat_count) :
       text === "{likecount}" ? animateLetter(mainEvent.data.likeCount) :
@@ -219,7 +222,7 @@ const Alertbox = () => {
       </div>
       <div className="layer p-3" id="askId" style={{"display": (layer === "askId" ? "block" : "none")}}>
         <span>Please enter streaming tiktok id</span>
-        <div className="input-group mb-3">
+        <div className="input-group mb-3" style={{"maxWidth":"500px","minWidth":"300px"}}>
           <input onChange={e => {setTiktokId(e.target.value)}} type="text" className="form-control" placeholder="Enter Tiktok id" aria-label="Enter Tiktok id"/>
           <a href={"?id="+tiktokId} className="btn btn-outline-primary" type="button" style={{"paddingTop":"10px"}}>
             <span>Connect</span>
