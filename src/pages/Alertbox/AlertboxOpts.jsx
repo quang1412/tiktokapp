@@ -42,13 +42,15 @@ export default function AlertboxOpts(props){
         break;
       case "text_color":
         if(!corloValid(value)){
-          target.value = options[optType][optName];
+          // target.value = options[optType][optName];
+          value = "#ffffff";
           return;
         } 
         break;
       case "text_highlight_color":
         if(!corloValid(value)){
-          target.value = options[optType][optName];
+          // target.value = options[optType][optName];
+          value = "#ffffff";
           return;
         } 
         break;
