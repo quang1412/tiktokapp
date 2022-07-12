@@ -7,6 +7,10 @@ import { io } from "socket.io-client";
  
 const Alertbox = () => {
   
+  const userAgent = window.navigator.userAgent;
+  const isMobile = userAgent.includes('Mobile');
+  const isOBS = userAgent.includes('OBS');
+  
   const isLoading = useRef(false);
   const isOutro = useRef(false);
   const canAutoPlay = useRef(false);
@@ -22,7 +26,7 @@ const Alertbox = () => {
   const [isShowing, setIsShowing] = useState(false);
   
   const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
-  audio.volume = 0.1;
+  audio.volume = 0.01;
 
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -129,8 +133,7 @@ const Alertbox = () => {
   } 
   
   const enableAutoPlaySound = () => {
-    window.navigator.userAgent.includes('Mobile') ? 
-      alert("Please open on PC to enable audio") : canAutoPlay.current = true
+    isMobile ? alert("Please open on PC to enable audio") : canAutoPlay.current = true
   }
   
   const MessTemplate = () => {
@@ -272,9 +275,9 @@ const Alertbox = () => {
         </div> 
       </div>
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"300px","maxWidth":"800px","height":"100vh"}}>
-        <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer}/>
+        <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer} isOBS={isOBS}/>
       </div>
-      <button className={`btn btn-sm btn-white btn-rounded position-absolute bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`} onClick={enableAutoPlaySound}>Enable audio <i className="fas fa-volume-up"></i></button>
+      <button className={`btn btn-sm btn-white btn-rounded position-absolute bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play' || isOBS) && 'd-none'}`} onClick={enableAutoPlaySound}>Enable audio <i className="fas fa-volume-up"></i></button>
     </div>
   );
 }
