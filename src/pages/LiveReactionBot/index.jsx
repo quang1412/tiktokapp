@@ -1,10 +1,5 @@
 import { io } from "socket.io-client";
 import React, {useEffect, useState, useRef} from 'react';
-// import AlertboxOpts from './AlertboxOpts';
-// import './style.css';
-// import './TextAnimations.css';
-// import './Animate.min.css';
-
  
 const App = () => {
   
@@ -16,7 +11,6 @@ const App = () => {
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([]);
   const [isDelay, setIsDelay] = useState(false);
-  const [isShowing, setIsShowing] = useState(false);
 
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -117,47 +111,8 @@ const App = () => {
     setEventQueue(list);
   } 
   
-  const handleAnimationEnd = e => {  
-    setAnimate("");
-    if(isOutro.current){
-      setIsShowing(false);
-    }
-  }
-  
   const handleAnimateText = str => { 
     
-  }
-  
-  const MessTemplate = () => {
-    if(!mainEvent.data.id){
-      return (<></>);
-    }
-    
-    const animateLetter = str => {
-      try{
-        return str.split("").map((i, k) => (<span key={k} className={"animated-letter "+options[mainEvent.type].text_animation}>{i}</span>));
-      }
-      catch{
-        console.log(str);
-        return (<></>);
-      }
-    }
-    
-    let optsTemplate = options[mainEvent.type].message_template
-    var template = mainEvent.type
-    .replace("gift", (optsTemplate || '{username} send {giftcount} {giftname}'))
-    .replace("like", (optsTemplate || '{username} send {likecount} heart!'))
-    .replace("share", (optsTemplate || '{username} just share livestream!'))
-    .replace("follow", (optsTemplate || '{username} is now follower'))
-    
-    return template.split(" ").map((text, i) => ( <span key={i}>{
-      text === "{username}" ? animateLetter(mainEvent.data.uniqueId) :
-      text === "{nickname}" ? animateLetter(mainEvent.data.nickname || mainEvent.data.uniqueId) :
-      text === "{giftname}" ? animateLetter(mainEvent.data.extendedGiftInfo.name) :
-      text === "{giftcount}" ? animateLetter(mainEvent.data.gift.repeat_count) :
-      text === "{likecount}" ? animateLetter(mainEvent.data.likeCount) :
-      text === "{amount}" ? animateLetter(mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count) : text
-    }{' '}</span>))
   }
   
   useEffect(function(){
@@ -177,9 +132,10 @@ const App = () => {
   useEffect(() => {
     let events = [...eventQueue];
     let event = events.pop();
-    if(!isDelay){return;
+    if(!isDelay){
+      return;
     }
-  }, [eventQueue, isDelay, isShowing])
+  }, [eventQueue, isDelay])
  
   return (
     <div className="Alertbox">
