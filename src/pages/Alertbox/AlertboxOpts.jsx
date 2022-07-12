@@ -85,6 +85,9 @@ export default function AlertboxOpts(props){
         <li className="nav-item" role="presentation">
           <button className="nav-link" data-mdb-toggle="tab" href="#tab-share" role="tab" aria-controls="tab-share" aria-selected="false">Share</button>
         </li>
+        <li className="ms-auto" role="presentation">
+          <button onClick={e => {props.setLayer("play")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
+        </li>
       </ul>
     </div>
     <div className="card-body text-start overflow-auto">
