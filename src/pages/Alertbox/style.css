@@ -5,10 +5,8 @@
   top: 0;
   left: 0;
 }
-body {
-/*   overflow-y: hidden;  
-  overflow-x: hidden; 
-  text-align: center; */
+.layer:not(:hover)>button{
+  display:none
 }
 body[data-layout="banner"] #alert-image {
   background-position: center center;

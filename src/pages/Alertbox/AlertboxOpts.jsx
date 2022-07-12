@@ -44,14 +44,12 @@ export default function AlertboxOpts(props){
         break;
     }
     
-    console.log(optType, optName, value);
     options[optType][optName] = value;
     props.onChangeOptions(options);
   } 
   
   const checkImage = async url => {
     return new Promise((resolve) => {
-      console.log(url)
       var image = new Image();
       image.addEventListener('load', () => resolve(true));
       image.addEventListener('error', () => resolve(false));
@@ -61,7 +59,6 @@ export default function AlertboxOpts(props){
   
   const checkAudio = async url => {
     return new Promise((resolve) => {
-      console.log(url)
       var audio = new Audio();
       audio.addEventListener('load', () => resolve(true));
       audio.addEventListener('error', () => resolve(false));

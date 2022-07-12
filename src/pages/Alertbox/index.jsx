@@ -96,8 +96,7 @@ const Alertbox = () => {
     }
   }, [isLoading.current])
   
-  const handleOptions = newOptions => {
-    console.log(newOptions)
+  const handleOptions = newOptions => { 
     setOptions({...options, ...newOptions})
     localStorage.alertboxOpts = JSON.stringify(newOptions)
   }
@@ -254,7 +253,7 @@ const Alertbox = () => {
           </div>
         </div> 
       </div>
-      <div className="layer" id="setting" style={{"display":(layer === "setting"?"block":"none"),"width":"min(100vh, 100vw)","height":"min(100vh, 100vw)","margin":"auto"}}>
+      <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"width":"min(100vh, 100vw)","height":"min(100vh, 100vw)"}}>
         <button onClick={e => {setLayer("play")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions}/>
       </div>
