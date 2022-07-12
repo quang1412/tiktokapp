@@ -129,11 +129,12 @@ const Alertbox = () => {
   const handleAnimateText = str => {
     // return str.split("").map(char => (char))
     return str.split(" ").map((text, i) => ( <span key={i}>{
-      switch(text){
-        case "{username}":
-        
-      }
-        text == "{username}" ? mainEvent.data.uniqueId : text
+        text === "{username}" ? mainEvent.data.uniqueId :
+        text === "{nickname}" ? mainEvent.data.nickname :
+        text === "{giftname}" ? mainEvent.data.extendedGiftInfo.name :
+        text === "{giftcount}" ? mainEvent.data.gift.repeat_count :
+        text === "{amount}" ? (mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count) :
+        text === "{likecount}" ? mainEvent.data.likeCount : text
     }{' '}</span>))
   }
   
@@ -141,37 +142,14 @@ const Alertbox = () => {
     if(!mainEvent.data.id){
       return (<></>);
     }
-    var data;
-    let template = options[mainEvent.type].message_template
-    switch(mainEvent.type){
-      case "gift":
-        let amount = mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count;
-        data =  (template || '{username} send {giftcount} {giftname}')
-          // .replace('{username}', `<span class="animated-letters">${mainEvent.data.uniqueId}</span>`)
-          // .replace('{nickname}', `<span class="animated-letters">${mainEvent.data.nickname || mainEvent.data.uniqueId}</span>`)
-          // .replace('{amount}', `<span  class="animated-letters">${amount}</span>`)
-          // .replace('{giftcount}', `<span  class="animated-letters">${mainEvent.data.gift.repeat_count}</span>`)
-          // .replace('{giftname}', `<span  class="animated-letters">${mainEvent.data.extendedGiftInfo.name}</span>`)
-          // .replace('{giftimg}', `<span  class="${options[mainEvent.type].gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${mainEvent.data.extendedGiftInfo.image.url_list[0]}"></span>`);
-        break; 
-      case "like":
-        data =  (template || '{username} send {likecount} heart!')
-          // .replace('{nickname}', `<span class="animated-letters">${mainEvent.data.nickname || mainEvent.data.uniqueId}</span>`)
-          // .replace('{likecount}', `<span class="animated-letters">${mainEvent.data.likeCount}</span>`);
-        break;
-      case "share":
-        data = (template || '{username} just share livestream!')
-        // .replace('{username}', `<span class="animated-letters">${mainEvent.data.uniqueId}</span>`)
-        // .replace('{nickname}', `<span class="animated-letters">${mainEvent.data.nickname || mainEvent.data.uniqueId}</span>`);
-        break;
-      case "follow":
-        data =  (template || '{username} is now follower');
-        break;
-      default:
-        break;
-      
-    }
-    let animateText = handleAnimateText(data);
+    let optsTemplate = options[mainEvent.type].message_template
+    var template = mainEvent.type
+    .replace("gift", (optsTemplate || '{username} send {giftcount} {giftname}'))
+    .replace("like", (optsTemplate || '{username} send {likecount} heart!'))
+    .replace("share", (optsTemplate || '{username} just share livestream!'))
+    .replace("follow", (optsTemplate || '{username} is now follower'))
+    
+    let animateText = handleAnimateText(template);
     return animateText
   }
   
