@@ -220,8 +220,8 @@ const Alertbox = () => {
  
   return (
     <div className="Alertbox">
-      <div className="layer p-3 text-start text-white" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
-        {log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))}
+      <div className="layer p-3 text-start" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
+        {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
       <div className="layer p-3" id="askId" style={{"display": (layer === "askId" ? "block" : "none")}}>
         <div className="card card-body text-center">

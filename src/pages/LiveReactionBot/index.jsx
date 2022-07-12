@@ -8,20 +8,15 @@ import React, {useEffect, useState, useRef} from 'react';
  
 const App = () => {
   
-  const isLoading = useRef(false);
-  // const isOutro = useRef(false);
+  const isLoading = useRef(false); 
  
   const [options, setOptions] = useState(JSON.parse(localStorage.alertboxOpts || `{ "share": { "alert_duration": 10, "message_template": "", "alert_animation_out": "backOutDown", "image_url": "https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif", "sound_volume": 100, "alert_animation_in": "backInDown", "layout": "banner", "alert_text_delay": 0, "font_weight": 800, "text_color": "#ffffff", "text_highlight_color": "#32c3a6", "text_animation": "wiggle", "font_size": 64, "active": true, "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg" }, "gift": { "text_highlight_color": "#32c3a6", "active": true, "text_animation": "wiggle", "alert_animation_out": "backOutDown", "layout": "banner", "text_color": "#ffffff", "image_url": "https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif", "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", "alert_animation_in": "backInDown", "alert_duration": 10, "sound_volume": 50, "message_template": "", "font_size": 64, "font_weight": 800, "alert_min_amount": 0, "alert_text_delay": 0 }, "like": { "text_color": "#ffffff", "image_url": "https://isetup.vn/tiktok/assets/gif/Explosion.gif", "sound_volume": 50, "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", "font_weight": 800, "alert_animation_out": "backOutDown", "alert_text_delay": 0, "text_highlight_color": "#32c3a6", "alert_animation_in": "backInDown", "text_animation": "wiggle", "layout": "banner", "alert_duration": 10, "font_size": 64, "message_template": "", "active": true }, "general": { "layout": "banner", "alert_parries": true, "parry_alert_delay": 3, "approved_manually": false, "censor_timeout": 0, "background_color": "#80ffac", "alert_delay": 3, "censor_recent_events": true }, "comment": {}, "follow": { "alert_duration": 10, "alert_animation_in": "backInDown", "message_template": "", "alert_animation_out": "backOutDown", "alert_text_delay": 0, "font_size": 64, "image_url": "https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif", "text_highlight_color": "#32c3a6", "text_color": "#ffffff", "layout": "banner", "sound_volume": 50, "text_animation": "wiggle", "font_weight": 800, "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", "active": true } }`));
   const [layer, setLayer] = useState("log");
   const [tiktokId, setTiktokId] = useState("");
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([]);
-  const [mainEvent, setMainEvent] = useState({"type": "like", "data" : {}});
-  const [animate, setAnimate] = useState("");
   const [isDelay, setIsDelay] = useState(false);
   const [isShowing, setIsShowing] = useState(false);
-  
-  const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
 
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -102,6 +97,8 @@ const App = () => {
     localStorage.alertboxOpts = JSON.stringify(newOptions)
   }
   
+  const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
+  
   const playSound = (url = "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", vol = 50) => {
     try{
       audio.pause();
@@ -180,49 +177,14 @@ const App = () => {
   useEffect(() => {
     let events = [...eventQueue];
     let event = events.pop();
-    if(!isDelay){
-      var delay = options.general.alert_delay
-      if(event){
-        options.general.alert_parries && setIsShowing(false);
-        if(!isShowing){
-          setIsShowing(true);
-          isOutro.current = false;
-          setEventQueue(events);
-
-          let opt = options[event.type];
-
-          !opt.active && delAllType(event.type)
-
-          delay += opt.alert_duration;
-
-          options.general.alert_parries && (delay = options.general.parry_alert_delay)
-
-          setMainEvent(event);
-          document.body.setAttribute("data-layout", opt.layout)
-          setAnimate(`animate__animated animate__${options.general.alert_parries ? "fadeIn" : opt.alert_animation_in}`);
-
-          playSound();
-           
-          setTimeout(() => {
-            if(document.getElementById(event.data.id)){
-              setAnimate(`animate__animated animate__${options.general.alert_parries ? "fadeOut" : opt.alert_animation_out}`);
-              isOutro.current = true;
-            }
-          }, opt.alert_duration*1000)
-          
-          setIsDelay(true);
-          setTimeout(() => {
-            setIsDelay(false)
-          }, delay*1000)
-        }
-      } 
+    if(!isDelay){return;
     }
   }, [eventQueue, isDelay, isShowing])
  
   return (
     <div className="Alertbox">
       <div className="layer p-3 text-start text-white" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
-        {log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))}
+        {log.map((text, i) => (<p key={i} className="mb-0 bg-secondary">{text}</p>))}
       </div>
       <div className="layer p-3" id="askId" style={{"display": (layer === "askId" ? "block" : "none")}}>
         <div className="card card-body text-center">
@@ -237,25 +199,7 @@ const App = () => {
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
-        <div id="widget" className={animate} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
-          <div id="alert-box">
-            <div id="wrap">
-              <div id="alert-image-wrap">
-                <div id={mainEvent.data.id} className="d-none"></div>
-                <div id="alert-image" className="" style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
-                  <img style={{"height": "1px","opacity": "0","width": "1px"}} src={options[mainEvent.type].image_url} alt="animate gif"/>
-                </div>
-              </div>
-              <div id="alert-text-wrap">
-                <div id="alert-text" className=" ">
-                  <div id="alert-message" style={{"fontSize": `${options[mainEvent.type].font_size}px`,"color": `${options[mainEvent.type].text_color || "rgb(255, 255, 255)"}`,"fontFamily": "Open Sans&quot","fontWeight": `${options[mainEvent.type].font_weight}`,"textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>
-                    <MessTemplate />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> 
+        
       </div>
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"width":"min(100vh, 100vw)","height":"min(100vh, 100vw)"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer}/>
