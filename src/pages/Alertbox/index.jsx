@@ -137,7 +137,7 @@ const Alertbox = () => {
     
     const animateLetter = str => {
       try{
-        return (str.split("").map((i, k) => (<span key={k} className={style["animated-letter"], options[mainEvent.type].text_animation}>{i}</span>)))
+        return (<span style={{"color":""}}>{str.split("").map((i, k) => (<span key={k} className={[style["animated-letter"], options[mainEvent.type].text_animation].join(' ')}>{i}</span>))}</span>)
       }
       catch{
         console.log(str);
@@ -236,11 +236,11 @@ const Alertbox = () => {
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
-        <div className={animate} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
+        <div className={[style.widget, animate].join(' ')} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
           <div className={style["alert-box"]}>
             <div className={style.wrap}>
               <div className={style["alert-image-wrap"]}>
-                <div id={mainEvent.data.id} className="d-none"></div>
+                <div id={mainEvent.data.id} ></div>
                 <div className={style["alert-image"]} style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
                   <img style={{"height": "1px","opacity": "0","width": "1px"}} src={options[mainEvent.type].image_url} alt="animate gif"/>
                 </div>
