@@ -241,9 +241,9 @@ export default function AlertboxOpts(props){
                           type === "share" ? "{username} shared host" : ""
                         )}/>
                     </div>
-                    <small>Keys:
+                    <small>Keys: 
                       {(type === "gift"   ? "{nickname} / {username} / {giftname} / {giftcount} / {amount}}" : 
-                        type === "follow" ? "{nickname} / {username} / {giftname} / {giftcount} / {amount}" : 
+                        type === "follow" ? "{nickname} / {username}" : 
                         type === "like"   ? "{nickname} / {username} / {likecount}" : 
                         type === "share"  ? "{nickname} / {username}" : ""
                       )} 

@@ -127,20 +127,18 @@ const Alertbox = () => {
   }
   
   const handleAnimateText = str => { 
-    return str.split(" ").map((text, i) => ( <span key={i}>{
-        text === "{username}" ? mainEvent.data.uniqueId.split("").map(i => (<span className="animated-letter wave">{i}</span>)) :
-        text === "{nickname}" ? mainEvent.data.nickname :
-        text === "{giftname}" ? mainEvent.data.extendedGiftInfo.name :
-        text === "{giftcount}" ? mainEvent.data.gift.repeat_count :
-        text === "{amount}" ? (mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count) :
-        text === "{likecount}" ? mainEvent.data.likeCount : text
-    }{' '}</span>))
+    
   }
   
   const MessTemplate = () => {
     if(!mainEvent.data.id){
       return (<></>);
     }
+    
+    const animateLetter = str => {
+      return str.split("").map(i => (<span className="animated-letter tada">{i}</span>))
+    }
+    
     let optsTemplate = options[mainEvent.type].message_template
     var template = mainEvent.type
     .replace("gift", (optsTemplate || '{username} send {giftcount} {giftname}'))
@@ -148,8 +146,14 @@ const Alertbox = () => {
     .replace("share", (optsTemplate || '{username} just share livestream!'))
     .replace("follow", (optsTemplate || '{username} is now follower'))
     
-    let animateText = handleAnimateText(template);
-    return animateText
+    return template.split(" ").map((text, i) => ( <span key={i}>{
+      text === "{username}" ? animateLetter(mainEvent.data.uniqueId) :
+      text === "{nickname}" ? animateLetter(mainEvent.data.nickname) :
+      text === "{giftname}" ? animateLetter(mainEvent.data.extendedGiftInfo.name) :
+      text === "{giftcount}" ? animateLetter(mainEvent.data.gift.repeat_count) :
+      text === "{likecount}" ? animateLetter(mainEvent.data.likeCount) :
+      text === "{amount}" ? animateLetter(mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count) : text
+    }{' '}</span>))
   }
   
   useEffect(function(){
