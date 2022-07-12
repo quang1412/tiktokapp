@@ -1,11 +1,11 @@
- .layer.play{
+ .alertboxLayer{
   width: 100vw;
   height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
 }
-.layer:not(:hover)>button{
+.alertboxLayer:not(:hover)>button{
   display:none
 }
 body[data-layout="banner"] .alert-image {
@@ -78,33 +78,30 @@ body[data-layout="above"] .alert-image-wrap,
 body[data-layout="above"] .alert-text-wrap{
     display: table-row;
 }
-
-.hidden {
-  opacity: 0;
-}
-.alert-box {
+ 
+.alertboxLayer.alert-box {
   height: 100%;
   width: 100%; 
 }
-.alert-text{
+.alertboxLayer.alert-text{
   padding:20px;
   position: relative;
 }
-.alert-image {
+.alertboxLayer.alert-image {
   position: relative;
 }
-.wrap {
+.alertboxLayer.wrap {
   position: relative;
   height: 100%;
   width: 100%;
 }
-.widget{
+.alertboxLayer.widget{
   width:100%;
   height:100%;
 }
-.animated-letter{
-  color: .32C3A6;
+.alertboxLayer.animated-letter{
+  color: #32C3A6;
 }
-.alert-message > span > span {
+.alertboxLayer.alert-message > span > span {
     display: inline-block;
 }
