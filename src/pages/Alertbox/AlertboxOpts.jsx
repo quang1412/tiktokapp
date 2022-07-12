@@ -40,6 +40,18 @@ export default function AlertboxOpts(props){
           return;
         }
         break;
+      case "text_color":
+        if(!corloValid(value)){
+          // target.value = options[optType][optName];
+          return;
+        } 
+        break;
+      case "text_highlight_color":
+        if(!corloValid(value)){
+          // target.value = options[optType][optName];
+          return;
+        } 
+        break;
       default:
         break;
     }
@@ -64,6 +76,10 @@ export default function AlertboxOpts(props){
       audio.addEventListener('error', () => resolve(false));
       audio.src = url;
     })
+  }
+  
+  const corloValid = code => {
+    return (/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(code))
   }
   
   return (
