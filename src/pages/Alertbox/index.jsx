@@ -137,7 +137,7 @@ const Alertbox = () => {
     
     const animateLetter = str => {
       try{
-        return (<span className="text-nowrap">{str.split("").map((i, k) => (<span key={k} className={"animated-letter "+options[mainEvent.type].text_animation}>{i}</span>))}</span>)
+        return (str.split("").map((i, k) => (<span key={k} className={"animated-letter "+options[mainEvent.type].text_animation}>{i}</span>)))
       }
       catch{
         console.log(str);
@@ -247,7 +247,7 @@ const Alertbox = () => {
               </div>
               <div id="alert-text-wrap">
                 <div id="alert-text" className=" ">
-                  <div id="alert-message" className="text-center" style={{"fontSize": `${options[mainEvent.type].font_size}px`,"color": `${options[mainEvent.type].text_color || "rgb(255, 255, 255)"}`,"fontFamily": "Open Sans&quot","fontWeight": `${options[mainEvent.type].font_weight}`,"textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>
+                  <div id="alert-message" style={{"fontSize": `${options[mainEvent.type].font_size}px`,"color": `${options[mainEvent.type].text_color || "rgb(255, 255, 255)"}`,"fontFamily": "Open Sans&quot","fontWeight": `${options[mainEvent.type].font_weight}`,"textShadow": "0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000"}}>
                     <MessTemplate />
                   </div>
                 </div>

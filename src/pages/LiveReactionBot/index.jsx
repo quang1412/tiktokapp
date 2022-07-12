@@ -1,4 +1,5 @@
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client';
+import './style.css';
 import React, {useEffect, useState, useRef} from 'react';
  
 const App = () => {
@@ -84,7 +85,7 @@ const App = () => {
 
       return () => clearInterval(interval);
     }
-  }, [isLoading.current])
+  }, [isLoading.current]);
   
   const handleOptions = newOptions => { 
     setOptions({...options, ...newOptions})
