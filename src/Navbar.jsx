@@ -21,6 +21,9 @@ function Navbar() {
         <li className="nav-item">
           <Link to="/alertbox" className="nav-link">Alertbox</Link>
         </li> 
+        <li className="nav-item">
+          <Link to="/live-reaction-bot" className="nav-link">Live Reaction Bot</Link>
+        </li> 
       </ul>
     </div>
   </div>
