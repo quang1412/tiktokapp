@@ -268,14 +268,9 @@ export default function AlertboxOpts(props){
                   <div className="col-4">
                     <label className="form-label mb-0">Text effect</label>
                   </div>
-                  <div className="col-8 d-flex align-items-center">
-                   <select className="my-select selectpicker" data-container="body">
-                    <option>Mustard</option>
-                    <option>Ketchup</option>
-                    <option>Barbecue</option>
-                  </select>
-
-                    <select className="d-none" name="text_animation"  defaultValue={opt.text_animation}  onChange={handleOptionsChange} className="form-select me-2">
+                  <div className="col-8 d-flex align-items-center"> 
+                    
+                    <select name="text_animation"  defaultValue={opt.text_animation}  onChange={handleOptionsChange} className="form-select me-2">
                       <option defaultValue='wiggle'>Wiggle</option>
                       <option defaultValue="wave">Wave</option>
                       <option defaultValue="wobble">Wobble</option>
@@ -283,6 +278,7 @@ export default function AlertboxOpts(props){
                       <option defaultValue="bounce">Bounce</option>
                       <option defaultValue="tada">Tada</option>
                     </select>
+                    
                     <div className="fw-bold text-nowrap text-primary">
                       <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>S</span>
                       <span className={`animated-letter ${opt.text_animation.toLowerCase()}`}>A</span>
