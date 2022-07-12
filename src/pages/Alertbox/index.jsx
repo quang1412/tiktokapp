@@ -136,10 +136,13 @@ const Alertbox = () => {
     }
     
     const animateLetter = str => {
-      if(!str){
+      try{
+        return str.split("").map((i, k) => (<span key={k} className={"animated-letter "+options[mainEvent.type].text_animation}>{i}</span>));
+      }
+      catch{
+        console.log(str);
         return (<></>);
       }
-      return str.split("").map(i => (<span className={"animated-letter "+options[mainEvent.type].text_animation}>{i}</span>))
     }
     
     let optsTemplate = options[mainEvent.type].message_template
@@ -221,12 +224,14 @@ const Alertbox = () => {
         {log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))}
       </div>
       <div className="layer p-3" id="askId" style={{"display": (layer === "askId" ? "block" : "none")}}>
-        <span>Please enter streaming tiktok id</span>
-        <div className="input-group mb-3" style={{"maxWidth":"500px","minWidth":"300px"}}>
-          <input onChange={e => {setTiktokId(e.target.value)}} type="text" className="form-control" placeholder="Enter Tiktok id" aria-label="Enter Tiktok id"/>
-          <a href={"?id="+tiktokId} className="btn btn-outline-primary" type="button" style={{"paddingTop":"10px"}}>
-            <span>Connect</span>
-          </a>
+        <div className="card card-body text-center">
+          <span>Please enter streaming tiktok id</span>
+            <div className="input-group mx-auto" style={{"maxWidth":"500px","minWidth":"300px"}}>
+              <input onChange={e => {setTiktokId(e.target.value)}} type="text" className="form-control" placeholder="Enter Tiktok id" aria-label="Enter Tiktok id"/>
+              <a href={"?id="+tiktokId} className="btn btn-outline-primary" type="button" style={{"paddingTop":"10px"}}>
+                <span>Connect</span>
+              </a>
+            </div>
         </div>
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
