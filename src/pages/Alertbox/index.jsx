@@ -249,7 +249,7 @@ const Alertbox = () => {
           </div>
         </div> 
       </div>
-      <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"width":"min(100vh, 100vw)","height":"min(100vh, 100vw)"}}>
+      <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"width":"min(100vh, 100vw)","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer}/>
       </div>
     </div>
