@@ -76,6 +76,11 @@ export default function AlertboxOpts(props){
     })
   }
   
+  const paste = async function(){
+    console.log(this)
+    
+  }
+  
   const corloValid = code => {
     return (/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(code))
   }
@@ -242,10 +247,10 @@ export default function AlertboxOpts(props){
                         )}/>
                     </div>
                     <small>Keys: 
-                      {(type === "gift"   ? "{nickname} / {username} / {giftname} / {giftcount} / {amount}}" : 
-                        type === "follow" ? "{nickname} / {username}" : 
-                        type === "like"   ? "{nickname} / {username} / {likecount}" : 
-                        type === "share"  ? "{nickname} / {username}" : ""
+                      {(type === "gift"   ? " {nickname} / {username} / {giftname} / {giftcount} / {amount}}" : 
+                        type === "follow" ? " {nickname} / {username}" : 
+                        type === "like"   ? " {nickname} / {username} / {likecount}" : 
+                        type === "share"  ? " {nickname} / {username}" : ""
                       )} 
                     </small>
                   </div>
@@ -286,6 +291,7 @@ export default function AlertboxOpts(props){
                     <div className="input-group">
                       <span className="input-group-text p-0" style={{"backgroundImage":`url(${opt.image_url})`, "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
                       <input name="image_url" defaultValue={opt.image_url} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Image URL"/>
+                      <button onClick={}></button>
                     </div>
                   </div>
                 </div>
