@@ -269,11 +269,7 @@ const Alertbox = () => {
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"300px","maxWidth":"800px","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer}/>
       </div>
-      <button className={`btn btn-sm btn-white btn-rounded position-absolute bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`} onClick={() => {canAutoPlay.current = true}}>Enable audio <i className="fas fa-volume-up"></i></button>
-      <iframe src="https://isetup.vn/tiktok/assets/sound/new-message-4.ogg" allow="autoplay" id="audio" style={{"display":"none"}}></iframe>
-      <audio autoplay>
-        <source src="https://isetup.vn/tiktok/assets/sound/new-message-4.ogg" type="audio/mp3"/>
-      </audio>
+      <button className={`btn btn-sm btn-white btn-rounded position-absolute bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`} onClick={() => {canAutoPlay.current = true; alert(window.navigator.userAgent)}}>Enable audio <i className="fas fa-volume-up"></i></button>
     </div>
   );
 }
