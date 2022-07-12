@@ -76,9 +76,12 @@ export default function AlertboxOpts(props){
     })
   }
   
-  const paste = async function(){
-    console.log(this)
-    
+  const paste = async e => {
+    let target = e.target;
+    e.preventDefault();
+    const text = await navigator.clipboard.readText();
+    target.previousSibling.value = text;
+    console.log(text)
   }
   
   const corloValid = code => {
@@ -291,8 +294,8 @@ export default function AlertboxOpts(props){
                     <div className="input-group">
                       <span className="input-group-text p-0" style={{"backgroundImage":`url(${opt.image_url})`, "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
                       <input name="image_url" defaultValue={opt.image_url} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Image URL"/>
-                      <button onClick={}></button>
                     </div>
+                    <button className="btn btn-secondary d-none" onClick={e => {paste(e)}}></button>
                   </div>
                 </div>
                 <div className="row mb-3">
