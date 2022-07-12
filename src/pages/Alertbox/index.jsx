@@ -128,7 +128,13 @@ const Alertbox = () => {
   
   const handleAnimateText = str => {
     // return str.split("").map(char => (char))
-    return str.split("").map((text, i) => (<span key={i} >{text}</span>))
+    return str.split(" ").map((text, i) => ( <span key={i}>{
+      switch(text){
+        case "{username}":
+        
+      }
+        text == "{username}" ? mainEvent.data.uniqueId : text
+    }{' '}</span>))
   }
   
   const MessTemplate = () => {
@@ -150,7 +156,6 @@ const Alertbox = () => {
         break; 
       case "like":
         data =  (template || '{username} send {likecount} heart!')
-          .replace('{username}', handleAnimateText(mainEvent.data.uniqueId))
           // .replace('{nickname}', `<span class="animated-letters">${mainEvent.data.nickname || mainEvent.data.uniqueId}</span>`)
           // .replace('{likecount}', `<span class="animated-letters">${mainEvent.data.likeCount}</span>`);
         break;
@@ -165,8 +170,9 @@ const Alertbox = () => {
       default:
         break;
       
-    }  
-    return data
+    }
+    let animateText = handleAnimateText(data);
+    return animateText
   }
   
   useEffect(function(){
