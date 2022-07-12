@@ -70,7 +70,7 @@ export default function AlertboxOpts(props){
   }
   
   return (
-    <div className="card">
+    <div className="card w-100 h-100">
     <div className="card-header">
       <ul className="nav nav-tabs" id="pills-tab" role="tablist">
         <li className="nav-item" role="presentation">

@@ -220,7 +220,7 @@ const Alertbox = () => {
  
   return (
     <div className="Alertbox">
-      <div className="layer  p-3 text-start" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
+      <div className="layer p-3 text-start text-white" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
         {log.map((text, i) => (<p key={i} className="mb-0">{text}</p>))}
       </div>
       <div className="layer p-3" id="askId" style={{"display": (layer === "askId" ? "block" : "none")}}>
@@ -233,7 +233,7 @@ const Alertbox = () => {
         </div>
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
-        <button onClick={e => {setLayer("setting")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
+        <button onClick={e => {setLayer("setting")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
         <div id="widget" className={animate} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
           <div id="alert-box">
             <div id="wrap">
@@ -254,8 +254,8 @@ const Alertbox = () => {
           </div>
         </div> 
       </div>
-      <div className="layer" id="setting" style={{"display":(layer === "setting" ? "block" : "none")}}>
-        <button onClick={e => {setLayer("play")}} className="btn btn-sm btn-light position-absolute top-0 end-0 text-secondary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
+      <div className="layer" id="setting" style={{"display":(layer === "setting"?"block":"none"),"width":"min(100vh, 100vw)","height":"min(100vh, 100vw)","margin":"auto"}}>
+        <button onClick={e => {setLayer("play")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary border lh-1 p-2 m-2" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions}/>
       </div>
     </div>
