@@ -126,10 +126,9 @@ const Alertbox = () => {
     }
   }
   
-  const handleAnimateText = str => {
-    // return str.split("").map(char => (char))
+  const handleAnimateText = str => { 
     return str.split(" ").map((text, i) => ( <span key={i}>{
-        text === "{username}" ? mainEvent.data.uniqueId :
+        text === "{username}" ? mainEvent.data.uniqueId.split("").map(i => (<span className="animated-letter wave">{i}</span>)) :
         text === "{nickname}" ? mainEvent.data.nickname :
         text === "{giftname}" ? mainEvent.data.extendedGiftInfo.name :
         text === "{giftcount}" ? mainEvent.data.gift.repeat_count :
@@ -231,7 +230,7 @@ const Alertbox = () => {
               <div id="alert-image-wrap">
                 <div id={mainEvent.data.id} className="d-none"></div>
                 <div id="alert-image" className="" style={{"backgroundImage": `url(${options[mainEvent.type].image_url})`}}>
-                  <img style={{"height": "1px","opacity": "0","width": "1px"}} src={options[mainEvent.type].image_url}/>
+                  <img style={{"height": "1px","opacity": "0","width": "1px"}} src={options[mainEvent.type].image_url} alt="animate gif"/>
                 </div>
               </div>
               <div id="alert-text-wrap">
