@@ -124,11 +124,7 @@ const Alertbox = () => {
     if(isOutro.current){
       setIsShowing(false);
     }
-  }
-  
-  const handleAnimateText = str => { 
-    
-  }
+  } 
   
   const MessTemplate = () => {
     if(!mainEvent.data.id){
@@ -136,13 +132,8 @@ const Alertbox = () => {
     }
     
     const animateLetter = str => {
-      try{
-        return (str.split("").map((i, k) => (<span style={{"color":"#32c3a6"}} key={k} className={["animated-letter", options[mainEvent.type].text_animation].join(' ')}>{i}</span>)))
-      }
-      catch{
-        console.log(str);
-        return (<></>);
-      }
+      str = str.toString();
+      return (str.split("").map((i, k) => (<span style={{"color":"#32c3a6"}} key={k} className={["animated-letter", options[mainEvent.type].text_animation].join(' ')}>{i}</span>)))
     }
     
     let optsTemplate = options[mainEvent.type].message_template
