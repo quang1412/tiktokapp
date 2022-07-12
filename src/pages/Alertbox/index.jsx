@@ -9,7 +9,7 @@ const Alertbox = () => {
   
   const isLoading = useRef(false);
   const isOutro = useRef(false);
-  const canAutoPlay = useRef(false)
+  const canAutoPlay = useRef(false);
  
   const [options, setOptions] = useState(JSON.parse(localStorage.alertboxOpts || `{ "share": { "alert_duration": 10, "message_template": "", "alert_animation_out": "backOutDown", "image_url": "https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif", "sound_volume": 100, "alert_animation_in": "backInDown", "layout": "banner", "alert_text_delay": 0, "font_weight": 800, "text_color": "#ffffff", "text_highlight_color": "#32c3a6", "text_animation": "wiggle", "font_size": 64, "active": true, "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg" }, "gift": { "text_highlight_color": "#32c3a6", "active": true, "text_animation": "wiggle", "alert_animation_out": "backOutDown", "layout": "banner", "text_color": "#ffffff", "image_url": "https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif", "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", "alert_animation_in": "backInDown", "alert_duration": 10, "sound_volume": 50, "message_template": "", "font_size": 64, "font_weight": 800, "alert_min_amount": 0, "alert_text_delay": 0 }, "like": { "text_color": "#ffffff", "image_url": "https://isetup.vn/tiktok/assets/gif/Explosion.gif", "sound_volume": 50, "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", "font_weight": 800, "alert_animation_out": "backOutDown", "alert_text_delay": 0, "text_highlight_color": "#32c3a6", "alert_animation_in": "backInDown", "text_animation": "wiggle", "layout": "banner", "alert_duration": 10, "font_size": 64, "message_template": "", "active": true }, "general": { "layout": "banner", "alert_parries": true, "parry_alert_delay": 3, "approved_manually": false, "censor_timeout": 0, "background_color": "#80ffac", "alert_delay": 3, "censor_recent_events": true }, "comment": {}, "follow": { "alert_duration": 10, "alert_animation_in": "backInDown", "message_template": "", "alert_animation_out": "backOutDown", "alert_text_delay": 0, "font_size": 64, "image_url": "https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif", "text_highlight_color": "#32c3a6", "text_color": "#ffffff", "layout": "banner", "sound_volume": 50, "text_animation": "wiggle", "font_weight": 800, "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", "active": true } }`));
   const [layer, setLayer] = useState("log");
@@ -22,6 +22,7 @@ const Alertbox = () => {
   const [isShowing, setIsShowing] = useState(false);
   
   const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
+  audio.volum
 
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -103,14 +104,13 @@ const Alertbox = () => {
   }
   
   const playSound = (url = "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", vol = 50) => {
-    try{
+    if(canAutoPlay.current){
       audio.pause();
       audio.currentTime = 0;
       audio.src = url;
       audio.volume = vol/100;
       audio.play();
-    }
-    catch{}
+    } 
   } 
   
   const delAllType = type => {
@@ -162,7 +162,8 @@ const Alertbox = () => {
 
     if (playPromise !== undefined) {
       playPromise.then(_ => {
-        console.log("sound ok")
+        console.log("sound ok");
+        canAutoPlay.current = true;
       })
       .catch(error => {
         // Auto-play was prevented
@@ -268,6 +269,7 @@ const Alertbox = () => {
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"300px","maxWidth":"800px","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer}/>
       </div>
+      <button className={`btn btn-sm btn-white position-absolute bottom-0 end-0 m-2 ${canAutoPlay.current && 'd-none'}`} onClick={() => {canAutoPlay.current = true}}>Enable audio <i className="fas fa-volume-up"></i></button>
     </div>
   );
 }
