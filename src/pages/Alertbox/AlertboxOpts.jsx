@@ -194,7 +194,7 @@ export default function AlertboxOpts(props){
                   <div className="col-4">
                     <label className="form-label mb-0">Layout</label>
                   </div>
-                  <div className="col-8 d-flex">
+                  <div className="col-8 d-flex flex-wrap">
                     <div className="form-check me-2">
                       <input name="layout" defaultValue="above" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={opt.layout === "above"}/>
                       <label className="form-check-label">
@@ -270,7 +270,7 @@ export default function AlertboxOpts(props){
                   <div className="col-4">
                     <label className="form-label mb-0">Text effect</label>
                   </div>
-                  <div className="col-8 d-flex align-items-center"> 
+                  <div className="col-8 d-md-flex align-items-center"> 
                     
                     <select name="text_animation"  defaultValue={opt.text_animation}  onChange={handleOptionsChange} className="form-select me-2" title="use arrow key to navigate through list, and enter key to select">
                       <option defaultValue='wiggle'>Wiggle</option>
