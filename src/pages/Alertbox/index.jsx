@@ -163,6 +163,7 @@ const Alertbox = () => {
   }
   
   useEffect(function(){
+    document.getElementsByTagName('html')[0].className = style.html;
     let id = new URLSearchParams(window.location.search).get('id'); 
     if(!id){
       setLayer("askId");
