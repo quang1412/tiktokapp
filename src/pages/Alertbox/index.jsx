@@ -22,7 +22,7 @@ const Alertbox = () => {
   const [isShowing, setIsShowing] = useState(false);
   
   const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
-  audio.volum
+  audio.volume = 0.1;
 
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -269,7 +269,7 @@ const Alertbox = () => {
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"300px","maxWidth":"800px","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer}/>
       </div>
-      <button className={`btn btn-sm btn-white position-absolute bottom-0 end-0 m-2 ${canAutoPlay.current && 'd-none'}`} onClick={() => {canAutoPlay.current = true}}>Enable audio <i className="fas fa-volume-up"></i></button>
+      <button className={`btn btn-sm btn-white btn-rounded position-absolute bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`} onClick={() => {canAutoPlay.current = true}}>Enable audio <i className="fas fa-volume-up"></i></button>
     </div>
   );
 }
