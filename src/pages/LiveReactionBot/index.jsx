@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
-import './style.css';
+import style from './livereactionbot.module.css';
 import React, {useEffect, useState, useRef} from 'react';
  
 const App = () => {
@@ -139,7 +139,7 @@ const App = () => {
   }, [eventQueue, isDelay])
  
   return (
-    <div className="Alertbox">
+    <div className="LiveReactionBot">
       <div className="layer p-3 text-start" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
         {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
@@ -158,7 +158,9 @@ const App = () => {
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
-        
+      </div>
+      <div className="layer" id="play" style={{"display":(layer === "setting" ? "block" : "none")}}>
+        <button onClick={e => {setLayer("play")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
       </div>
     </div>
   );
