@@ -128,6 +128,11 @@ const Alertbox = () => {
     }
   } 
   
+  const enableAutoPlaySound = () => {
+    window.navigator.userAgent.includes('Mobile') ? 
+      alert("Please open on PC to enable audio") : canAutoPlay.current = true
+  }
+  
   const MessTemplate = () => {
     if(!mainEvent.data.id){
       return (<></>);
@@ -269,7 +274,7 @@ const Alertbox = () => {
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"300px","maxWidth":"800px","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer}/>
       </div>
-      <button className={`btn btn-sm btn-white btn-rounded position-absolute bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`} onClick={() => {canAutoPlay.current = true; alert(window.navigator.userAgent)}}>Enable audio <i className="fas fa-volume-up"></i></button>
+      <button className={`btn btn-sm btn-white btn-rounded position-absolute bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`} onClick={enableAutoPlaySound}>Enable audio <i className="fas fa-volume-up"></i></button>
     </div>
   );
 }
