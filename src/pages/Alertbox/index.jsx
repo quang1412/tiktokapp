@@ -126,7 +126,14 @@ const Alertbox = () => {
     }
   }
   
+  const handleAnimateString = str => {
+    return str.split("").map(char => {return char})
+  }
+  
   const MessTemplate = () => {
+    if(!mainEvent.data.id){
+      return (<></>);
+    }
     var data;
     let template = options[mainEvent.type].message_template
     switch(mainEvent.type){
@@ -139,10 +146,10 @@ const Alertbox = () => {
           // .replace('{giftcount}', `<span  class="animated-letters">${mainEvent.data.gift.repeat_count}</span>`)
           // .replace('{giftname}', `<span  class="animated-letters">${mainEvent.data.extendedGiftInfo.name}</span>`)
           // .replace('{giftimg}', `<span  class="${options[mainEvent.type].gift.text_animation}" style="display:inline-block"><img style="height:1.0em" src="${mainEvent.data.extendedGiftInfo.image.url_list[0]}"></span>`);
-        break;
+        break; 
       case "like":
         data =  (template || '{username} send {likecount} heart!')
-          .replace('{username}', mainEvent.data.uniqueId.map(char => {return char}))
+          .replace('{username}', handleAnimateString(mainEvent.data.uniqueId))
           // .replace('{nickname}', `<span class="animated-letters">${mainEvent.data.nickname || mainEvent.data.uniqueId}</span>`)
           // .replace('{likecount}', `<span class="animated-letters">${mainEvent.data.likeCount}</span>`);
         break;
