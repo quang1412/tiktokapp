@@ -142,7 +142,7 @@ const Alertbox = () => {
         break;
       case "like":
         data =  (template || '{username} send {likecount} heart!')
-          // .replace('{username}', `<span class="animated-letters">${mainEvent.data.uniqueId}</span>`)
+          .replace('{username}', mainEvent.data.uniqueId.map(char => {return char}))
           // .replace('{nickname}', `<span class="animated-letters">${mainEvent.data.nickname || mainEvent.data.uniqueId}</span>`)
           // .replace('{likecount}', `<span class="animated-letters">${mainEvent.data.likeCount}</span>`);
         break;

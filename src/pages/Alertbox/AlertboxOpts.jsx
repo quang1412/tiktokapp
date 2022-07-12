@@ -42,13 +42,11 @@ export default function AlertboxOpts(props){
         break;
       case "text_color":
         if(!corloValid(value)){
-          // target.value = options[optType][optName];
           return;
         } 
         break;
       case "text_highlight_color":
         if(!corloValid(value)){
-          // target.value = options[optType][optName];
           return;
         } 
         break;
@@ -364,7 +362,7 @@ export default function AlertboxOpts(props){
                       </div>
                       <div className="col-8">
                         <div className="input-group mb-3">
-                          <span className="input-group-text p-0" style={{"backgroundColor":"#ffffff"}}><div style={{"width":"3rem"}}></div></span>
+                          <span className="input-group-text p-0" style={{"backgroundColor":opt.text_color}}><div style={{"width":"3rem"}}></div></span>
                           <input name="text_color" defaultValue={opt.text_color} onChange={handleOptionsChange} type="text" className="form-control" placeholder="#ffffff" title="Set text color"/>
                         </div>
                       </div>
@@ -375,7 +373,7 @@ export default function AlertboxOpts(props){
                       </div>
                       <div className="col-8">
                         <div className="input-group mb-3">
-                          <span className="input-group-text p-0" style={{"backgroundColor":"#32c3a6"}}><div style={{"width":"3rem"}}></div></span>
+                          <span className="input-group-text p-0" style={{"backgroundColor":opt.text_highlight_color}}><div style={{"width":"3rem"}}></div></span>
                           <input name="text_highlight_color" defaultValue={opt.text_highlight_color} onChange={handleOptionsChange} type="text" className="form-control" placeholder="#32c3a6" title="Set text color"/>
                         </div>
                       </div>
