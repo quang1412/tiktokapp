@@ -312,7 +312,7 @@ export default function AlertboxOpts(props){
                   <div className="col-8">
                     <div className="input-group">
                       <span className="input-group-text p-0"><div className="d-flex justify-content-center align-items-center" style={{"width": "3rem","height": "100%"}}><i className="fas fa-music mauto" aria-hidden="true"></i></div></span>
-                      <input name="sound_url" defaultValue={opt.sound_url} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="Sound URL"/>
+                      <input name="sound_url" defaultValue={opt.sound_url} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="Sound URL" title={`Please enter audio link, current: ${opt.sound_url} `}/>
                     </div>
                   </div>
                 </div>
@@ -379,7 +379,7 @@ export default function AlertboxOpts(props){
                       <div className="col-8">
                         <div className="input-group mb-3">
                           <span className="input-group-text p-0" style={{"backgroundColor":opt.text_color}}><div style={{"width":"3rem"}}></div></span>
-                          <input name="text_color" defaultValue={opt.text_color} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="#ffffff" title="Set text color"/>
+                          <input name="text_color" defaultValue={opt.text_color} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="#ffffff" title="Please enter color code, eg: #ffffff"/>
                         </div>
                       </div>
                     </div>
@@ -390,7 +390,7 @@ export default function AlertboxOpts(props){
                       <div className="col-8">
                         <div className="input-group mb-3">
                           <span className="input-group-text p-0" style={{"backgroundColor":opt.text_highlight_color}}><div style={{"width":"3rem"}}></div></span>
-                          <input name="text_highlight_color" defaultValue={opt.text_highlight_color} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="#32c3a6" title="Set text color"/>
+                          <input name="text_highlight_color" defaultValue={opt.text_highlight_color} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="#32c3a6" title="Please enter color code, eg: #ffffff"/>
                         </div>
                       </div>
                     </div>
