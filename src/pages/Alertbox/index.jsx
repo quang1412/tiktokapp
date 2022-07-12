@@ -215,12 +215,12 @@ const Alertbox = () => {
         {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
       <div className="layer p-3" id="askId" style={{"display": (layer === "askId" ? "block" : "none")}}>
-        <div className="card card-body text-center mx-auto" style={{"maxWidth":"500px","minWidth":"300px"}}>
+        <div className="card card-body mx-auto" style={{"maxWidth":"500px","minWidth":"300px"}}>
           <span>Please enter streaming tiktok id</span>
             <div className="input-group mx-auto" >
               <input onChange={e => {setTiktokId(e.target.value)}} type="text" className="form-control" placeholder="Enter Tiktok id" aria-label="Enter Tiktok id"/>
               <a href={"?id="+tiktokId}>
-                <button className="btn btn-primary" type="button">
+                <button className="btn btn-primary rounded-0 rounded-end h-100" type="button">
                   Connect
                 </button>
               </a>
