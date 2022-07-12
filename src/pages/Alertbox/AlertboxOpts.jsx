@@ -81,8 +81,8 @@ export default function AlertboxOpts(props){
   const askInput = async e => {
     if(window.navigator.userAgent.includes("OBS")){
       let target = e.target
-      const input = prompt('Please Enter your Name');
-      if (input == null || input == "") {
+      const input = prompt(target.title);
+      if (input === null || input === "") {
       } else {
         target.value = input
         handleOptionsChange(e);
@@ -218,12 +218,12 @@ export default function AlertboxOpts(props){
                     <label className="form-label mb-0">Effects</label>
                   </div>
                   <div className="col-8 d-flex">
-                    <select name="alert_animation_in" defaultValue={opt.alert_animation_in} onChange={handleOptionsChange} className="form-select me-1">{
+                    <select name="alert_animation_in" defaultValue={opt.alert_animation_in} onChange={handleOptionsChange} className="form-select me-1" title="use arrow key to navigate through list, and enter key to select">{
                       intro.map((e, i) => {
                         return (<option key={`alert_animation_in${i}`} value={e.replaceAll(' ','')}>{e}</option>)
                       }) 
                     }</select>
-                    <select name="alert_animation_out" defaultValue={opt.alert_animation_out} onChange={handleOptionsChange} className="form-select ms-1">{
+                    <select name="alert_animation_out" defaultValue={opt.alert_animation_out} onChange={handleOptionsChange} className="form-select ms-1" title="use arrow key to navigate through list, and enter key to select">{
                       outro.map((e, i) => {
                         return (<option key={`alert_animation_out${i}`} value={e.replaceAll(" ","")}>{e}</option>)
                       }) 
@@ -270,7 +270,7 @@ export default function AlertboxOpts(props){
                   </div>
                   <div className="col-8 d-flex align-items-center"> 
                     
-                    <select name="text_animation"  defaultValue={opt.text_animation}  onChange={handleOptionsChange} className="form-select me-2">
+                    <select name="text_animation"  defaultValue={opt.text_animation}  onChange={handleOptionsChange} className="form-select me-2" title="use arrow key to navigate through list, and enter key to select">
                       <option defaultValue='wiggle'>Wiggle</option>
                       <option defaultValue="wave">Wave</option>
                       <option defaultValue="wobble">Wobble</option>
@@ -301,7 +301,7 @@ export default function AlertboxOpts(props){
                   <div className="col-8">
                     <div className="input-group">
                       <span className="input-group-text p-0" style={{"backgroundImage":`url(${opt.image_url})`, "backgroundSize":"contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat"}}><div style={{"width": "3rem","height":"100%"}}></div></span>
-                      <input name="image_url" defaultValue={opt.image_url} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="Image URL"/>
+                      <input name="image_url" defaultValue={opt.image_url} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="Image URL" title={`Please enter image link, current: ${opt.image_url}`}/>
                     </div>
                   </div>
                 </div>
@@ -312,7 +312,7 @@ export default function AlertboxOpts(props){
                   <div className="col-8">
                     <div className="input-group">
                       <span className="input-group-text p-0"><div className="d-flex justify-content-center align-items-center" style={{"width": "3rem","height": "100%"}}><i className="fas fa-music mauto" aria-hidden="true"></i></div></span>
-                      <input name="sound_url" defaultValue={opt.sound_url} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="Sound URL" title={`Please enter audio link, current: ${opt.sound_url} `}/>
+                      <input name="sound_url" defaultValue={opt.sound_url} onChange={handleOptionsChange} onClick={askInput} type="text" className="form-control" placeholder="Sound URL" title={`Please enter audio link, current: ${opt.sound_url}`}/>
                     </div>
                   </div>
                 </div>
