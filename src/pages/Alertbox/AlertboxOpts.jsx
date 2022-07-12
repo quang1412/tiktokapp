@@ -269,7 +269,13 @@ export default function AlertboxOpts(props){
                     <label className="form-label mb-0">Text effect</label>
                   </div>
                   <div className="col-8 d-flex align-items-center">
-                    <select name="text_animation"  defaultValue={opt.text_animation}  onChange={handleOptionsChange} className="form-select me-2">
+                    <select className="selectpicker me-2" name="text_animation"  defaultValue={opt.text_animation}  onChange={handleOptionsChange} >
+                      <option>Mustard</option>
+                      <option>Ketchup</option>
+                      <option>Barbecue</option>
+                    </select>
+
+                    <select className="d-none" name="text_animation"  defaultValue={opt.text_animation}  onChange={handleOptionsChange} className="form-select me-2">
                       <option defaultValue='wiggle'>Wiggle</option>
                       <option defaultValue="wave">Wave</option>
                       <option defaultValue="wobble">Wobble</option>
