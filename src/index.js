@@ -7,6 +7,7 @@ import './index.css';
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Alertbox from "./pages/Alertbox/";
+import LiveReactionBot from './pages/LiveReactionBot/';
 
 
 export default function Main() {
@@ -17,6 +18,7 @@ export default function Main() {
           <Route index element={<Home />}/>
         </Route>
         <Route path="alertbox" element={<Alertbox />}/>
+        <Route path="live-reaction-bot" element={<LiveReactionBot />}/>
       </Routes>
     </BrowserRouter>
   );
