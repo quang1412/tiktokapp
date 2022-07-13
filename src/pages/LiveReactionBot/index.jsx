@@ -260,9 +260,9 @@ const App = () => {
           <i className="fas fa-cog"></i>
         </button>
         <div className="p-3">
-          <span className={"d-block text-primary "+style.pageTitle}>
+          <p className={"text-primary "+style.pageTitle}>
             {options.general.pageTitle}
-          </span>
+          </p>
           <div className={"text-center text-md-start "+style.lastEvent} style={{"backgroundColor":"white"}}>
             <img className="" src={lastEvent.data.profilePictureUrl}/>
             <div className="my-1">
