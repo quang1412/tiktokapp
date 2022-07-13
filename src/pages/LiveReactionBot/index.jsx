@@ -38,7 +38,8 @@ const App = () => {
   const [tiktokId, setTiktokId] = useState("");
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([]);
-  const [isDelay, setIsDelay] = useState(false)
+  const [isDelay, setIsDelay] = useState(false);
+  const [lastEvent, setLastEvent] = useState({})
   
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -190,7 +191,7 @@ const App = () => {
         let newRow = document.createElement('li');
         newRow.className = style.listItem;
         newRow.innerHTML = `<div class="d-flex align-items-center">
-          <img class="${style.avatar}" src="${event.data.profilePictureUrl}">
+          <img class="${style.avatar}" src="${event.data.profilePictureUrl}"/>
           <div class="d-flex flex-column ms-2">
             <span class="${style.userName}">${name}</span>
             <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
@@ -254,8 +255,8 @@ const App = () => {
           <i className="fas fa-cog"></i>
         </button>
         <div className="p-3">
-          <div className={style.firstEvent} style={{"backgroundColor":"var(--mdb-gray-300)"}}>
-            
+          <div className={style.lastEvent} style={{"backgroundColor":"var(--mdb-gray-100)"}}>
+            <img className="" src={lastEvent.profilePictureUrl}/>
           </div>
           <ul id="eventsList" className={style.list}>
           </ul>
