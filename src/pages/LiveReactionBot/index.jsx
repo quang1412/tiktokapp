@@ -257,12 +257,12 @@ const App = () => {
           <i className="fas fa-cog"></i>
         </button>
         <div className="p-3">
-          <p className={style.pageTitle}>
+          <p className={"text-center text-md-start "+style.pageTitle}>
             {options.general.pageTitle}
           </p>
-          <div className={"d-flex flex-column flex-md-row justify-content-center "+style.lastEvent} style={{"backgroundColor":"white"}}>
+          <div className={"text-center text-md-start "+style.lastEvent} style={{"backgroundColor":"white"}}>
             <img className="" src={lastEvent.profilePictureUrl}/>
-            <div>
+            <div className="d-md-inline-block ms-md-2">
               <p className={style.username}>{lastEvent.nickname}</p>
             </div>
           </div>

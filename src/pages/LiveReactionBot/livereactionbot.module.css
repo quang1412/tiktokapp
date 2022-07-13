@@ -15,8 +15,7 @@
 .pageTitle{
   font-size: 2rem;
   font-weight: 800;
-  line-height: 1;
-  text-align: center;
+  line-height: 1; 
 }
 .lastEvent{
   height:30vh
