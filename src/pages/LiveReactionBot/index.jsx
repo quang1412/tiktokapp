@@ -159,8 +159,9 @@ const App = () => {
     let event = events.pop();
     if(!isDelay.current){
       isDelay.current = true;
-      console.log('run proccess')
-      setTimeout(() => {isDelay.current = false}, 3000)
+      setEventQueue(events);
+      console.log('run proccess');
+      setTimeout(() => {isDelay.current = false}, 1000);
     }
   }, [eventQueue, isDelay.current])
  
@@ -170,7 +171,7 @@ const App = () => {
         {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
       <div className={layer==="askId"?"p-3":"d-none"}>
-        <div className="card card-body mx-auto" style={{"maxWidth":"500px","minWidth":"300px"}}>
+        <div className="card card-body mx-auto" style={{"maxWidth":"600px","minWidth":"300px"}}>
           <span>Please enter streaming tiktok id</span>
             <div className="input-group mx-auto" >
               <input onChange={e => {setTiktokId(e.target.value)}} type="text" className="form-control" placeholder="Enter Tiktok id" aria-label="Enter Tiktok id"/>
@@ -182,7 +183,7 @@ const App = () => {
             </div>
         </div>
       </div>
-      <div className={layer !== "play" && "d-none"}>
+      <div className={layer==="play"?"":"d-none"}>
         <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
         <div>
           
