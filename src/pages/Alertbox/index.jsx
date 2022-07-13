@@ -2,8 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import AlertboxOpts from './AlertboxOpts';
 import style from './alertbox.module.css';
 import './TextAnimations.css';
-import'./Animate.min.css';
-import {Howl, Howler} from 'howler';
+import'./Animate.min.css'; 
 import { io } from "socket.io-client";
  
 const Alertbox = () => {
@@ -178,25 +177,7 @@ const Alertbox = () => {
   
   useEffect(function(){
     document.getElementsByTagName('html')[0].className = style.alertboxhtml;
-    
-    const sound = new Howl({
-      src: ['https://isetup.vn/tiktok/assets/sound/new-message-3.ogg'],
-      html5: true, 
-      onload(){
-        console.log('audio loaded')
-      },
-      onloaderror(e, msg) {
-        console.log("audio Error", e, msg);
-      } 
-    });
-    
-    sound.once('load', () => {
-      id = sound.play();
-      sound.volume(1, id);
-      sound.play();
-    });
-
-
+     
     audio.play()
     .then(_ => {
       canAutoPlay.current = true;
