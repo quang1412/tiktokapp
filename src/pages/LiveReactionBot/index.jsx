@@ -7,7 +7,7 @@ const App = () => {
   const canPlaySound = useRef(false); 
   
   const [options, setOptions] = useState({
-    geleral:{},
+    geleral:{delay:1000},
     gift:{active:true},
     like:{active:true},
     share:{active:true},
@@ -160,10 +160,19 @@ const App = () => {
     let events = [...eventQueue];
     let event = events.pop();
     if(!isDelay){
-      setIsDelay(true);
-      setEventQueue(events);
-      console.log('run proccess');
-      setTimeout(() => {setIsDelay(false)}, 1000);
+      
+      if(event){
+        setIsDelay(true);
+        setEventQueue(events);
+        console.log('run proccess');
+
+        let column = document.getElementById('eventsList');
+        let newRow = document.createElement('li');
+        newRow.innerHTML = `<div>${event.data.nickname || event.data.uniqueId}</div>`;
+        column.insertBefore(newRow, column.firstChild);
+
+        setTimeout(() => {setIsDelay(false)}, options.general.delay);
+      }
     }
   }, [eventQueue, isDelay])
  
@@ -190,7 +199,8 @@ const App = () => {
           <i className="fas fa-cog"></i>
         </button>
         <div>
-          
+          <ul id="eventsList">
+          </ul>
         </div>
       </div>
       <div className={(layer==="setting"?"":"d-none")}>
