@@ -193,9 +193,10 @@ const App = () => {
           <img class="${style.avatar}" src="${event.data.profilePictureUrl}"/>
           <div class="d-flex flex-column ms-2">
             <span class="${style.userName}">${name}</span>
-            <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
+            <span class="${style.subText}">${event.data.uniqueId}</span>
           </div>
         </div>`;
+        // <span class="${style.subText}">${event.data.uniqueId}</span>
         column.insertBefore(newRow, column.firstChild);
         setLastEvent(event);
         
@@ -259,10 +260,10 @@ const App = () => {
             {options.general.pageTitle}
           </p>
           <div className={"text-center text-md-start "+style.lastEvent} style={{"backgroundColor":"white"}}>
-            <img className="" src={lastEvent.profilePictureUrl}/>
+            <img className="" src={lastEvent.data.profilePictureUrl}/>
             <div className="my-1">
-              <span className={style.userName}>{lastEvent.data.nickname}</span>
-              <span className={style.subText}>{lastEvent.data.uniqueId}</span>
+              <p className={style.userName}>{lastEvent.data.nickname}</p>
+              <p className={style.subText}>{lastEvent.data.uniqueId}</p>
             </div>
           </div>
           <ul id="eventsList" className={style.list}>
