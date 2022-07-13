@@ -9,7 +9,7 @@ const App = () => {
   
   const [options, setOptions] = useState({
     general:{
-      delay:1000
+      delay:3000
     },
     gift:{
       active:true, 
@@ -39,7 +39,7 @@ const App = () => {
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([]);
   const [isDelay, setIsDelay] = useState(false);
-  const [lastEvent, setLastEvent] = useState({})
+  const [lastEvent, setLastEvent] = useState({uniqueId:"abc123",nickname:"ABC123",profilePictureUrl:"https://static.fullstack.edu.vn/static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"})
   
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -198,6 +198,7 @@ const App = () => {
           </div>
         </div>`;
         column.insertBefore(newRow, column.firstChild);
+        setLastEvent(event.data);
         
         if(canPlaySound.current){
           fetch("https://tiktoktool.app/api/ggtts?text=hello "+name)

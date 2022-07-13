@@ -13,7 +13,7 @@
   min-width: 30vh
 }
 .lastEvent{
-  height:30vh
+  height:30vh; text-align: center;
 }
 .list{
   list-style:none;
@@ -23,7 +23,11 @@
   padding: 0.5rem 0;
   border-bottom: .1rem dashed;
 }
-.avatar{
+.lastEvent img{width: 20vh; height: auto; border-radius: 10%; border: 0.1rem solid var(--mdb-gray-300);}
+
+.listItem:first-child{display:none}
+
+.listItem .avatar{
     background-color: white;
     border: 0.05rem solid black;
     border-radius: 50%;
