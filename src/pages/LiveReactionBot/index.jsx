@@ -8,10 +8,10 @@ const App = () => {
   
   const [options, setOptions] = useState({
     general:{delay:1000},
-    gift:{active:true},
-    like:{active:true},
-    share:{active:true},
-    follow:{active:true}
+    gift:{active:true, template:'{nickname} / {username} / {giftname} / {giftcount} / {amount}'},
+    like:{active:true, template:'{nickname} / {username} / {likecount}'},
+    share:{active:true, template:'{nickname} / {username}'},
+    follow:{active:true, template:'{nickname} / {username}'}
   });
   
   const [isLoading, setIsLoading] = useState(true);
@@ -168,7 +168,13 @@ const App = () => {
 
         let column = document.getElementById('eventsList');
         let newRow = document.createElement('li');
-        newRow.innerHTML = `<div><span>${event.type}</span><span class="ms-2">${event.data.nickname || event.data.uniqueId}</span></div>`;
+        newRow.innerHTML = `<div class="d-flex">
+        <img class="rounded-circle border border-1 bg-white p-1 ${style.avatar}" src="${event.data.profilePictureUrl}">
+          <div>
+            <span>${event.type}</span>
+            <span class="ms-2">${event.data.nickname || event.data.uniqueId}</span>
+          </div>
+        </div>`;
         column.insertBefore(newRow, column.firstChild);
 
         setTimeout(() => {setIsDelay(false)}, options.general.delay);

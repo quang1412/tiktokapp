@@ -258,7 +258,7 @@ export default function AlertboxOpts(props){
                         )}/>
                     </div>
                     <small>Keys: 
-                      {(type === "gift"   ? " {nickname} / {username} / {giftname} / {giftcount} / {amount}}" : 
+                      {(type === "gift"   ? " {nickname} / {username} / {giftname} / {giftcount} / {amount}" : 
                         type === "follow" ? " {nickname} / {username}" : 
                         type === "like"   ? " {nickname} / {username} / {likecount}" : 
                         type === "share"  ? " {nickname} / {username}" : ""

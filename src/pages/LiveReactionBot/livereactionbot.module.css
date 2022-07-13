@@ -5,3 +5,7 @@
 .html:not(:hover) .hoverBtn{
  display:none
 }
+.avatar{
+  width: 3rem;
+  height: 3rem;
+}
