@@ -28,6 +28,25 @@ const Alertbox = () => {
   const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
   audio.volume = 0.01;
 
+  const sound = new Howl({
+      src: [`/assets/audio/${getSoundData().name}.mp3`],
+      volume: 1.0,
+      onload() {
+        const lengthOfNote = getSoundData().length;
+        let timeIndex = 0;
+        for (let i = 24; i <= 96; i++) {
+          sound["_sprite"][i] = [timeIndex, lengthOfNote];
+          timeIndex += lengthOfNote;
+        }
+        setHasInited(true);
+      },
+      onloaderror(e: any, msg: any) {
+        console.log("Error", e, msg);
+        setHasInited(true);
+      },
+    });
+
+  
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
       isLoading.current = true;
@@ -133,6 +152,7 @@ const Alertbox = () => {
   } 
   
   const enableAutoPlaySound = () => {
+    audio.load()
     audio.play()
     .then(_ => {
       canAutoPlay.current = true;
