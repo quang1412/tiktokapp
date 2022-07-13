@@ -3,6 +3,7 @@ import AlertboxOpts from './AlertboxOpts';
 import style from './alertbox.module.css';
 import './TextAnimations.css';
 import'./Animate.min.css';
+import {Howl, Howler} from 'howler';
 import { io } from "socket.io-client";
  
 const Alertbox = () => {
@@ -26,26 +27,11 @@ const Alertbox = () => {
   const [isShowing, setIsShowing] = useState(false);
   
   const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
-  audio.volume = 0.01;
-
-  const sound = new Howl({
-      src: [`/assets/audio/${getSoundData().name}.mp3`],
-      volume: 1.0,
-      onload() {
-        const lengthOfNote = getSoundData().length;
-        let timeIndex = 0;
-        for (let i = 24; i <= 96; i++) {
-          sound["_sprite"][i] = [timeIndex, lengthOfNote];
-          timeIndex += lengthOfNote;
-        }
-        setHasInited(true);
-      },
-      onloaderror(e: any, msg: any) {
-        console.log("Error", e, msg);
-        setHasInited(true);
-      },
-    });
-
+  audio.volume = 0.01; 
+  
+  var sound = new Howl({
+    src: ['https://isetup.vn/tiktok/assets/sound/new-message-4.ogg']
+  });
   
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -151,9 +137,8 @@ const Alertbox = () => {
     }
   } 
   
-  const enableAutoPlaySound = () => {
-    audio.load()
-    audio.play()
+  const enableAutoPlaySound = () => { 
+    sound.play()
     .then(_ => {
       canAutoPlay.current = true;
     })
@@ -168,8 +153,14 @@ const Alertbox = () => {
     }
     
     const animateLetter = str => {
-      str = str.toString();
-      return (str.split("").map((i, k) => (<span style={{"color":"#32c3a6"}} key={k} className={["animated-letter", options[mainEvent.type].text_animation].join(' ')}>{i}</span>)))
+      try{
+        str = str.toString();
+        return (str.split("").map((i, k) => (<span style={{"color":"#32c3a6"}} key={k} className={["animated-letter", options[mainEvent.type].text_animation].join(' ')}>{i}</span>)))
+      }
+      catch{
+        return (<>---</>)
+      }
+      
     }
     
     let optsTemplate = options[mainEvent.type].message_template
@@ -192,7 +183,7 @@ const Alertbox = () => {
   useEffect(function(){
     document.getElementsByTagName('html')[0].className = style.alertboxhtml;
     
-    audio.play()
+    sound.play()
     .then(_ => {
       canAutoPlay.current = true;
     })
