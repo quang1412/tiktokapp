@@ -8,11 +8,29 @@ const App = () => {
   const canPlaySound = useRef(false); 
   
   const [options, setOptions] = useState({
-    general:{delay:1000},
-    gift:{active:true, template:'{nickname} / {username} / {giftname} / {giftcount} / {amount}'},
-    like:{active:true, template:'{nickname} / {username} / {likecount}'},
-    share:{active:true, template:'{nickname} / {username}'},
-    follow:{active:true, template:'{nickname} / {username}'}
+    general:{
+      delay:1000
+    },
+    gift:{
+      active:true, 
+      voiceTemp:'{nickname} / {username} / {giftname} / {giftcount} / {amount}',
+      subtitleTemp:'',
+    },
+    like:{
+      active:true, 
+      voiceTemp:'{nickname} / {username} / {likecount}',
+      subtitleTemp:'',
+    },
+    share:{
+      active:true, 
+      voiceTemp:'{nickname} / {username}',
+      subtitleTemp:'',
+    },
+    follow:{
+      active:true, 
+      voiceTemp:'{nickname} / {username}',
+      subtitleTemp:'',
+    }
   });
   
   const [isLoading, setIsLoading] = useState(true);
@@ -174,8 +192,8 @@ const App = () => {
         newRow.innerHTML = `<div class="d-flex align-items-center">
           <img class="${style.avatar}" src="${event.data.profilePictureUrl}">
           <div class="d-flex flex-column ms-2">
-            <span>${event.type}</span>
-            <span class="ms-2">${name}</span>
+            <span class="${style.userName}">${name}</span>
+            <span class="ms-2 ${style.subText}">${event.type}</span>
           </div>
         </div>`;
         column.insertBefore(newRow, column.firstChild);
