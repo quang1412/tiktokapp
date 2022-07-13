@@ -20,6 +20,12 @@
 .lastEvent{
   height:30vh
 }
+.lastEvent .userName{
+  font-size: 1.5rem;
+  font-weight:800;
+  line-height: 1;
+  white-space: nowrap;
+}
 .list{
   list-style:none;
   padding:0;
@@ -28,14 +34,17 @@
   padding: 0.5rem 0;
   border-bottom: .1rem dashed;
 }
+.listItem .userName{
+  font-size: 1rem; 
+  font-weight:800;
+  line-height: 1;
+  white-space: nowrap;
+}
 .lastEvent img{
   width: 20vh; 
   height: 20vh; 
   border-radius: 10%; 
   border: 0.1rem solid var(--mdb-gray-300);
-}
-.listItem .username{
-  font-size: 2rem; 
 }
 .listItem:first-child{
   display:none
@@ -44,14 +53,9 @@
     background-color: white;
     border: 0.05rem solid black;
     border-radius: 50%;
-    padding: 0.5%;
+    padding: .2rem;
     width: 3rem;
     height: 3rem; 
-}
-.userName{
-  font-weight:800;
-  line-height: 1;
-  white-space: nowrap;
 }
 .subText{
   white-space: nowrap;
