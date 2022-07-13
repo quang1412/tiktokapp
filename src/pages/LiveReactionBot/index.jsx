@@ -1,11 +1,9 @@
 import { io } from 'socket.io-client';
 import style from './livereactionbot.module.css';
-import React, {useEffect, useState, useRef} from 'react';
-import { useSpeechSynthesis } from 'react-speech-kit'; 
+import React, {useEffect, useState, useRef} from 'react'; 
 
 
-const App = () => {
-  const { speak } = useSpeechSynthesis();
+const App = () => { 
   
   const canPlaySound = useRef(false); 
   
@@ -180,8 +178,20 @@ const App = () => {
           </div>
         </div>`;
         column.insertBefore(newRow, column.firstChild);
+        if(canPlaySound){
+          let tts = new Audio('https://tiktoktool.app/api/ggtts?text=hello');
+          tts.volume = 0.5;
+          tts.addEventListener("ended", function() {
+            setTimeout(() => {
+              setIsDelay(false)
+            }, options.general.delay);
+          });
 
-        setTimeout(() => {setIsDelay(false)}, options.general.delay);
+          tts.addEventListener('error', () => {
+            setIsDelay(false)
+          });
+          tts.play();
+        }
       }
     }
   }, [eventQueue, isDelay])
