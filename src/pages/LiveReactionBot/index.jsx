@@ -7,7 +7,7 @@ const App = () => {
   const canPlaySound = useRef(false); 
   
   const [options, setOptions] = useState({
-    geleral:{delay:1000},
+    general:{delay:1000},
     gift:{active:true},
     like:{active:true},
     share:{active:true},
@@ -195,7 +195,7 @@ const App = () => {
         </div>
       </div>
       <div className={layer==="play"?"":"d-none"}>
-        <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}>
+        <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-fixed top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}>
           <i className="fas fa-cog"></i>
         </button>
         <div>
@@ -204,7 +204,7 @@ const App = () => {
         </div>
       </div>
       <div className={(layer==="setting"?"":"d-none")}>
-        <button onClick={e => {setLayer("play")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}>
+        <button onClick={e => {setLayer("play")}} className={style.hoverBtn+" btn btn-lg btn-light position-fixed top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}>
           <i className="fas fa-times-circle"></i>
         </button>
       </div>
