@@ -1,9 +1,12 @@
 import { io } from 'socket.io-client';
 import style from './livereactionbot.module.css';
 import React, {useEffect, useState, useRef} from 'react';
- 
+import { useSpeechSynthesis } from 'react-speech-kit'; 
+
 const App = () => {
-   
+  const [value, setValue] = React.useState("");
+  const { speak } = useSpeechSynthesis();
+  const { speak } = useSpeechSynthesis();
   const canPlaySound = useRef(false); 
   
   const [options, setOptions] = useState({
@@ -20,7 +23,7 @@ const App = () => {
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([]);
   const [isDelay, setIsDelay] = useState(false)
-
+  
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
       setIsLoading(true);
@@ -168,7 +171,8 @@ const App = () => {
 
         let column = document.getElementById('eventsList');
         let newRow = document.createElement('li');
-        newRow.innerHTML = `<div class="d-flex">
+        newRow.className = "mb-2 "
+        newRow.innerHTML = `<div class="d-flex align-items-center">
         <img class="${style.avatar}" src="${event.data.profilePictureUrl}">
           <div>
             <span>${event.type}</span>
