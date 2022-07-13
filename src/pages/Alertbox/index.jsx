@@ -27,7 +27,7 @@ const Alertbox = () => {
   const [isShowing, setIsShowing] = useState(false);
   
   const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
-  audio.volume = 0.01; 
+  audio.volume = 0;
   
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -255,7 +255,7 @@ const Alertbox = () => {
       <div className={(layer==="log"?"p-3 text-start":"d-none")}>
         {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
-      <div className={"layer p-3"+(layer !== "askId" && " d-none")}>
+      <div className={layer==="askId"?"p-3":"d-none"}>
         <div className="card card-body mx-auto" style={{"maxWidth":"600px","minWidth":"300px"}}>
           <span>Please enter streaming tiktok id</span>
             <div className="input-group mx-auto" >
@@ -268,7 +268,7 @@ const Alertbox = () => {
             </div>
         </div>
       </div>
-      <div className={[style.alertboxLayer, style[options[mainEvent.type].layout]].join(' ')} id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
+      <div className={[style.alertboxLayer, style[options[mainEvent.type].layout], (layer !== "play" && "d-none")].join(' ')}>
         <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-fixed top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
         <div className={[style.widget, animate].join(' ')} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
           <div className={style.alertBox}>

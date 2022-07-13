@@ -5,8 +5,8 @@ import React, {useEffect, useState, useRef} from 'react';
 const App = () => {
   
   const isLoading = useRef(false); 
-  const canAutoPlay = useRef(false);
- 
+  const canPlaySound = useRef(false);
+  const isDelay = useRef(false);
   const [options, setOptions] = useState({
     geleral:{},
     gift:{active:true},
@@ -18,7 +18,6 @@ const App = () => {
   const [tiktokId, setTiktokId] = useState("");
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([]);
-  const [isDelay, setIsDelay] = useState(false);
 
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -100,6 +99,7 @@ const App = () => {
   }
   
   const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
+  audio.volume = 0;
   
   const playSound = (url = "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", vol = 50) => {
     try{
@@ -115,7 +115,7 @@ const App = () => {
     let enable = () => {
       audio.play()
       .then(_ => {
-        canAutoPlay.current = true;
+        canPlaySound.current = true;
       })
       .catch(error => {
         alert("Please open on PC to enable audio")
@@ -124,7 +124,7 @@ const App = () => {
     return (
       <button 
         onClick={enable} 
-        className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
+        className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canPlaySound.current || layer !== 'play') && 'd-none'}`}>
         <span>Enable audio <i className="fas fa-volume-up"></i></span>
       </button>
     )
@@ -157,10 +157,12 @@ const App = () => {
   useEffect(() => {
     let events = [...eventQueue];
     let event = events.pop();
-    if(!isDelay){
-      return;
+    if(!isDelay.current){
+      isDelay.current = true;
+      console.log('run proccess')
+      setTimeout(() => {isDelay.current = false}, 3000)
     }
-  }, [eventQueue, isDelay])
+  }, [eventQueue, isDelay.current])
  
   return (
     <div className="LiveReactionBot">
