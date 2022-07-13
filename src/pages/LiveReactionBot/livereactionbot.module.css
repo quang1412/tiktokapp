@@ -12,6 +12,12 @@
   width:100vw;
   min-width: 30vh
 }
+.pageTitle{
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+}
 .lastEvent{
   height:30vh; text-align: center;
 }

@@ -9,7 +9,8 @@ const App = () => {
   
   const [options, setOptions] = useState({
     general:{
-      delay:3000
+      delay:3000,
+      pageTitle:"hello"
     },
     gift:{
       active:true, 
@@ -256,7 +257,10 @@ const App = () => {
           <i className="fas fa-cog"></i>
         </button>
         <div className="p-3">
-          <div className={style.lastEvent} style={{"backgroundColor":"var(--mdb-gray-100)"}}>
+          <p className={style.pageTitle}>
+            {options.general.pageTitle}
+          </p>
+          <div className={style.lastEvent} style={{"backgroundColor":"white"}}>
             <img className="" src={lastEvent.profilePictureUrl}/>
           </div>
           <ul id="eventsList" className={style.list}>
