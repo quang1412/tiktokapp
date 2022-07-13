@@ -111,7 +111,7 @@ const App = () => {
     } catch(err){}
   } 
   
-  const EnableAudio = () => {
+  const EnableAudioBtn = () => {
     let enable = () => {
       audio.play()
       .then(_ => {
@@ -122,13 +122,14 @@ const App = () => {
       });
     }
     return (
-    <button 
-      onClick={enable} 
-      className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
-      <span>Enable audio <i className="fas fa-volume-up"></i></span>
-    </button>
+      <button 
+        onClick={enable} 
+        className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
+        <span>Enable audio <i className="fas fa-volume-up"></i></span>
+      </button>
     )
   }
+  
   const delAllType = type => {
     let list = [...eventQueue]
     list = list.filter(e => {
@@ -138,6 +139,8 @@ const App = () => {
   }
   
   useEffect(function(){
+    document.getElementsByTagName('html')[0].className = style.html;
+    
     let id = new URLSearchParams(window.location.search).get('id'); 
     if(!id){
       setLayer("askId");
@@ -161,10 +164,10 @@ const App = () => {
  
   return (
     <div className="LiveReactionBot">
-      <div className={"layer p-3 text-start "+(layer !== "log" && "d-none")} id="log">
+      <div className={(layer==="log"?"p-3 text-start":"d-none")}>
         {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
-      <div className={"layer p-3 "+(layer !== "askId" && "d-none")}>
+      <div className={layer==="askId"?"p-3":"d-none"}>
         <div className="card card-body mx-auto" style={{"maxWidth":"500px","minWidth":"300px"}}>
           <span>Please enter streaming tiktok id</span>
             <div className="input-group mx-auto" >
@@ -177,13 +180,15 @@ const App = () => {
             </div>
         </div>
       </div>
-      <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
+      <div className={layer !== "play" && "d-none"}>
         <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
         <div>
           
         </div>
       </div>
-      <EnableAudio />
+      <div className={(layer==="setting"?"":"d-none")}>
+      </div>
+      <EnableAudioBtn />
     </div>
   );
 }

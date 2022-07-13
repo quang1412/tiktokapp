@@ -118,7 +118,7 @@ const Alertbox = () => {
     } 
   } 
   
-  const EnableAudio = () => {
+  const EnableAudioBtn = () => {
     let enable = () => {
       audio.play()
       .then(_ => {
@@ -188,7 +188,7 @@ const Alertbox = () => {
   }
   
   useEffect(function(){
-    document.getElementsByTagName('html')[0].className = style.alertboxhtml;
+    document.getElementsByTagName('html')[0].className = style.html;
      
     audio.play()
     .then(_ => {
@@ -252,7 +252,7 @@ const Alertbox = () => {
  
   return (
     <div className="Alertbox">
-      <div className="layer p-3 text-start" id="log" style={{"display": (layer !== "log" && "none")}}>
+      <div className={(layer==="log"?"p-3 text-start":"d-none")}>
         {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
       <div className={"layer p-3"+(layer !== "askId" && " d-none")}>
@@ -293,7 +293,7 @@ const Alertbox = () => {
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"300px","maxWidth":"unset","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer} isOBS={isOBS}/>
       </div>
-      <EnableAudio />
+      <EnableAudioBtn />
     </div>
   );
 }
