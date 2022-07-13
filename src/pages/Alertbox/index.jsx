@@ -154,8 +154,7 @@ const Alertbox = () => {
       }
       catch{
         return (<>---</>)
-      }
-      
+      } 
     }
     
     let optsTemplate = options[mainEvent.type].message_template
@@ -165,7 +164,7 @@ const Alertbox = () => {
     .replace("share", (optsTemplate || '{username} just share livestream!'))
     .replace("follow", (optsTemplate || '{username} is now follower'))
     
-    return template.split(" ").map((text, i) => ( <span key={i}>{
+    let output =  template.split(" ").map((text, i) => ( <span key={i}>{
       text === "{username}" ? animateLetter(mainEvent.data.uniqueId) :
       text === "{nickname}" ? animateLetter(mainEvent.data.nickname || mainEvent.data.uniqueId) :
       text === "{giftname}" ? animateLetter(mainEvent.data.extendedGiftInfo.name) :
@@ -173,6 +172,9 @@ const Alertbox = () => {
       text === "{likecount}" ? animateLetter(mainEvent.data.likeCount) :
       text === "{amount}" ? animateLetter(mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count) : text
     }{' '}</span>))
+    
+    console.log(output.toString())
+    return output
   }
   
   useEffect(function(){

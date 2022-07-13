@@ -5,6 +5,7 @@ import React, {useEffect, useState, useRef} from 'react';
 const App = () => {
   
   const isLoading = useRef(false); 
+  const canAutoPlay = useRef(false);
  
   const [options, setOptions] = useState({
     geleral:{},
@@ -118,6 +119,16 @@ const App = () => {
     setEventQueue(list);
   }  
   
+  const enableAutoPlaySound = () => { 
+    audio.play()
+    .then(_ => {
+      canAutoPlay.current = true;
+    })
+    .catch(error => {
+      alert("Please open on PC to enable audio")
+    });
+  }
+  
   useEffect(function(){
     let id = new URLSearchParams(window.location.search).get('id'); 
     if(!id){
@@ -164,9 +175,11 @@ const App = () => {
           
         </div>
       </div>
-      <div className="layer" id="play" style={{"display":(layer === "setting" ? "block" : "none")}}>
-        <button onClick={e => {setLayer("play")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
-      </div>
+      <button 
+        onClick={enableAutoPlaySound} 
+        className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
+        <span>Enable audio <i className="fas fa-volume-up"></i></span>
+      </button>
     </div>
   );
 }
