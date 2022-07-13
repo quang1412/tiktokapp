@@ -5,9 +5,15 @@
 .html:not(:hover) .hoverBtn{
  display:none
 }
+.firstEvent{
+  
+}
 .list{
   list-style:none;
   padding-left:0;
+}
+.listItem{
+  margin-bottom:.5rem
 }
 .avatar{
     background-color: white;
@@ -18,7 +24,7 @@
     height: 3rem; 
 }
 .userName{
-  
+  font-weight:800;
 }
 .subText{
   

@@ -14,22 +14,22 @@ const App = () => {
     gift:{
       active:true, 
       voiceTemp:'{nickname} / {username} / {giftname} / {giftcount} / {amount}',
-      subtitleTemp:'',
+      subtitleTemp:'Đã tặng quà',
     },
     like:{
       active:true, 
       voiceTemp:'{nickname} / {username} / {likecount}',
-      subtitleTemp:'',
+      subtitleTemp:'Đã thả tim',
     },
     share:{
       active:true, 
       voiceTemp:'{nickname} / {username}',
-      subtitleTemp:'',
+      subtitleTemp:'Đã chia sẻ',
     },
     follow:{
       active:true, 
       voiceTemp:'{nickname} / {username}',
-      subtitleTemp:'',
+      subtitleTemp:'đã theo dõi',
     }
   });
   
@@ -188,12 +188,12 @@ const App = () => {
         
         let column = document.getElementById('eventsList');
         let newRow = document.createElement('li');
-        newRow.className = "mb-2 "
+        newRow.className = style.listItem;
         newRow.innerHTML = `<div class="d-flex align-items-center">
           <img class="${style.avatar}" src="${event.data.profilePictureUrl}">
           <div class="d-flex flex-column ms-2">
             <span class="${style.userName}">${name}</span>
-            <span class="ms-2 ${style.subText}">${event.type}</span>
+            <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
           </div>
         </div>`;
         column.insertBefore(newRow, column.firstChild);
@@ -254,6 +254,9 @@ const App = () => {
           <i className="fas fa-cog"></i>
         </button>
         <div className="p-3">
+          <div className={style.firstEvent}>
+            
+          </div>
           <ul id="eventsList" className={style.list}>
           </ul>
         </div>
