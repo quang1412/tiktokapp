@@ -160,8 +160,7 @@ const App = () => {
   useEffect(() => {
     let events = [...eventQueue];
     let event = events.pop();
-    if(!isDelay){
-      
+    if(!isDelay){ 
       if(event){
         setIsDelay(true);
         setEventQueue(events);
@@ -186,8 +185,8 @@ const App = () => {
               setIsDelay(false)
             }, options.general.delay);
           });
-
           tts.addEventListener('error', () => {
+            console.log('tts error')
             setIsDelay(false)
           });
           tts.play();
