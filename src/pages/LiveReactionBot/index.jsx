@@ -3,10 +3,9 @@ import style from './livereactionbot.module.css';
 import React, {useEffect, useState, useRef} from 'react';
  
 const App = () => {
+   
+  const canPlaySound = useRef(false); 
   
-  const isLoading = useRef(false); 
-  const canPlaySound = useRef(false);
-  const isDelay = useRef(false);
   const [options, setOptions] = useState({
     geleral:{},
     gift:{active:true},
@@ -14,14 +13,17 @@ const App = () => {
     share:{active:true},
     follow:{active:true}
   });
+  
+  const [isLoading, setIsLoading] = useState(true);
   const [layer, setLayer] = useState("log");
   const [tiktokId, setTiktokId] = useState("");
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([]);
+  const [isDelay, setIsDelay] = useState(false)
 
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
-      isLoading.current = true;
+      setIsLoading(true);
     
       changeLog(prevLog => [...prevLog, 'server connecting...']); 
       let socket = io("https://tiktoktools.glitch.me/obs",  {query: `id=${id}`});
@@ -34,14 +36,14 @@ const App = () => {
       });
 
       socket.on('ttRoomInfo', data => {
-        isLoading.current = false;
+        setIsLoading(false)
         console.log(data);
         changeLog(prevLog => [...prevLog, 'tiktok connected']);
         return resolve(socket);
       });
 
       socket.on('ttConnectFail', () => {
-        isLoading.current = false;
+        setIsLoading(false)
         changeLog(prevLog => [...prevLog, 'tiktok connect fail']);
         return reject(false)
       });
@@ -49,7 +51,7 @@ const App = () => {
     })
   }
   
-  const listenSocket = socket => {
+  function listenSocket(socket){
     socket.on('gift', data => {
       if(options.gift.active){
         console.log(data)
@@ -57,7 +59,7 @@ const App = () => {
       }
     })
     
-    socket.on('follow', data => {
+    socket.on('follow', data => { 
       if(options.follow.active){
         console.log(data)
         setEventQueue(oldList => [...oldList, {type:'follow', data: data}])
@@ -80,7 +82,7 @@ const App = () => {
   }
   
   useEffect(() => {
-    if(isLoading.current){
+    if(isLoading){
       const interval = setInterval(() => {
         changeLog(prevState => {
           const newState = [...prevState]
@@ -91,7 +93,7 @@ const App = () => {
 
       return () => clearInterval(interval);
     }
-  }, [isLoading.current]);
+  }, [isLoading]);
   
   const handleOptions = newOptions => { 
     setOptions({...options, ...newOptions})
@@ -150,20 +152,20 @@ const App = () => {
     socketConnect(id)
     .then(socket => {
       listenSocket(socket); 
-      setTimeout(() => {setLayer("play")}, 3000);
+      setTimeout(() => {setLayer("play")}, 1000);
     }) 
   }, []);
   
   useEffect(() => {
     let events = [...eventQueue];
     let event = events.pop();
-    if(!isDelay.current){
-      isDelay.current = true;
+    if(!isDelay){
+      setIsDelay(true);
       setEventQueue(events);
       console.log('run proccess');
-      setTimeout(() => {isDelay.current = false}, 1000);
+      setTimeout(() => {setIsDelay(false)}, 1000);
     }
-  }, [eventQueue, isDelay.current])
+  }, [eventQueue, isDelay])
  
   return (
     <div className="LiveReactionBot">
@@ -184,12 +186,17 @@ const App = () => {
         </div>
       </div>
       <div className={layer==="play"?"":"d-none"}>
-        <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
+        <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}>
+          <i className="fas fa-cog"></i>
+        </button>
         <div>
           
         </div>
       </div>
       <div className={(layer==="setting"?"":"d-none")}>
+        <button onClick={e => {setLayer("play")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}>
+          <i className="fas fa-times-circle"></i>
+        </button>
       </div>
       <EnableAudioBtn />
     </div>
