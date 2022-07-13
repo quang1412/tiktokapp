@@ -133,7 +133,13 @@ const Alertbox = () => {
   } 
   
   const enableAutoPlaySound = () => {
-    isMobile ? alert("Please open on PC to enable audio") : canAutoPlay.current = true
+    audio.play()
+    .then(_ => {
+      canAutoPlay.current = true;
+    })
+    .catch(error => {
+      alert("Please open on PC to enable audio")
+    });
   }
   
   const MessTemplate = () => {
@@ -166,19 +172,11 @@ const Alertbox = () => {
   useEffect(function(){
     document.getElementsByTagName('html')[0].className = style.alertboxhtml;
     
-    var playPromise = audio.play();
-
-    if (playPromise !== undefined) {
-      playPromise.then(_ => {
-        console.log("sound ok");
-        canAutoPlay.current = true;
-      })
-      .catch(error => {
-        // Auto-play was prevented
-        // Show paused UI.
-        console.log("sound not ok")
-      });
-    }
+    audio.play()
+    .then(_ => {
+      canAutoPlay.current = true;
+    })
+    .catch(e => { });
 
     let id = new URLSearchParams(window.location.search).get('id'); 
     if(!id){
