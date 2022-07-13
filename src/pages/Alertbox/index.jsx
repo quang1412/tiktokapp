@@ -274,7 +274,7 @@ const Alertbox = () => {
           </div>
         </div> 
       </div>
-      <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"300px","maxWidth":"800px","height":"100vh"}}>
+      <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"unset","maxWidth":"unset","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer} isOBS={isOBS}/>
       </div>
       <button className={`btn btn-sm btn-white btn-rounded position-absolute bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play' || isOBS) && 'd-none'}`} onClick={enableAutoPlaySound}>Enable audio <i className="fas fa-volume-up"></i></button>
