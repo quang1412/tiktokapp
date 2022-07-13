@@ -169,7 +169,7 @@ const App = () => {
         let column = document.getElementById('eventsList');
         let newRow = document.createElement('li');
         newRow.innerHTML = `<div class="d-flex">
-        <img class="rounded-circle border border-1 bg-white p-1 ${style.avatar}" src="${event.data.profilePictureUrl}">
+        <img class="${style.avatar}" src="${event.data.profilePictureUrl}">
           <div>
             <span>${event.type}</span>
             <span class="ms-2">${event.data.nickname || event.data.uniqueId}</span>
