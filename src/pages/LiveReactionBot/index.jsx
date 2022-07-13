@@ -163,13 +163,13 @@ const App = () => {
         </div>
       </div>
       <div className="layer" id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
-        <button onClick={e => {setLayer("setting")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
+        <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
         <div>
           
         </div>
       </div>
       <div className="layer" id="play" style={{"display":(layer === "setting" ? "block" : "none")}}>
-        <button onClick={e => {setLayer("play")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
+        <button onClick={e => {setLayer("play")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
       </div>
     </div>
   );
