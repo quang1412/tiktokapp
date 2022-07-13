@@ -165,7 +165,9 @@ const App = () => {
         setIsDelay(true);
         setEventQueue(events);
         console.log('run proccess');
-
+        
+        let name = event.data.nickname || event.data.uniqueId;
+        
         let column = document.getElementById('eventsList');
         let newRow = document.createElement('li');
         newRow.className = "mb-2 "
@@ -173,15 +175,16 @@ const App = () => {
         <img class="${style.avatar}" src="${event.data.profilePictureUrl}">
           <div>
             <span>${event.type}</span>
-            <span class="ms-2">${event.data.nickname || event.data.uniqueId}</span>
+            <span class="ms-2">${name}</span>
           </div>
         </div>`;
         column.insertBefore(newRow, column.firstChild);
+        
         if(canPlaySound.current){
-          fetch("https://tiktoktool.app/api/ggtts?text=hello")
+          fetch("https://tiktoktool.app/api/ggtts?text=hello "+name)
           .then(res => res.text())
           .then(base64 => {
-            console.log(base64)
+
             return new Promise((resolve, reject) => {
               let tts = new Audio(base64);
               tts.volume = 0.5;
