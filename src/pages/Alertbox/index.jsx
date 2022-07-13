@@ -29,10 +29,6 @@ const Alertbox = () => {
   const audio = new Audio("https://isetup.vn/tiktok/assets/sound/new-message-4.ogg");
   audio.volume = 0.01; 
   
-  var sound = new Howl({
-    src: ['https://isetup.vn/tiktok/assets/sound/new-message-4.ogg']
-  });
-  
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
       isLoading.current = true;
@@ -138,7 +134,7 @@ const Alertbox = () => {
   } 
   
   const enableAutoPlaySound = () => { 
-    sound.play()
+    audio.play()
     .then(_ => {
       canAutoPlay.current = true;
     })
@@ -183,7 +179,20 @@ const Alertbox = () => {
   useEffect(function(){
     document.getElementsByTagName('html')[0].className = style.alertboxhtml;
     
-    sound.play()
+    const sound = new Howl({
+      src: ['https://isetup.vn/tiktok/assets/sound/new-message-3.ogg'],
+      html5: true,
+      volume: 1.0,
+      onload(){
+        console.log('audio loaded')
+      },
+      onloaderror(e, msg) {
+        console.log("audio Error", e, msg);
+      }
+    });
+    sound.play();
+
+    audio.play()
     .then(_ => {
       canAutoPlay.current = true;
     })
