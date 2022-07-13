@@ -260,7 +260,7 @@ const App = () => {
           <p className={style.pageTitle}>
             {options.general.pageTitle}
           </p>
-          <div className={style.lastEvent} style={{"backgroundColor":"white"}}>
+          <div className={"d-flex flex-column flex-md-row justify-content-center "+style.lastEvent} style={{"backgroundColor":"white"}}>
             <img className="" src={lastEvent.profilePictureUrl}/>
           </div>
           <ul id="eventsList" className={style.list}>

@@ -19,7 +19,7 @@
   text-align: center;
 }
 .lastEvent{
-  height:30vh; text-align: center;
+  height:30vh
 }
 .list{
   list-style:none;
@@ -29,10 +29,15 @@
   padding: 0.5rem 0;
   border-bottom: .1rem dashed;
 }
-.lastEvent img{width: 20vh; height: auto; border-radius: 10%; border: 0.1rem solid var(--mdb-gray-300);}
-
-.listItem:first-child{display:none}
-
+.lastEvent img{
+  width: 20vh; 
+  height: 20vh; 
+  border-radius: 10%; 
+  border: 0.1rem solid var(--mdb-gray-300);
+}
+.listItem:first-child{
+  display:none
+}
 .listItem .avatar{
     background-color: white;
     border: 0.05rem solid black;
