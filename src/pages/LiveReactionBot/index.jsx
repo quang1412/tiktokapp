@@ -74,36 +74,6 @@ const App = () => {
     })
   }
   
-  function listenSocket(socket){
-    socket.on('gift', data => {
-      if(options.gift.active){
-        console.log(data)
-        setEventQueue(oldList => [...oldList, {type:'gift', data: data}])
-      }
-    })
-    
-    socket.on('follow', data => { 
-      if(options.follow.active){
-        console.log(data)
-        setEventQueue(oldList => [...oldList, {type:'follow', data: data}])
-      }
-    })
-    
-    socket.on('like', data => {
-      if(options.like.active){
-        console.log(data)
-        setEventQueue(oldList => [...oldList, {type:'like', data: data}])
-      }
-    })
-    
-    socket.on('share', data => {
-      if(options.share.active){
-        console.log(data)
-        setEventQueue(oldList => [...oldList, {type:'share', data: data}])
-      }
-    })
-  }
-  
   useEffect(() => {
     if(isLoading){
       const interval = setInterval(() => {
@@ -162,6 +132,42 @@ const App = () => {
     })
     setEventQueue(list);
   }
+  
+  function listenSocket(socket){
+    socket.on('gift', data => {
+      if(options.gift.active){
+        console.log(data)
+        setEventQueue(oldList => [...oldList, {type:'gift', data: data}])
+      }
+    })
+    
+    socket.on('follow', data => { 
+      if(options.follow.active){
+        console.log(data)
+        setEventQueue(oldList => [...oldList, {type:'follow', data: data}])
+      }
+    })
+    
+    socket.on('like', data => {
+      if(options.like.active){
+        console.log(data)
+        setEventQueue(oldList => [...oldList, {type:'like', data: data}])
+      }
+    })
+    
+    socket.on('share', data => {
+      if(options.share.active){
+        console.log(data)
+        setEventQueue(oldList => [...oldList, {type:'share', data: data}])
+      }
+    })
+  }
+  
+//   function getUserFollowerCount(){
+//     return new Promise((resolve, reject) => {
+      
+//     })
+//   }
   
   useEffect(function(){
     document.getElementsByTagName('html')[0].className = style.html;
