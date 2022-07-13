@@ -190,7 +190,7 @@ const Alertbox = () => {
     .then(socket => {
       listenSocket(socket); 
       setTimeout(() => {setLayer("play")}, 3000);
-    }) 
+    })
   }, []);
   
   useEffect(() => {
@@ -236,7 +236,7 @@ const Alertbox = () => {
  
   return (
     <div className="Alertbox">
-      <div className="layer p-3 text-start" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
+      <div className="layer p-3 text-start" id="log" style={{"display": (layer !== "log" && "none")}}>
         {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
       <div className="layer p-3" id="askId" style={{"display": (layer === "askId" ? "block" : "none")}}>
@@ -253,7 +253,7 @@ const Alertbox = () => {
         </div>
       </div>
       <div className={[style.alertboxLayer, style[options[mainEvent.type].layout]].join(' ')} id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
-        <button onClick={e => {setLayer("setting")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
+        <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
         <div className={[style.widget, animate].join(' ')} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
           <div className={style.alertBox}>
             <div className={style.wrap}>
