@@ -118,6 +118,25 @@ const Alertbox = () => {
     } 
   } 
   
+  const EnableAudio = () => {
+    let enable = () => {
+      audio.play()
+      .then(_ => {
+        canAutoPlay.current = true;
+      })
+      .catch(error => {
+        alert("Please open on PC to enable audio")
+      });
+    }
+    return (
+    <button 
+      onClick={enable} 
+      className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
+      <span>Enable audio <i className="fas fa-volume-up"></i></span>
+    </button>
+    )
+  }
+  
   const delAllType = type => {
     let list = [...eventQueue]
     list = list.filter(e => {
@@ -131,17 +150,7 @@ const Alertbox = () => {
     if(isOutro.current){
       setIsShowing(false);
     }
-  } 
-  
-  const enableAutoPlaySound = () => { 
-    audio.play()
-    .then(_ => {
-      canAutoPlay.current = true;
-    })
-    .catch(error => {
-      alert("Please open on PC to enable audio")
-    });
-  }
+  }  
   
   const MessTemplate = () => {
     if(!mainEvent.data.id){
@@ -185,13 +194,13 @@ const Alertbox = () => {
     .then(_ => {
       canAutoPlay.current = true;
     })
-    .catch(e => { });
 
     let id = new URLSearchParams(window.location.search).get('id'); 
     if(!id){
       setLayer("askId");
       return;
     }
+    
     setTiktokId(id);
     socketConnect(id)
     .then(socket => {
@@ -281,12 +290,10 @@ const Alertbox = () => {
           </div>
         </div> 
       </div>
-      <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"unset","maxWidth":"unset","height":"100vh"}}>
+      <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"300px","maxWidth":"unset","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer} isOBS={isOBS}/>
       </div>
-      <button onClick={enableAutoPlaySound} className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
-        <span>Enable audio <i className="fas fa-volume-up"></i></span>
-      </button>
+      <EnableAudio />
     </div>
   );
 }

@@ -111,22 +111,30 @@ const App = () => {
     } catch(err){}
   } 
   
+  const EnableAudio = () => {
+    let enable = () => {
+      audio.play()
+      .then(_ => {
+        canAutoPlay.current = true;
+      })
+      .catch(error => {
+        alert("Please open on PC to enable audio")
+      });
+    }
+    return (
+    <button 
+      onClick={enable} 
+      className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
+      <span>Enable audio <i className="fas fa-volume-up"></i></span>
+    </button>
+    )
+  }
   const delAllType = type => {
     let list = [...eventQueue]
     list = list.filter(e => {
       return e.type !== type;
     })
     setEventQueue(list);
-  }  
-  
-  const enableAutoPlaySound = () => { 
-    audio.play()
-    .then(_ => {
-      canAutoPlay.current = true;
-    })
-    .catch(error => {
-      alert("Please open on PC to enable audio")
-    });
   }
   
   useEffect(function(){
@@ -153,10 +161,10 @@ const App = () => {
  
   return (
     <div className="LiveReactionBot">
-      <div className="layer p-3 text-start" id="log" style={{"display": (layer === "log" ? "block" : "none")}}>
+      <div className={"layer p-3 text-start "+(layer !== "log" && "d-none")} id="log">
         {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
-      <div className="layer p-3" id="askId" style={{"display": (layer === "askId" ? "block" : "none")}}>
+      <div className={"layer p-3 "+(layer !== "askId" && "d-none")}>
         <div className="card card-body mx-auto" style={{"maxWidth":"500px","minWidth":"300px"}}>
           <span>Please enter streaming tiktok id</span>
             <div className="input-group mx-auto" >
@@ -175,11 +183,7 @@ const App = () => {
           
         </div>
       </div>
-      <button 
-        onClick={enableAutoPlaySound} 
-        className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
-        <span>Enable audio <i className="fas fa-volume-up"></i></span>
-      </button>
+      <EnableAudio />
     </div>
   );
 }
