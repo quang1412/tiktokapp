@@ -172,8 +172,8 @@ const App = () => {
         let newRow = document.createElement('li');
         newRow.className = "mb-2 "
         newRow.innerHTML = `<div class="d-flex align-items-center">
-        <img class="${style.avatar}" src="${event.data.profilePictureUrl}">
-          <div>
+          <img class="${style.avatar}" src="${event.data.profilePictureUrl}">
+          <div class="d-flex flex-column ms-2">
             <span>${event.type}</span>
             <span class="ms-2">${name}</span>
           </div>
@@ -235,8 +235,8 @@ const App = () => {
         <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-fixed top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}>
           <i className="fas fa-cog"></i>
         </button>
-        <div>
-          <ul id="eventsList">
+        <div className="p-3">
+          <ul id="eventsList" className={style.list}>
           </ul>
         </div>
       </div>

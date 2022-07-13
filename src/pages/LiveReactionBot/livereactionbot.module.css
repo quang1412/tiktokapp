@@ -5,6 +5,10 @@
 .html:not(:hover) .hoverBtn{
  display:none
 }
+.list{
+  list-style:none;
+  padding-left:0;
+}
 .avatar{
     background-color: white;
     border: 0.05rem solid black;
