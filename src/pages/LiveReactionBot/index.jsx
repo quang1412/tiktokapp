@@ -3,10 +3,10 @@ import style from './livereactionbot.module.css';
 import React, {useEffect, useState, useRef} from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit'; 
 
+
 const App = () => {
-  const [value, setValue] = React.useState("");
   const { speak } = useSpeechSynthesis();
-  const { speak } = useSpeechSynthesis();
+  
   const canPlaySound = useRef(false); 
   
   const [options, setOptions] = useState({
