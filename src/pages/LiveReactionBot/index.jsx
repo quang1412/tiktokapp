@@ -116,11 +116,7 @@ const App = () => {
       return e.type !== type;
     })
     setEventQueue(list);
-  } 
-  
-  const handleAnimateText = str => { 
-    
-  }
+  }  
   
   useEffect(function(){
     let id = new URLSearchParams(window.location.search).get('id'); 

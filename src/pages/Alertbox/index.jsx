@@ -132,16 +132,6 @@ const Alertbox = () => {
     }
   } 
   
-  const enableAutoPlaySound = () => { 
-    audio.play()
-    .then(_ => {
-      canAutoPlay.current = true;
-    })
-    .catch(error => {
-      alert("Please open on PC to enable audio")
-    });
-  }
-  
   const MessTemplate = () => {
     if(!mainEvent.data.id){
       return (<></>);
@@ -175,15 +165,36 @@ const Alertbox = () => {
     }{' '}</span>))
   }
   
-  useEffect(function(){
-    document.getElementsByTagName('html')[0].className = style.alertboxhtml;
-     
+  const enableAutoPlaySound = () => { 
+    audio.play()
+    .then(_ => {
+      canAutoPlay.current = true;
+    })
+    .catch(error => {
+      alert("Please open on PC to enable audio")
+    });
+  }
+  
+  const EnableAudioBtn = () => {
+    
     audio.play()
     .then(_ => {
       canAutoPlay.current = true;
     })
     .catch(e => { });
-
+    
+    return (
+      <button 
+        className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play' || isOBS) && 'd-none'}`} 
+        onClick={enableAutoPlaySound}>
+        <span>Enable audio <i className="fas fa-volume-up"></i></span>
+      </button>
+    )
+  }
+  
+  useEffect(function(){
+    document.getElementsByTagName('html')[0].className = style.alertboxhtml; 
+    
     let id = new URLSearchParams(window.location.search).get('id'); 
     if(!id){
       setLayer("askId");
@@ -281,7 +292,7 @@ const Alertbox = () => {
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"unset","maxWidth":"unset","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer} isOBS={isOBS}/>
       </div>
-      <button className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play' || isOBS) && 'd-none'}`} onClick={enableAutoPlaySound}>Enable audio <i className="fas fa-volume-up"></i></button>
+      <EnableAudioBtn />
     </div>
   );
 }
