@@ -3,10 +3,7 @@ import style from './livereactionbot.module.css';
 import React, {useEffect, useState, useRef} from 'react'; 
 
 
-const App = () => { 
-  
-  const canPlaySound = useRef(false); 
-  
+const App = () => {  
   const [options, setOptions] = useState({
     general:{
       delay:3000,
@@ -34,13 +31,14 @@ const App = () => {
     }
   });
   
+  const [canPlaySound, setCanPlaySound] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [layer, setLayer] = useState("log");
   const [tiktokId, setTiktokId] = useState("");
   const [log, changeLog] = useState(["log:"]);
   const [eventQueue, setEventQueue] = useState([]);
   const [isDelay, setIsDelay] = useState(false);
-  const [lastEvent, setLastEvent] = useState({uniqueId:"abc123",nickname:"ABC123",profilePictureUrl:"https://static.fullstack.edu.vn/static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"})
+  const [lastEvent, setLastEvent] = useState({type:'gift',data:{uniqueId:"abc123",nickname:"ABC123",profilePictureUrl:"https://static.fullstack.edu.vn/static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"}})
   
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -138,7 +136,7 @@ const App = () => {
     let enable = () => {
       audio.play()
       .then(_ => {
-        canPlaySound.current = true;
+        setCanPlaySound(true);
       })
       .catch(error => {
         alert("Please open on PC to enable audio")
@@ -147,7 +145,7 @@ const App = () => {
     return (
       <button 
         onClick={enable} 
-        className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canPlaySound.current || layer !== 'play') && 'd-none'}`}>
+        className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canPlaySound || layer !== 'play') && 'd-none'}`}>
         <span>Enable audio <i className="fas fa-volume-up"></i></span>
       </button>
     )
@@ -199,9 +197,9 @@ const App = () => {
           </div>
         </div>`;
         column.insertBefore(newRow, column.firstChild);
-        setLastEvent(event.data);
+        setLastEvent(event);
         
-        if(canPlaySound.current){
+        if(canPlaySound){
           fetch("https://tiktoktool.app/api/ggtts?text=hello "+name)
           .then(res => res.text())
           .then(base64 => {
@@ -232,7 +230,7 @@ const App = () => {
         }
       }
     }
-  }, [eventQueue, isDelay, canPlaySound.current])
+  }, [eventQueue, isDelay, canPlaySound])
  
   return (
     <div className="LiveReactionBot">
@@ -257,13 +255,14 @@ const App = () => {
           <i className="fas fa-cog"></i>
         </button>
         <div className="p-3">
-          <p className={"text-center text-md-start text-red "+style.pageTitle}>
+          <p className={"text-primary "+style.pageTitle}>
             {options.general.pageTitle}
           </p>
           <div className={"text-center text-md-start "+style.lastEvent} style={{"backgroundColor":"white"}}>
             <img className="" src={lastEvent.profilePictureUrl}/>
-            <div className="d-md-inline-block ms-md-2">
-              <span className={style.userName}>{lastEvent.nickname}</span>
+            <div className="my-1">
+              <span className={style.userName}>{lastEvent.data.nickname}</span>
+              <span className={style.subText}>{lastEvent.data.uniqueId}</span>
             </div>
           </div>
           <ul id="eventsList" className={style.list}>
