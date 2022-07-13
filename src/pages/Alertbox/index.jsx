@@ -144,18 +144,21 @@ const Alertbox = () => {
   }
   
   const MessTemplate = () => {
-    if(!mainEvent.data.id || isDelay.current){
-      return (<></>);
+    if(!mainEvent.data.id){
+      return true;
     }
     
-    const animateLetter = str => {
+    const letters = str => {
       try{
         str = str.toString();
-        return (str.split("").map((i, k) => (<span style={{"color":"#32c3a6"}} key={k} className={["animated-letter", options[mainEvent.type].text_animation].join(' ')}>{i}</span>)))
+        return (str.split("").map((i, k) => (
+          <span
+            style={{"color":"#32c3a6"}} key={k}
+            className={["animated-letter", options[mainEvent.type].text_animation].join(' ')}>{i}
+          </span>
+        )))
       }
-      catch{
-        return (<>---</>)
-      } 
+      catch{ return true }
     }
     
     let optsTemplate = options[mainEvent.type].message_template
@@ -166,12 +169,12 @@ const Alertbox = () => {
     .replace("follow", (optsTemplate || '{username} is now follower'))
     
     return template.split(" ").map((text, i) => ( <span key={i}>{
-      text === "{username}" ? animateLetter(mainEvent.data.uniqueId) :
-      text === "{nickname}" ? animateLetter(mainEvent.data.nickname || mainEvent.data.uniqueId) :
-      text === "{giftname}" ? animateLetter(mainEvent.data.extendedGiftInfo.name) :
-      text === "{giftcount}" ? animateLetter(mainEvent.data.gift.repeat_count) :
-      text === "{likecount}" ? animateLetter(mainEvent.data.likeCount) :
-      text === "{amount}" ? animateLetter(mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count) : text
+      text === "{username}" ? letters(mainEvent.data.uniqueId) :
+      text === "{nickname}" ? letters(mainEvent.data.nickname || mainEvent.data.uniqueId) :
+      text === "{giftname}" ? letters(mainEvent.data.extendedGiftInfo.name) :
+      text === "{giftcount}" ? letters(mainEvent.data.gift.repeat_count) :
+      text === "{likecount}" ? letters(mainEvent.data.likeCount) :
+      text === "{amount}" ? letters(mainEvent.data.gift.repeat_count * mainEvent.data.extendedGiftInfo.diamond_count) : text
     }{' '}</span>))
   }
   
