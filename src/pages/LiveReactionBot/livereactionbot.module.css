@@ -35,6 +35,9 @@
   border-radius: 10%; 
   border: 0.1rem solid var(--mdb-gray-300);
 }
+.listItem .username{
+  font-size: 2rem; 
+}
 .listItem:first-child{
   display:none
 }

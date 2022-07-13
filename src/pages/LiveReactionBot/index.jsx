@@ -262,6 +262,9 @@ const App = () => {
           </p>
           <div className={"d-flex flex-column flex-md-row justify-content-center "+style.lastEvent} style={{"backgroundColor":"white"}}>
             <img className="" src={lastEvent.profilePictureUrl}/>
+            <div>
+              <p className={style.username}>{lastEvent.nickname}</p>
+            </div>
           </div>
           <ul id="eventsList" className={style.list}>
           </ul>
