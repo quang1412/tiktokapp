@@ -168,7 +168,7 @@ const App = () => {
 
         let column = document.getElementById('eventsList');
         let newRow = document.createElement('li');
-        newRow.innerHTML = `<div>${event.data.nickname || event.data.uniqueId}</div>`;
+        newRow.innerHTML = `<div><span>${event.type}</span><span class="ms-2">${event.data.nickname || event.data.uniqueId}</span></div>`;
         column.insertBefore(newRow, column.firstChild);
 
         setTimeout(() => {setIsDelay(false)}, options.general.delay);
