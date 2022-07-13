@@ -178,18 +178,28 @@ const App = () => {
         </div>`;
         column.insertBefore(newRow, column.firstChild);
         if(canPlaySound.current){
-          let tts = new Audio("https://tiktoktool.app/api/ggtts?text=hello");
-          tts.volume = 0.5;
-          tts.addEventListener("ended", function() {
+          fetch("https://tiktoktool.app/api/ggtts?text=hello")
+          .then(res => res.text())
+          .then(base64 => {
+            console.log(base64)
+            return new Promise((resolve, reject) => {
+              let tts = new Audio(base64);
+              tts.volume = 0.5;
+              tts.addEventListener("ended", function() {
+                resolve(true)
+              });
+              tts.addEventListener('error', () => {
+                resolve(true)
+              });
+              tts.play();
+            })
+          })
+          .catch(err => {console.log(err)})
+          .finally(() => {
             setTimeout(() => {
               setIsDelay(false)
             }, options.general.delay);
           });
-          tts.addEventListener('error', () => {
-            console.log('tts error')
-            setIsDelay(false)
-          });
-          tts.play();
         }
         else{
           setTimeout(() => {
