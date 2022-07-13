@@ -249,7 +249,7 @@ const App = () => {
             </div>
         </div>
       </div>
-      <div className={(layer==="play"?"":"d-none ")+style.playLayer}>
+      <div className={layer==="play"?style.layerPlay:"d-none"}>
         <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-fixed top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}>
           <i className="fas fa-cog"></i>
         </button>

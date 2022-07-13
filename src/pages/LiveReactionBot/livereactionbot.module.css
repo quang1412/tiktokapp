@@ -5,15 +5,19 @@
 .html:not(:hover) .hoverBtn{
  display:none
 }
+.layerPlay{
+  width:100vw
+}
 .firstEvent{
-  
+  height:30vh
 }
 .list{
   list-style:none;
   padding-left:0;
 }
 .listItem{
-  margin-bottom:.5rem
+  padding: 0.5rem 0;
+  border-bottom: .1rem dashed;
 }
 .avatar{
     background-color: white;
@@ -25,8 +29,9 @@
 }
 .userName{
   font-weight:800;
-    line-height: 1;
+  line-height: 1;
+  white-space: nowrap;
 }
 .subText{
-  
+  white-space: nowrap;
 }
