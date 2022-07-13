@@ -163,6 +163,12 @@ const App = () => {
     })
   }
   
+  function replaceTempVoice(event){
+    let temp = options[event.type].voiceTemp.split(" ").map(text => {
+      return (text === '{}' ? "" : text)
+    }).join(" ")
+  }
+  
 //   function getUserFollowerCount(){
 //     return new Promise((resolve, reject) => {
       
