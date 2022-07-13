@@ -12,21 +12,25 @@ const App = () => {
     gift:{
       active:true, 
       voiceTemp:'{nickname} / {username} / {giftname} / {giftcount} / {amount}',
+      // voiceTemp:'{nickname} / {username} / {giftname} / {giftcount} / {amount}',
       subtitleTemp:'Đã tặng quà',
     },
     like:{
       active:true, 
       voiceTemp:'{nickname} / {username} / {likecount}',
+      // voiceTemp:'{nickname} / {username} / {likecount}',
       subtitleTemp:'Đã thả tim',
     },
     share:{
       active:true, 
       voiceTemp:'{nickname} / {username}',
+      // voiceTemp:'{nickname} / {username}',
       subtitleTemp:'Đã chia sẻ',
     },
     follow:{
       active:true, 
       voiceTemp:'{nickname} / {username}',
+      // voiceTemp:'{nickname} / {username}',
       subtitleTemp:'đã theo dõi',
     }
   });
@@ -256,9 +260,9 @@ const App = () => {
           <i className="fas fa-cog"></i>
         </button>
         <div className="p-3">
-          <p className={"text-primary "+style.pageTitle}>
+          <span className={"d-block text-primary "+style.pageTitle}>
             {options.general.pageTitle}
-          </p>
+          </span>
           <div className={"text-center text-md-start "+style.lastEvent} style={{"backgroundColor":"white"}}>
             <img className="" src={lastEvent.data.profilePictureUrl}/>
             <div className="my-1">
