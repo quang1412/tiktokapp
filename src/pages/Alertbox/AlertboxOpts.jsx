@@ -116,7 +116,7 @@ export default function AlertboxOpts(props){
           <button className="nav-link fs-6 py-2 px-3" data-mdb-toggle="tab" href="#tab-share" role="tab" aria-controls="tab-share" aria-selected="false">Share</button>
         </li>
         <li className="ms-auto" role="presentation">
-          <button onClick={e => {props.setLayer("play")}} className="btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
+          <button onClick={e => {props.setLayer("play")}} className="btn btn-lg btn-light position-fixed top-0 end-0 text-primary lh-1 p-2 m-3" style={{"zIndex":"1"}}><i className="fas fa-times-circle"></i></button>
         </li>
       </ul>
     </div>

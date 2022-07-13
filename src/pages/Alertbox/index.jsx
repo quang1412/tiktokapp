@@ -251,7 +251,7 @@ const Alertbox = () => {
         </div>
       </div>
       <div className={[style.alertboxLayer, style[options[mainEvent.type].layout]].join(' ')} id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
-        <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-absolute top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
+        <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-fixed top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
         <div className={[style.widget, animate].join(' ')} onAnimationEnd={handleAnimationEnd} style={{"display" : (isShowing ? "block" : "none")}}>
           <div className={style.alertBox}>
             <div className={style.wrap}>
@@ -275,7 +275,7 @@ const Alertbox = () => {
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"unset","maxWidth":"unset","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer} isOBS={isOBS}/>
       </div>
-      <button className={`btn btn-sm btn-white btn-rounded position-absolute bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play' || isOBS) && 'd-none'}`} onClick={enableAutoPlaySound}>Enable audio <i className="fas fa-volume-up"></i></button>
+      <button className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play' || isOBS) && 'd-none'}`} onClick={enableAutoPlaySound}>Enable audio <i className="fas fa-volume-up"></i></button>
     </div>
   );
 }
