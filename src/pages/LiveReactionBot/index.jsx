@@ -164,8 +164,15 @@ const App = () => {
   }
   
   function replaceTempVoice(event){
-    let temp = options[event.type].voiceTemp.split(" ").map(text => {
-      return (text === '{}' ? "" : text)
+    let isGift = event.type === "gift";
+    let isLike = event.type === "like";
+    return options[event.type].voiceTemp.split(" ").map(text => {
+      return (text === '{nickname}'    ? lastEvent.data.nickname : 
+              text === '{username}'    ? lastEvent.data.uniqueId : 
+              (text === '{giftname}'   && isGift)  ? "" : 
+              (text === '{giftcount}'  && isGift)  ? "" : 
+              (text === '{amount}'     && isGift)  ? "" : 
+              (text === '{likecount}'  && isLike)  ? "" : text)
     }).join(" ")
   }
   
@@ -196,6 +203,7 @@ const App = () => {
     let event = events.pop();
     if(!isDelay){ 
       if(event){
+        setLastEvent(event);
         setIsDelay(true);
         setEventQueue(events);
         console.log('run proccess');
@@ -209,13 +217,12 @@ const App = () => {
           <img class="${style.avatar}" src="${event.data.profilePictureUrl}"/>
           <div class="d-flex flex-column ms-2">
             <span class="${style.userName}">${name}</span>
-            <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
+            <span class="${style.subText}">${replaceTempVoice(event)}</span>
           </div>
         </div>`;
         // <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
         // <span class="${style.subText}">${event.data.uniqueId}</span>
         column.insertBefore(newRow, column.firstChild);
-        setLastEvent(event);
         
         if(canPlaySound){
           fetch("https://tiktoktool.app/api/ggtts?text=hello "+name)
