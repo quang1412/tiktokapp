@@ -1,9 +1,12 @@
 .html{
-  font-size: max(16px, (min(3vw, 3vh)))
+/*   font-size: max(16px, (min(3vw, 3vh))) */
 }
 
 .html:not(:hover) .hoverBtn{
  display:none
+}
+.html body{
+  overflow-x: hidden
 }
 .layerPlay{
   width:100vw
@@ -13,7 +16,7 @@
 }
 .list{
   list-style:none;
-  padding-left:0;
+  padding:0;
 }
 .listItem{
   padding: 0.5rem 0;

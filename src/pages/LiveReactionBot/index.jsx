@@ -254,7 +254,7 @@ const App = () => {
           <i className="fas fa-cog"></i>
         </button>
         <div className="p-3">
-          <div className={style.firstEvent}>
+          <div className={style.firstEvent} style={{"backgroundColor":"var(--mdb-gray-300)"}}>
             
           </div>
           <ul id="eventsList" className={style.list}>
