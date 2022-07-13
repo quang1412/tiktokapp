@@ -181,16 +181,21 @@ const Alertbox = () => {
     
     const sound = new Howl({
       src: ['https://isetup.vn/tiktok/assets/sound/new-message-3.ogg'],
-      html5: true,
-      volume: 1.0,
+      html5: true, 
       onload(){
         console.log('audio loaded')
       },
       onloaderror(e, msg) {
         console.log("audio Error", e, msg);
-      }
+      } 
     });
-    sound.play();
+    
+    sound.once('load', () => {
+      id = sound.play();
+      sound.volume(1, id);
+      sound.play();
+    });
+
 
     audio.play()
     .then(_ => {
