@@ -132,6 +132,16 @@ const Alertbox = () => {
     }
   } 
   
+  const enableAutoPlaySound = () => { 
+    audio.play()
+    .then(_ => {
+      canAutoPlay.current = true;
+    })
+    .catch(error => {
+      alert("Please open on PC to enable audio")
+    });
+  }
+  
   const MessTemplate = () => {
     if(!mainEvent.data.id){
       return (<></>);
@@ -165,36 +175,31 @@ const Alertbox = () => {
     }{' '}</span>))
   }
   
-  const enableAutoPlaySound = () => { 
-    audio.play()
-    .then(_ => {
-      canAutoPlay.current = true;
-    })
-    .catch(error => {
-      alert("Please open on PC to enable audio")
-    });
+  const AskID = () => { 
+    return layer === 'askId' ? (
+      <div className="card card-body mx-auto" style={{"maxWidth":"500px","minWidth":"300px"}}>
+        <span>Please enter streaming tiktok id</span>
+          <div className="input-group mx-auto" >
+            <input onChange={e => {setTiktokId(e.target.value)}} type="text" className="form-control" placeholder="Enter Tiktok id" aria-label="Enter Tiktok id"/>
+            <a href={"?id="+tiktokId}>
+              <button className="btn btn-primary rounded-0 rounded-end h-100" type="button">
+                Connect
+              </button>
+            </a>
+          </div>
+      </div>
+    ) : (<></>)
   }
   
-  const EnableAudioBtn = () => {
-    
+  useEffect(function(){
+    document.getElementsByTagName('html')[0].className = style.alertboxhtml;
+     
     audio.play()
     .then(_ => {
       canAutoPlay.current = true;
     })
     .catch(e => { });
-    
-    return (
-      <button 
-        className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play' || isOBS) && 'd-none'}`} 
-        onClick={enableAutoPlaySound}>
-        <span>Enable audio <i className="fas fa-volume-up"></i></span>
-      </button>
-    )
-  }
-  
-  useEffect(function(){
-    document.getElementsByTagName('html')[0].className = style.alertboxhtml; 
-    
+
     let id = new URLSearchParams(window.location.search).get('id'); 
     if(!id){
       setLayer("askId");
@@ -255,17 +260,7 @@ const Alertbox = () => {
         {log.map((text, i) => (<div key={i}><span className="bg-white">{text}</span></div>))}
       </div>
       <div className="layer p-3" id="askId" style={{"display": (layer === "askId" ? "block" : "none")}}>
-        <div className="card card-body mx-auto" style={{"maxWidth":"500px","minWidth":"300px"}}>
-          <span>Please enter streaming tiktok id</span>
-            <div className="input-group mx-auto" >
-              <input onChange={e => {setTiktokId(e.target.value)}} type="text" className="form-control" placeholder="Enter Tiktok id" aria-label="Enter Tiktok id"/>
-              <a href={"?id="+tiktokId}>
-                <button className="btn btn-primary rounded-0 rounded-end h-100" type="button">
-                  Connect
-                </button>
-              </a>
-            </div>
-        </div>
+        <AskID />
       </div>
       <div className={[style.alertboxLayer, style[options[mainEvent.type].layout]].join(' ')} id="play" style={{"display":(layer === "play" ? "block" : "none")}}>
         <button onClick={e => {setLayer("setting")}} className={style.hoverBtn+" btn btn-lg btn-light position-fixed top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}><i className="fas fa-cog"></i></button>
@@ -292,7 +287,9 @@ const Alertbox = () => {
       <div className="layer position-relative m-auto" id="setting" style={{"display":(layer === "setting"?"block":"none"),"minWidth":"unset","maxWidth":"unset","height":"100vh"}}>
         <AlertboxOpts opts={options} onChangeOptions={handleOptions} setLayer={setLayer} isOBS={isOBS}/>
       </div>
-      <EnableAudioBtn />
+      <button onClick={enableAutoPlaySound} className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
+        <span>Enable audio <i className="fas fa-volume-up"></i></span>
+      </button>
     </div>
   );
 }
