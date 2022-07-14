@@ -50,7 +50,7 @@ const App = () => {
       setIsLoading(true);
     
       changeLog(prevLog => [...prevLog, 'server connecting...']); 
-      let socket = io("https://tiktoktools.glitch.me/obs",  {query: `id=${id}`});
+      let socket = io("https://bow-lush-day.glitch.me/obs",  {query: `id=${id}`});
       socket.on('connect', () => {  
         changeLog(prevLog => [...prevLog, ...['server connected', 'tiktok connecting...']]);
       });
