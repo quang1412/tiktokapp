@@ -45,7 +45,7 @@
 }
 .listItem .avatar{
     background-color: white;
-    border: 0.05rem solid black;
+    border: 0.05rem solid var(--mdb-secondary);
     border-radius: 50%;
     padding: .2rem;
     width: 3rem;

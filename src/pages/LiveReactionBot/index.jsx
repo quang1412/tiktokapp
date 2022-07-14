@@ -6,7 +6,7 @@ import React, {useEffect, useState, useRef} from 'react';
 const App = () => {  
   const [options, setOptions] = useState({
     general:{
-      delay:1000,
+      delay:3000,
       duration: 3000,
       pageTitle:"Tiktok tool"
     },
@@ -44,6 +44,8 @@ const App = () => {
   const [eventQueue, setEventQueue] = useState([]);
   const [isDelay, setIsDelay] = useState(false);
   const [lastEvent, setLastEvent] = useState({type:'gift',data:{uniqueId:"abc123",nickname:"ABC123",profilePictureUrl:"https://static.fullstack.edu.vn/static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"}})
+  const userLikeCount = {'asdqwe':123}
+  
   
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -152,7 +154,9 @@ const App = () => {
     socket.on('like', data => {
       if(options.like.active){
         console.log(data)
+        userLikeCount[data.uniqueId] += data.likeCount;
         setEventQueue(oldList => [...oldList, {type:'like', data: data}])
+        console.log(userLikeCount)
       }
     })
     
@@ -218,7 +222,7 @@ const App = () => {
           <img class="${style.avatar}" src="${event.data.profilePictureUrl}"/>
           <div class="d-flex flex-column ms-2">
             <span class="${style.userName}">${name}</span>
-            <span class="${style.subText}">${replaceTempVoice(event)}</span>
+            <span class="${style.subText}">${userLikeCount[event.data.uniqueId]||0}❤️</span>
           </div>
         </div>`;
         // <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
