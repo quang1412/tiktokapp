@@ -236,7 +236,7 @@ const App = () => {
         
         var delay = options.general.delay;
         if(canPlaySound){
-          fetch(`https://tiktoktool.app/api/ggtts?text=${replaceTempVoice(event)}&lang=${options.general.lang}`)
+          fetch(`https://bow-lush-day.glitch.me/api/ggtts?text=${replaceTempVoice(event)}&lang=${options.general.lang}`)
           .then(res => res.text())
           .then(base64 => {
 

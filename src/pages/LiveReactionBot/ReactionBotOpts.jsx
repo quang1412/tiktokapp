@@ -27,7 +27,7 @@ export default function ReactionBotOpts(props){
         </li>
       </ul>
     </div>
-    <div className="  text-start overflow-auto">
+    <div className="text-start">
       <div className="tab-content pt-3" id="pills-tabContent">
         <div className="tab-pane fade show active" id="tab-general" role="tabpanel" aria-labelledby="general">
           <form name="general">
