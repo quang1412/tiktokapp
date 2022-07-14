@@ -35,8 +35,8 @@ export default function ReactionBotOpts(props){
                 <label className="form-label mb-0">Page title</label>
               </div>
               <div className="col-8">
-                <div class="input-group">
-                  <input name="pageTitle" defaultValue={options.general.pageTitle} onChange={handleOptionsChange} type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" />
+                <div className="input-group">
+                  <input name="pageTitle" defaultValue={options.general.pageTitle} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" />
                 </div> 
               </div>
             </div> 
@@ -45,8 +45,8 @@ export default function ReactionBotOpts(props){
                 <label className="form-label mb-0">Delay</label>
               </div>
               <div className="col-8">
-                <div class="range">
-                  <input name="delay" defaultValue={options.general.delay} onChange={handleOptionsChange} type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3" />
+                <div className="range">
+                  <input name="delay" defaultValue={options.general.delay} onChange={handleOptionsChange} type="range" className="form-range" min="1" max="30" step="1" />
                 </div>
               </div>
             </div> 
@@ -56,7 +56,37 @@ export default function ReactionBotOpts(props){
           if(type !== "general"){ return (
             <div key={type} className="tab-pane fade" id={`tab-${type}`} role="tabpanel">
               <form name={type}>
-                
+                <div className="row mb-3">
+                  <div className="col-4">
+                    <label className="form-label mb-0">Active</label>
+                  </div>
+                  <div className="col-8">
+                    <div className="form-check form-check-inline">
+                      <input name="active" defaultValue="true" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options[type].active}/>
+                      <label className="form-check-label">Enable</label>
+                    </div> 
+                    <div className="form-check form-check-inline">
+                      <input name="active" defaultValue="false" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={!options[type].active}/>
+                      <label className="form-check-label">Disable</label>
+                    </div>
+                  </div>
+                </div> 
+                <div className="row mb-3">
+                  <div className="col-4">
+                    <label className="form-label mb-0">Voice Template</label>
+                  </div>
+                  <div className="col-8">
+                    <div className="input-group">
+                      <input name="pageTitle" defaultValue={options[type].voiceTemp} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"/>
+                    </div>
+                    <small>
+                      {type === 'gift' ? "voiceTemp:'{nickname} / {username} / {giftname} / {giftcount} / {amount}'" : 
+                      type === 'like' ? "" : 
+                      type === 'share' ? "" : 
+                      type === 'follow' ? "" : type}
+                    </small>
+                  </div>
+                </div> 
               </form>
             </div>
           ) }

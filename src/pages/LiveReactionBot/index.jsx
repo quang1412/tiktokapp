@@ -7,7 +7,7 @@ import React, {useEffect, useState, useRef} from 'react';
 const App = () => {
   const [options, setOptions] = useState({
     general:{
-      delay:3000, 
+      delay:3, 
       pageTitle:"Tiktok tool"
     },
     gift:{
@@ -255,13 +255,13 @@ const App = () => {
           .finally(() => {
             setTimeout(() => {
               setIsDelay(false)
-            }, delay);
+            }, delay*1000);
           });
         }
         else{
           setTimeout(() => {
             setIsDelay(false)
-          }, delay);
+          }, delay*1000);
         }
       }
     }
