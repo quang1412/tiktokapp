@@ -154,10 +154,7 @@ const App = () => {
     socket.on('like', data => {
       if(options.like.active){
         console.log(data)
-        let newObj = {...likeCount};
-        newObj[data.uniqueId] = (newObj[data.uniqueId]||0) + data.likeCount;
-        updateLikeCount(newObj)
-        // userLikeCount[data.uniqueId] = (userLikeCount[data.uniqueId] || 0) + data.likeCount;
+        updateLikeCount(function(current){current[data.uniqueId] = (current[data.uniqueId]||0) + data.likeCount; return current})
         setEventQueue(oldList => [...oldList, {type:'like', data: data}]);
       }
     })
@@ -224,7 +221,11 @@ const App = () => {
           <img class="${style.avatar}" src="${event.data.profilePictureUrl}"/>
           <div class="d-flex flex-column ms-2">
             <span class="${style.userName}">${name}</span>
-            <span class="${style.subText}">${likeCount[event.data.uniqueId]||0}❤️</span>
+            <span class="${style.subText}">
+              <span><i class="fa-solid fa-heart text-danger"></i> ${likeCount[event.data.uniqueId]||0}</span>
+              <span class="ms-2"><i class="fa-solid fa-share text-primary"></i> 0</span>
+              <span><i class="fa-solid fa-gem"></i> 0</span>
+            </span>
           </div>
         </div>`;
         // <span class="${style.subText}">${options[event.type].subtitleTemp}</span>

@@ -58,6 +58,10 @@
   white-space: nowrap;
 }
 .subText{
+  font-size:90%;
   white-space: nowrap;
   margin-bottom:0;
+}
+.subText i{
+  font-size:90%
 }
