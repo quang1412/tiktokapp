@@ -208,68 +208,73 @@ const App = () => {
     }) 
   }, []);
   
-  useEffect(() => {
+  useEffect(function(){
+    if(isDelay){
+      return;
+    }
     let events = [...eventQueue];
     let event = events.pop();
-    if(!isDelay){ 
-      if(event){
-        setLastEvent(event);
-        setIsDelay(true);
-        setEventQueue(events);
-        console.log('run proccess');
-        
-        let name = event.data.nickname || event.data.uniqueId;
-        
-        let column = document.getElementById('eventsList');
-        let newRow = document.createElement('li');
-        newRow.className = style.listItem+" overflow-hidden";
-        newRow.innerHTML = `<div class="d-flex align-items-center">
-          <img class="${style.avatar}" src="${event.data.profilePictureUrl}"/>
-          <div class="d-flex flex-column ms-2">
-            <span class="${style.userName}">${name}</span>
-            <span class="${style.subText}">
-              <span><i class="fa-solid fa-heart text-danger"></i> ${likeCount[event.data.uniqueId]||0}</span>
-              <span class="ms-2"><i class="fa-solid fa-share text-primary"></i> ${shareCount[event.data.uniqueId]||0}</span>
-              <span class="ms-2"><i class="fa-solid fa-gem text-warning"></i> ${donateCount[event.data.uniqueId]||0}</span>
-            </span>
-          </div>
-        </div>`;
-        // <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
-        // <span class="${style.subText}">${event.data.uniqueId}</span>
-        console.log(likeCount );
-        column.insertBefore(newRow, column.firstChild);
-        
-        var delay = options.general.delay;
-        if(canPlaySound){
-          fetch(`https://bow-lush-day.glitch.me/api/ggtts?text=${replaceTempVoice(event)}&lang=${options.general.lang}`)
-          .then(res => res.text())
-          .then(base64 => {
+    if(!event){
+      return;
+    }
+    if(!options[event.type].active){
+      delAllType(event.type)
+      setIsDelay(false);
+      return;
+    }
+    setLastEvent(event);
+    setIsDelay(true);
+    setEventQueue(events); 
 
-            return new Promise((resolve, reject) => {
-              let tts = new Audio(base64);
-              tts.volume = 0.5;
-              tts.addEventListener("ended", function() {
-                resolve(true)
-              });
-              tts.addEventListener('error', () => {
-                resolve(true)
-              });
-              tts.play();
-            })
-          })
-          .catch(err => {console.log(err)})
-          .finally(() => {
-            setTimeout(() => {
-              setIsDelay(false)
-            }, delay*1000);
+    let name = event.data.nickname || event.data.uniqueId;
+
+    let column = document.getElementById('eventsList');
+    let newRow = document.createElement('li');
+    newRow.className = style.listItem+" overflow-hidden";
+    newRow.innerHTML = `<div class="d-flex align-items-center">
+      <img class="${style.avatar}" src="${event.data.profilePictureUrl}"/>
+      <div class="d-flex flex-column ms-2">
+        <span class="${style.userName}">${name}</span>
+        <span class="${style.subText}">
+          <span><i class="fa-solid fa-heart text-danger"></i> ${likeCount[event.data.uniqueId]||0}</span>
+          <span class="ms-2"><i class="fa-solid fa-share text-primary"></i> ${shareCount[event.data.uniqueId]||0}</span>
+          <span class="ms-2"><i class="fa-solid fa-gem text-warning"></i> ${donateCount[event.data.uniqueId]||0}</span>
+        </span>
+      </div>
+    </div>`;
+    // <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
+    // <span class="${style.subText}">${event.data.uniqueId}</span>
+    console.log(likeCount );
+    column.insertBefore(newRow, column.firstChild);
+
+    var delay = options.general.delay;
+    if(canPlaySound){
+      fetch(`https://bow-lush-day.glitch.me/api/ggtts?text=${replaceTempVoice(event)}&lang=${options.general.lang}`)
+      .then(res => res.text())
+      .then(base64 => { 
+        return new Promise((resolve, reject) => {
+          let tts = new Audio(base64);
+          tts.volume = 0.5;
+          tts.addEventListener("ended", function() {
+            resolve(true)
           });
-        }
-        else{
-          setTimeout(() => {
-            setIsDelay(false)
-          }, delay*1000);
-        }
-      }
+          tts.addEventListener('error', () => {
+            resolve(true)
+          });
+          tts.play();
+        })
+      })
+      .catch(err => {console.log(err)})
+      .finally(() => {
+        setTimeout(() => {
+          setIsDelay(false)
+        }, delay*1000);
+      });
+    }
+    else{
+      setTimeout(() => {
+        setIsDelay(false)
+      }, delay*1000);
     }
   }, [options, eventQueue, isDelay, canPlaySound, likeCount, shareCount])
  
@@ -312,11 +317,7 @@ const App = () => {
     // options[optType][optName] = value;
     setOptions(function(c){c[optType][optName] = value; return c});
     console.log(options)
-  }
-  
-  function SettingLayer(){
-    
-  }
+  } 
   
   return (
     <div className="LiveReactionBot">
