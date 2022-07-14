@@ -164,15 +164,15 @@ const App = () => {
   }
   
   function replaceTempVoice(event){
-    let isGift = event.type === "gift";
-    let isLike = event.type === "like";
+    let isGift = (event.type === "gift");
+    let isLike = (event.type === "like");
     return options[event.type].voiceTemp.split(" ").map(text => {
-      return (text === '{nickname}'    ? lastEvent.data.nickname : 
-              text === '{username}'    ? lastEvent.data.uniqueId : 
-              (text === '{giftname}'   && isGift)  ? "" : 
-              (text === '{giftcount}'  && isGift)  ? "" : 
-              (text === '{amount}'     && isGift)  ? "" : 
-              (text === '{likecount}'  && isLike)  ? "" : text)
+      return (text === '{nickname}'    ? event.data.nickname : 
+              text === '{username}'    ? event.data.uniqueId : 
+              (text === '{giftname}'   * isGift)  ? event.data.extendedGiftInfo.name : 
+              (text === '{giftcount}'  * isGift)  ? event.data.gift.repeat_count : 
+              (text === '{amount}'     * isGift)  ? (event.data.gift.repeat_count * event.data.extendedGiftInfo.diamond_count) : 
+              (text === '{likecount}'  * isLike)  ? event.data.likeCount : text)
     }).join(" ")
   }
   
