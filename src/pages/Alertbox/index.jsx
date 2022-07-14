@@ -94,19 +94,6 @@ const Alertbox = () => {
     })
   }
   
-  useEffect(() => {
-    if(isLoading){
-      const interval = setInterval(() => {
-        changeLog(prevState => {
-          const newState = [...prevState]
-          newState[newState.length - 1] += '.'
-          return newState
-        })
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [isLoading])
   
   const handleOptions = newOptions => { 
     setOptions({...options, ...newOptions})
@@ -192,7 +179,7 @@ const Alertbox = () => {
     }{' '}</span>))
   }
   
-  useEffect(function(){
+  useEffect(() => {
     document.getElementsByTagName('html')[0].className = style.html;
      
     audio.play()
@@ -203,16 +190,29 @@ const Alertbox = () => {
     let id = new URLSearchParams(window.location.search).get('id'); 
     if(!id){
       setLayer("askId");
-      return;
     }
-    
-    setTiktokId(id);
-    socketConnect(id)
-    .then(socket => {
-      listenSocket(socket); 
-      setTimeout(() => {setLayer("play")}, 3000);
-    })
+    else{
+      setTiktokId(id);
+      socketConnect(id).then(socket => {
+        listenSocket(socket); 
+        setTimeout(() => {setLayer("play")}, 3000);
+      });
+    }
   }, []);
+  
+  useEffect(() => {
+    if(isLoading){
+      const interval = setInterval(() => {
+        changeLog(prevState => {
+          const newState = [...prevState]
+          newState[newState.length - 1] += '.'
+          return newState
+        })
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [isLoading])
   
   useEffect(() => {
     let events = [...eventQueue];
