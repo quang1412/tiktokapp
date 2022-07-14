@@ -154,7 +154,7 @@ const App = () => {
     socket.on('like', data => {
       if(options.like.active){
         console.log(data)
-        userLikeCount[data.uniqueId] += data.likeCount;
+        userLikeCount[data.uniqueId] = (userLikeCount[data.uniqueId] || 0) + data.likeCount;
         setEventQueue(oldList => [...oldList, {type:'like', data: data}])
         console.log(userLikeCount)
       }
