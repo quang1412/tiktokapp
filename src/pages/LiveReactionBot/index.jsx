@@ -303,8 +303,9 @@ const App = () => {
         break;
     }
     
-    options[optType][optName] = value;
-    setOptions(options);
+    // options[optType][optName] = value;
+    setOptions(function(c){c[optType][optName] = value; return c});
+    console.log(options)
   }
   
   function SettingLayer(){
@@ -337,43 +338,14 @@ const App = () => {
           <form name="general">
             <div className="row mb-3">
               <div className="col-4">
-                <label className="form-label mb-0">Alert delay</label>
+                <label className="form-label mb-0">Page title</label>
               </div>
               <div className="col-8">
-                <div className="range">
-                    <input name="alert_delay" defaultValue={options.general.alert_delay} onChange={handleOptionsChange} type="range" className="form-range" min="0" max="30" step="1" />
-                </div>
-                </div>
-            </div>
-            <div className="row mb-3">
-              <div className="col-4">
-                <label className="form-label mb-0">Parry alert</label>
+                <div class="input-group">
+                  <input name="pageTitle" defaultValue={options.general.pageTitle} onChange={handleOptionsChange} type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" />
+                </div> 
               </div>
-              <div className="col-8">
-                <div className="form-check d-inline-block">
-                  <input name="alert_parries" defaultValue="true" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={options.general.alert_parries}/>
-                  <label className="form-check-label">
-                    On
-                  </label>
-                </div>
-                <div className="form-check d-inline-block ms-3">
-                  <input name="alert_parries" defaultValue="false" onChange={handleOptionsChange} className="form-check-input" type="radio" defaultChecked={!options.general.alert_parries}/>
-                  <label className="form-check-label">
-                    Off
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div className="row mb-3 parry_alert_delay" style={{"display": (options.general.alert_parries ? "flex" : "none")}}>
-              <div className="col-4">
-                <label className="form-label mb-0">Parry delay</label>
-              </div>
-              <div className="col-8">
-                <div className="range">
-                  <input name="parry_alert_delay" defaultValue={options.general.parry_alert_delay} onChange={handleOptionsChange} type="range" className="form-range" min="1" max="20" step="1" data-before="1" data-before-subfix="s"/>
-                </div>
-                </div>
-            </div>
+            </div> 
           </form>
         </div>
         {Object.keys(options).map(function(type, i){
