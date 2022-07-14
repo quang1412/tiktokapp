@@ -3,8 +3,9 @@ import React  from "react";
 export default function ReactionBotOpts(props){
   const options = props.options;
   const handleOptionsChange = props.handleOptionsChange;
-  return (<div className="card w-100 h-100">
-    <div className="card-header">
+  return (
+    <div className="p-3">
+    <div className=" ">
       <ul className="nav nav-tabs" id="pills-tab" role="tablist">
         <li className="nav-item" role="presentation">
           <button className="nav-link fs-6 py-2 px-3 active" data-mdb-toggle="tab" href="#tab-general" role="tab" aria-controls="tab-general" aria-selected="true">General</button>
@@ -26,7 +27,7 @@ export default function ReactionBotOpts(props){
         </li>
       </ul>
     </div>
-    <div className="card-body text-start overflow-auto">
+    <div className="  text-start overflow-auto">
       <div className="tab-content pt-3" id="pills-tabContent">
         <div className="tab-pane fade show active" id="tab-general" role="tabpanel" aria-labelledby="general">
           <form name="general">
@@ -88,7 +89,7 @@ export default function ReactionBotOpts(props){
                   </div>
                   <div className="col-8">
                     <div className="input-group">
-                      <input name="pageTitle" defaultValue={options[type].voiceTemp} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"/>
+                      <input name="voiceTemp" defaultValue={options[type].voiceTemp} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"/>
                     </div>
                     <small>
                       {type === 'gift' ? "keys: {nickname} / {username} / {giftname} / {giftcount} / {amount}" : 
