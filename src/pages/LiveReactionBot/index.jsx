@@ -215,7 +215,7 @@ const App = () => {
         
         let column = document.getElementById('eventsList');
         let newRow = document.createElement('li');
-        newRow.className = style.listItem;
+        newRow.className = style.listItem+" overflow-hidden";
         newRow.innerHTML = `<div class="d-flex align-items-center">
           <img class="${style.avatar}" src="${event.data.profilePictureUrl}"/>
           <div class="d-flex flex-column ms-2">
@@ -266,6 +266,13 @@ const App = () => {
     }
   }, [eventQueue, isDelay, canPlaySound, likeCount, shareCount])
  
+  function SettingLayer(){
+    Object.keys(options).map(function(type, i){
+      if(type ==)
+    })
+    return (<span>abc</span>)
+  }
+  
   return (
     <div className="LiveReactionBot">
       <div className={(layer==="log"?"p-3 text-start":"d-none")}>
@@ -307,6 +314,7 @@ const App = () => {
         <button onClick={e => {setLayer("play")}} className={style.hoverBtn+" btn btn-lg btn-light position-fixed top-0 end-0 text-primary lh-1 p-2 m-3"} style={{"zIndex":"1"}}>
           <i className="fas fa-times-circle"></i>
         </button>
+        <SettingLayer />
       </div>
       <EnableAudioBtn />
     </div>
