@@ -72,6 +72,11 @@ const App = () => {
         return reject(false)
       });
       
+      socket.on('rejectTiktokId', () => {
+        setIsLoading(false)
+        changeLog(prevLog => [...prevLog, 'tiktok id was rejected, please contact to Admin']);
+        return reject(false)
+      })
     })
   }
   

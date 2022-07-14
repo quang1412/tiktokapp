@@ -10,12 +10,12 @@ const Alertbox = () => {
   const userAgent = window.navigator.userAgent;
   const isMobile = userAgent.includes('Mobile');
   const isOBS = userAgent.includes('OBS');
-  
-  const isLoading = useRef(false);
+   
   const isOutro = useRef(false);
   const canAutoPlay = useRef(false);
   const isDelay = useRef(false);
- 
+   
+  const [isLoading, setIsLoading] = useState();
   const [options, setOptions] = useState(JSON.parse(localStorage.alertboxOpts || `{ "share": { "alert_duration": 10, "message_template": "", "alert_animation_out": "backOutDown", "image_url": "https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif", "sound_volume": 100, "alert_animation_in": "backInDown", "layout": "banner", "alert_text_delay": 0, "font_weight": 800, "text_color": "#ffffff", "text_highlight_color": "#32c3a6", "text_animation": "wiggle", "font_size": 64, "active": true, "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg" }, "gift": { "text_highlight_color": "#32c3a6", "active": true, "text_animation": "wiggle", "alert_animation_out": "backOutDown", "layout": "banner", "text_color": "#ffffff", "image_url": "https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif", "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", "alert_animation_in": "backInDown", "alert_duration": 10, "sound_volume": 50, "message_template": "", "font_size": 64, "font_weight": 800, "alert_min_amount": 0, "alert_text_delay": 0 }, "like": { "text_color": "#ffffff", "image_url": "https://isetup.vn/tiktok/assets/gif/Explosion.gif", "sound_volume": 50, "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", "font_weight": 800, "alert_animation_out": "backOutDown", "alert_text_delay": 0, "text_highlight_color": "#32c3a6", "alert_animation_in": "backInDown", "text_animation": "wiggle", "layout": "banner", "alert_duration": 10, "font_size": 64, "message_template": "", "active": true }, "general": { "layout": "banner", "alert_parries": true, "parry_alert_delay": 3, "approved_manually": false, "censor_timeout": 0, "background_color": "#80ffac", "alert_delay": 3, "censor_recent_events": true }, "comment": {}, "follow": { "alert_duration": 10, "alert_animation_in": "backInDown", "message_template": "", "alert_animation_out": "backOutDown", "alert_text_delay": 0, "font_size": 64, "image_url": "https://isetup.vn/tiktok/assets/gif/jumpy-t-rex.gif", "text_highlight_color": "#32c3a6", "text_color": "#ffffff", "layout": "banner", "sound_volume": 50, "text_animation": "wiggle", "font_weight": 800, "sound_url": "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", "active": true } }`));
   const [layer, setLayer] = useState("log");
   const [tiktokId, setTiktokId] = useState("");
@@ -31,7 +31,7 @@ const Alertbox = () => {
   
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
-      isLoading.current = true;
+      setIsLoading(true)
     
       changeLog(prevLog => [...prevLog, 'server connecting...']); 
       let socket = io("https://tiktoktools.glitch.me/obs",  {query: `id=${id}`});
@@ -44,18 +44,23 @@ const Alertbox = () => {
       });
 
       socket.on('ttRoomInfo', data => {
-        isLoading.current = false;
+        setIsLoading(false);
         console.log(data);
         changeLog(prevLog => [...prevLog, 'tiktok connected']);
         return resolve(socket);
       });
 
       socket.on('ttConnectFail', () => {
-        isLoading.current = false;
+        setIsLoading(false);
         changeLog(prevLog => [...prevLog, 'tiktok connect fail']);
         return reject(false)
-      });
+      }); 
       
+      socket.on('rejectTiktokId', () => {
+        setIsLoading(false);
+        changeLog(prevLog => [...prevLog, 'tiktok id was rejected, please contact to Admin']);
+        return reject(false)
+      })
     })
   }
   
