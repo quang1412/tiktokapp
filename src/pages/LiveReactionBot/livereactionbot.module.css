@@ -32,7 +32,7 @@
   border-bottom: .1rem dashed;
 }
 .listItem .userName{
-  font-size: 1rem;  
+  font-size: 1.1rem;  
 }
 .lastEvent img{
   width: 20vh; 
@@ -45,9 +45,9 @@
 }
 .listItem .avatar{
     background-color: white;
-    border: 0.05rem solid var(--mdb-secondary);
+    border: 0.09rem solid var(--mdb-secondary);
     border-radius: 50%;
-    padding: .2rem;
+    padding: .1rem;
     width: 3rem;
     height: 3rem; 
 }
@@ -58,9 +58,10 @@
   white-space: nowrap;
 }
 .subText{
-  font-size:90%;
+  font-size:80%;
   white-space: nowrap;
   margin-bottom:0;
+  opacity: 80%;
 }
 .subText i{
   font-size:90%
