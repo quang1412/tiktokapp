@@ -6,30 +6,31 @@ import React, {useEffect, useState, useRef} from 'react';
 const App = () => {  
   const [options, setOptions] = useState({
     general:{
-      delay:3000,
+      delay:1000,
+      duration: 3000,
       pageTitle:"Tiktok tool"
     },
     gift:{
       active:true, 
-      voiceTemp:'{nickname} / {username} / {giftname} / {giftcount} / {amount}',
+      voiceTemp:'cảm ơn {nickname} đã tặng quà',
       // voiceTemp:'{nickname} / {username} / {giftname} / {giftcount} / {amount}',
       subtitleTemp:'Đã tặng quà',
     },
     like:{
       active:true, 
-      voiceTemp:'{nickname} / {username} / {likecount}',
+      voiceTemp:'cảm ơn {nickname} đã thả tim',
       // voiceTemp:'{nickname} / {username} / {likecount}',
       subtitleTemp:'Đã thả tim',
     },
     share:{
       active:true, 
-      voiceTemp:'{nickname} / {username}',
+      voiceTemp:'cảm ơn {nickname} đã chia sẻ livestream',
       // voiceTemp:'{nickname} / {username}',
       subtitleTemp:'Đã chia sẻ',
     },
     follow:{
       active:true, 
-      voiceTemp:'{nickname} / {username}',
+      voiceTemp:'cảm ơn {nickname} đã follow kênh',
       // voiceTemp:'{nickname} / {username}',
       subtitleTemp:'đã theo dõi',
     }
@@ -224,8 +225,9 @@ const App = () => {
         // <span class="${style.subText}">${event.data.uniqueId}</span>
         column.insertBefore(newRow, column.firstChild);
         
+        var delay = options.general.delay;
         if(canPlaySound){
-          fetch("https://tiktoktool.app/api/ggtts?text=hello "+name)
+          fetch("https://tiktoktool.app/api/ggtts?text="+replaceTempVoice(event))
           .then(res => res.text())
           .then(base64 => {
 
@@ -245,13 +247,13 @@ const App = () => {
           .finally(() => {
             setTimeout(() => {
               setIsDelay(false)
-            }, options.general.delay);
+            }, delay);
           });
         }
         else{
           setTimeout(() => {
             setIsDelay(false)
-          }, options.general.delay);
+          }, delay);
         }
       }
     }
@@ -287,7 +289,7 @@ const App = () => {
             <img className="" src={lastEvent.data.profilePictureUrl}/>
             <div className="my-1">
               <p className={style.userName}>{lastEvent.data.nickname}</p>
-              <p className={style.subText}>{options[lastEvent.type].subtitleTemp}</p>
+              <p className={style.subText}>{replaceTempVoice(lastEvent)}</p>
             </div>
           </div>
           <ul id="eventsList" className={style.list}>
