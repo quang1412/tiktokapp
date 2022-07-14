@@ -32,6 +32,17 @@ export default function ReactionBotOpts(props){
           <form name="general">
             <div className="row mb-3">
               <div className="col-4">
+                <label className="form-label mb-0">Language</label>
+              </div>
+              <div className="col-8">
+                <select name="lang"  defaultValue={options.general.lang} onChange={handleOptionsChange} className="form-select me-2" title="use arrow key to navigate through list, and enter key to select">
+                  <option value='vi'>Vietnamese</option>
+                  <option value="en">English</option>
+                </select>
+              </div>
+            </div> 
+            <div className="row mb-3">
+              <div className="col-4">
                 <label className="form-label mb-0">Page title</label>
               </div>
               <div className="col-8">
@@ -80,10 +91,10 @@ export default function ReactionBotOpts(props){
                       <input name="pageTitle" defaultValue={options[type].voiceTemp} onChange={handleOptionsChange} type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"/>
                     </div>
                     <small>
-                      {type === 'gift' ? "voiceTemp:'{nickname} / {username} / {giftname} / {giftcount} / {amount}'" : 
-                      type === 'like' ? "" : 
-                      type === 'share' ? "" : 
-                      type === 'follow' ? "" : type}
+                      {type === 'gift' ? "keys: {nickname} / {username} / {giftname} / {giftcount} / {amount}" : 
+                      type === 'like' ? "keys: {nickname} / {username} / {likecount}" : 
+                      type === 'share' ? "keys: {nickname} / {username}" : 
+                      type === 'follow' ? "keys: {nickname} / {username}" : type}
                     </small>
                   </div>
                 </div> 

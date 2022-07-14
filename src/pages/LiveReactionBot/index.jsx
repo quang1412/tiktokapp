@@ -7,6 +7,7 @@ import React, {useEffect, useState, useRef} from 'react';
 const App = () => {
   const [options, setOptions] = useState({
     general:{
+      lang:"vi",
       delay:3, 
       pageTitle:"Tiktok tool"
     },
@@ -235,7 +236,7 @@ const App = () => {
         
         var delay = options.general.delay;
         if(canPlaySound){
-          fetch("https://tiktoktool.app/api/ggtts?text="+replaceTempVoice(event))
+          fetch(`https://tiktoktool.app/api/ggtts?text=${replaceTempVoice(event)}&lang=${options.general.lang}`)
           .then(res => res.text())
           .then(base64 => {
 
@@ -265,7 +266,7 @@ const App = () => {
         }
       }
     }
-  }, [eventQueue, isDelay, canPlaySound, likeCount, shareCount])
+  }, [options, eventQueue, isDelay, canPlaySound, likeCount, shareCount])
  
   const handleOptionsChange = async e => {
     let target = e.target;
@@ -302,8 +303,7 @@ const App = () => {
         break;
       default:
         break;
-    }
-    
+    } 
     // options[optType][optName] = value;
     setOptions(function(c){c[optType][optName] = value; return c});
     console.log(options)
