@@ -2,7 +2,7 @@ body:not(:hover) .hoverBtn{
  display:none
 }
 .html{
-  font-size: max(16px, (min(3vw, 3vh)))
+/*   font-size: max(16px, (min(3vw, 3vh))) */
 }
 .alertboxLayer{
   width: 100vw;
