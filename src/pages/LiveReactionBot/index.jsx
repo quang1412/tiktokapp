@@ -44,8 +44,9 @@ const App = () => {
   const [eventQueue, setEventQueue] = useState([]);
   const [isDelay, setIsDelay] = useState(false);
   const [lastEvent, setLastEvent] = useState({type:'gift',data:{uniqueId:"abc123",nickname:"ABC123",profilePictureUrl:"https://static.fullstack.edu.vn/static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"}})
-  const [likeCount, updateLikeCount] = useState({})
-  
+  const [likeCount, updateLikeCount] = useState({});
+  const [shareCount, updateShareCount] = useState({});
+  const [donateCount, updateDonateCount] = useState({});
   
   const socketConnect = (id) => {
     return new Promise((resolve, reject) => { 
@@ -140,6 +141,8 @@ const App = () => {
     socket.on('gift', data => {
       if(options.gift.active){
         console.log(data)
+        let amount = data.gift.repeat_count * data.extendedGiftInfo.diamond_count;
+        updateDonateCount(function(c){c[data.uniqueId] = (c[data.uniqueId]||0) + amount; return c})
         setEventQueue(oldList => [...oldList, {type:'gift', data: data}])
       }
     })
@@ -154,7 +157,7 @@ const App = () => {
     socket.on('like', data => {
       if(options.like.active){
         console.log(data)
-        updateLikeCount(function(current){current[data.uniqueId] = (current[data.uniqueId]||0) + data.likeCount; return current})
+        updateLikeCount(function(c){c[data.uniqueId] = (c[data.uniqueId]||0) + data.likeCount; return c})
         setEventQueue(oldList => [...oldList, {type:'like', data: data}]);
       }
     })
@@ -162,6 +165,7 @@ const App = () => {
     socket.on('share', data => {
       if(options.share.active){
         console.log(data)
+        updateShareCount(function(c){c[data.uniqueId] = (c[data.uniqueId]||0) + 1; return c})
         setEventQueue(oldList => [...oldList, {type:'share', data: data}])
       }
     })
@@ -223,8 +227,8 @@ const App = () => {
             <span class="${style.userName}">${name}</span>
             <span class="${style.subText}">
               <span><i class="fa-solid fa-heart text-danger"></i> ${likeCount[event.data.uniqueId]||0}</span>
-              <span class="ms-2"><i class="fa-solid fa-share text-primary"></i> 0</span>
-              <span><i class="fa-solid fa-gem"></i> 0</span>
+              <span class="ms-2"><i class="fa-solid fa-share text-primary"></i> ${shareCount[event.data.uniqueId]||0}</span>
+              <span class="ms-2"><i class="fa-solid fa-gem text-warning"></i> ${donateCount[event.data.uniqueId]||0}</span>
             </span>
           </div>
         </div>`;
@@ -265,7 +269,7 @@ const App = () => {
         }
       }
     }
-  }, [eventQueue, isDelay, canPlaySound, likeCount])
+  }, [eventQueue, isDelay, canPlaySound, likeCount, shareCount])
  
   return (
     <div className="LiveReactionBot">
