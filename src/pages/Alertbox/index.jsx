@@ -12,7 +12,6 @@ const Alertbox = () => {
   const isOBS = userAgent.includes('OBS');
    
   const isOutro = useRef(false);
-  const canAutoPlay = useRef(false);
   const isDelay = useRef(false);
   
   const [canPlaySound, setCanPlaySound] = useState(false);
@@ -102,7 +101,7 @@ const Alertbox = () => {
   }
   
   const playSound = (url = "https://isetup.vn/tiktok/assets/sound/new-message-4.ogg", vol = 50) => {
-    if(canAutoPlay.current){
+    if(canPlaySound){
       audio.pause();
       audio.currentTime = 0;
       audio.src = url;
@@ -115,7 +114,7 @@ const Alertbox = () => {
     let enable = () => {
       audio.play()
       .then(_ => {
-        canAutoPlay.current = true;
+        setCanPlaySound(true);
       })
       .catch(error => {
         alert("Please open on PC to enable audio")
@@ -124,7 +123,7 @@ const Alertbox = () => {
     return (
     <button 
       onClick={enable} 
-      className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canAutoPlay.current || layer !== 'play') && 'd-none'}`}>
+      className={`btn btn-sm btn-white btn-rounded position-fixed bottom-0 end-0 m-2 ${(canPlaySound || layer !== 'play') && 'd-none'}`}>
       <span>Enable audio <i className="fas fa-volume-up"></i></span>
     </button>
     )
@@ -254,7 +253,7 @@ const Alertbox = () => {
         }
       } 
     }
-  }, [eventQueue, isDelay.current, isShowing])
+  }, [eventQueue, isDelay.current, isShowing, canPlaySound])
  
   return (
     <div className="Alertbox">
