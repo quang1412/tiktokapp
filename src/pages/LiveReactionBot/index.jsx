@@ -241,10 +241,7 @@ const App = () => {
           <span class="ms-2"><i class="fa-solid fa-gem text-warning"></i> ${donateCount[event.data.uniqueId]||0}</span>
         </span>
       </div>
-    </div>`;
-    // <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
-    // <span class="${style.subText}">${event.data.uniqueId}</span>
-    console.log(likeCount );
+    </div>`;  
     column.insertBefore(newRow, column.firstChild);
 
     var delay = options.general.delay;
