@@ -95,7 +95,7 @@ const Alertbox = () => {
   }
   
   useEffect(() => {
-    if(isLoading.current){
+    if(isLoading){
       const interval = setInterval(() => {
         changeLog(prevState => {
           const newState = [...prevState]
@@ -106,7 +106,7 @@ const Alertbox = () => {
 
       return () => clearInterval(interval);
     }
-  }, [isLoading.current])
+  }, [isLoading])
   
   const handleOptions = newOptions => { 
     setOptions({...options, ...newOptions})
