@@ -3,7 +3,7 @@ import style from './livereactionbot.module.css';
 import React, {useEffect, useState, useRef} from 'react'; 
 
 
-const App = () => {  
+const App = () => {
   const [options, setOptions] = useState({
     general:{
       delay:3000,
@@ -44,7 +44,7 @@ const App = () => {
   const [eventQueue, setEventQueue] = useState([]);
   const [isDelay, setIsDelay] = useState(false);
   const [lastEvent, setLastEvent] = useState({type:'gift',data:{uniqueId:"abc123",nickname:"ABC123",profilePictureUrl:"https://static.fullstack.edu.vn/static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"}})
-  const userLikeCount = {'asdqwe':123}
+  const [likeCount, updateLikeCount] = useState({})
   
   
   const socketConnect = (id) => {
@@ -154,9 +154,11 @@ const App = () => {
     socket.on('like', data => {
       if(options.like.active){
         console.log(data)
-        userLikeCount[data.uniqueId] = (userLikeCount[data.uniqueId] || 0) + data.likeCount;
-        setEventQueue(oldList => [...oldList, {type:'like', data: data}])
-        console.log(userLikeCount)
+        let newObj = {...likeCount};
+        newObj[data.uniqueId] = (newObj[data.uniqueId]||0) + data.likeCount;
+        updateLikeCount(newObj)
+        // userLikeCount[data.uniqueId] = (userLikeCount[data.uniqueId] || 0) + data.likeCount;
+        setEventQueue(oldList => [...oldList, {type:'like', data: data}]);
       }
     })
     
@@ -222,11 +224,12 @@ const App = () => {
           <img class="${style.avatar}" src="${event.data.profilePictureUrl}"/>
           <div class="d-flex flex-column ms-2">
             <span class="${style.userName}">${name}</span>
-            <span class="${style.subText}">${userLikeCount[event.data.uniqueId]||0}❤️</span>
+            <span class="${style.subText}">${likeCount[event.data.uniqueId]||0}❤️</span>
           </div>
         </div>`;
         // <span class="${style.subText}">${options[event.type].subtitleTemp}</span>
         // <span class="${style.subText}">${event.data.uniqueId}</span>
+        console.log(likeCount );
         column.insertBefore(newRow, column.firstChild);
         
         var delay = options.general.delay;
@@ -261,7 +264,7 @@ const App = () => {
         }
       }
     }
-  }, [eventQueue, isDelay, canPlaySound])
+  }, [eventQueue, isDelay, canPlaySound, likeCount])
  
   return (
     <div className="LiveReactionBot">
