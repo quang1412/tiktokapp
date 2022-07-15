@@ -6,7 +6,6 @@ import'./Animate.min.css';
 import { io } from "socket.io-client";
  
 const Alertbox = () => {
-  
   const userAgent = window.navigator.userAgent;
   const isMobile = userAgent.includes('Mobile');
   const isOBS = userAgent.includes('OBS');
