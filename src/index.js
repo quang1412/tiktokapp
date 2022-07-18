@@ -1,9 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from 'react-dom';
-import './index.css';
-// import App from './App';
-// import * as serviceWorker from './serviceWorker';
+import './index.css'; 
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Alertbox from "./pages/Alertbox/";
