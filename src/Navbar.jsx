@@ -18,6 +18,9 @@ function Navbar() {
         <li className="nav-item">
           <Link to="/live-reaction-bot" className="nav-link">Live Reaction Bot</Link>
         </li> 
+        <li className="nav-item">
+          <Link to="/top-like" className="nav-link">Top Like</Link>
+        </li> 
       </ul>
     </div>
   </div>
