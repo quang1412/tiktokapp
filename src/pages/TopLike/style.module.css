@@ -81,7 +81,7 @@
 .recentEvent > *:nth-child(9){
     opacity: 90%;
 } 
-.topBar{
+.topRankBar{
     font-size: 5px;
     height: 100%;
     /* font-size: 12px; */
@@ -97,7 +97,7 @@
     /* top: 0; */
     left: 15px;
 }
-.topBar .topUser{
+.topRankBar .topUser{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,17 +116,17 @@
     border-radius:50%;
     /* padding:2px; */
 }
-/* .topBar .topUser:nth-child(3) .avatar{ 
+/* .topRankBar .topUser:nth-child(3) .avatar{ 
     width: 4em;
     height: 4em; 
     border-color: var(--bs-primary);
 }
-.topBar .topUser:nth-child(2) .avatar{ 
+.topRankBar .topUser:nth-child(2) .avatar{ 
     width: 4.5em;
     height: 4.5em; 
     border-color: var(--bs-primary);
 } */
-.topBar .topUser:nth-child(1)::before{ 
+.topRankBar .topUser:nth-child(1)::before{ 
     /* content: "TOP 1";
     white-space: nowrap;
     color: yellow;

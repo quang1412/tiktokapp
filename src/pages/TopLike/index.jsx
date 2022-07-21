@@ -89,9 +89,19 @@ const TopLike = () => {
             {layer === "connect" && <SocketConnect onConnected={socketListen} />}
             <div className={layer === "game" ? style.gameScreen : 'd-none'} style={{}}>
                 <div className={style.main}>
-                    <h4 className={style.title}>Top thả tim</h4>
+                    <div className="d-flex justify-content-between">
+                        <h4 className={style.title}>Top thả tim</h4>
+                        <div className={style.toolBar}>
+                            <small onClick={changeBackground} role="button">
+                                Đổi ảnh <i className="fas fa-image"></i>
+                            </small>
+                            <small onClick={resetChart} className="ms-2 text-danger" role="button">
+                                Reset <i className="fas fa-sync"></i>
+                            </small>
+                        </div>
+                    </div>
                     <div className={style.chartContainer} style={{ backgroundImage: `url("${options.bg_img}")` }}> 
-                        <div className={style.topBar}>
+                        <div className={style.topRankBar}>
                             {topLike.map((uniqueId, index) => {
                                 return (
                                     <div key={index} className={style.topUser}>
@@ -181,14 +191,6 @@ const TopLike = () => {
                                 return <p key={index} className="mb-0 text-nowrap">{`${event.nickname || event.uniqueId} +${event.likeCount} ♥︎`}</p>
                             })}
                         </div>
-                    </div>
-                    <div className={style.toolBar}>
-                        <small onClick={changeBackground} role="button">
-                            Đổi ảnh <i className="fas fa-image"></i>
-                        </small>
-                        <small onClick={resetChart} className="ms-2 text-danger" role="button">
-                            Reset <i className="fas fa-sync"></i>
-                        </small>
                     </div>
                 </div> 
             </div> 
