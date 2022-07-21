@@ -3,8 +3,7 @@ import SocketConnect from "../../components/SocketConnect";
 import style from "./style.module.css";
 import "../../libs/css/Animate.min.css";
 import { Bar } from 'react-chartjs-2';
-import ChartDataLabels from 'chartjs-plugin-datalabels'; 
-import Button from 'react-bootstrap/Button';
+import ChartDataLabels from 'chartjs-plugin-datalabels';  
 
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, } from 'chart.js';
 

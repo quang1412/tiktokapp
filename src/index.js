@@ -6,6 +6,7 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Alertbox from "./pages/Alertbox/";
 import LiveReactionBot from './pages/LiveReactionBot/';
+import TopLike from './pages/TopLike/';
 
 
 export default function Main() {
@@ -17,6 +18,7 @@ export default function Main() {
         </Route>
         <Route path="alertbox" element={<Alertbox />}/>
         <Route path="live-reaction-bot" element={<LiveReactionBot />}/>
+        <Route path="top-like" element={<TopLike />}/>
       </Routes>
     </BrowserRouter>
   );
