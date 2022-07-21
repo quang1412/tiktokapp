@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '../logo.svg';
-import '../style/Home.css';
+import logo from '../../logo.svg';
+import './style.css';
 
 function Home() {
   // document.getElementsByTagName('html')[0].className = "";

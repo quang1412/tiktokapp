@@ -6,7 +6,7 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-light bg-light position-absolute w-100" style={{ 'zIndex':'1' }}>
   <div className="container-fluid">
     <Link to="/" className="navbar-brand">Home</Link>
-    <button className="navbar-toggler"type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" 
+    <button className="navbar-toggler"type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <i className="fas fa-bars"></i>
     </button>

@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import './index.css'; 
 import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import Alertbox from "./pages/Alertbox/";
-import LiveReactionBot from './pages/LiveReactionBot/';
-import TopLike from './pages/TopLike/';
+import Home from "./pages/Home/";
+import Alertbox from "./pages/Alertbox";
+import LiveReactionBot from './pages/LiveReactionBot';
+import TopLike from './pages/TopLike';
 
 
 export default function Main() {

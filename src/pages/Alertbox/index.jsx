@@ -1,13 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
 import AlertboxOpts from './AlertboxOpts';
-import style from './alertbox.module.css';
+import style from './style.module.css';
 import './TextAnimations.css';
-import'./Animate.min.css'; 
+import'../../libs/css/Animate.min.css'; 
 import { io } from "socket.io-client";
  
 const Alertbox = () => {
-  const userAgent = window.navigator.userAgent;
-  const isMobile = userAgent.includes('Mobile');
+  const userAgent = window.navigator.userAgent; 
   const isOBS = userAgent.includes('OBS');
    
   const isOutro = useRef(false);

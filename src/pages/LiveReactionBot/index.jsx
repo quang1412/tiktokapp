@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
-import style from './livereactionbot.module.css';
+import style from './style.module.css';
 import ReactionBotOpts from './ReactionBotOpts'
 import React, {useEffect, useState, useRef} from 'react'; 
 

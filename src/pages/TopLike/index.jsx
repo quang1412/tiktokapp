@@ -71,6 +71,10 @@ const TopLike = () => {
         }
     }
 
+    function resetChart(){
+        setlikeData({})
+    }
+
     useEffect(() => {
         let top = Object.keys(likeData).sort(function (a, b) { return likeData[b] - likeData[a] });
         setTopLike(top.slice(0, 10))
@@ -127,8 +131,8 @@ const TopLike = () => {
                                                 right: 10
                                             },
                                             color: '#fff',
-                                            align: 'left',
-                                            anchor: 'end',
+                                            align: 'right',
+                                            anchor: 'start',
                                         },
                                         tooltip: {
                                             displayColors: false
@@ -167,7 +171,7 @@ const TopLike = () => {
                                         borderSkipped: false,
                                         data: topLike[0] ? topLike.map(uniqueId => {
                                             return likeData[uniqueId]
-                                        }) : [5, 4, 3, 2, 1]
+                                        }) : [0, 0, 0, 0, 0]
                                     }]
                                 }}
                             />
@@ -179,9 +183,12 @@ const TopLike = () => {
                         </div>
                     </div>
                     <div className={style.toolBar}>
-                        <span onClick={changeBackground} role="button">
-                            <i className="fas fa-image"></i> Đổi ảnh nền
-                        </span>
+                        <small onClick={changeBackground} role="button">
+                            Đổi ảnh <i className="fas fa-image"></i>
+                        </small>
+                        <small onClick={resetChart} className="ms-2 text-danger" role="button">
+                            Reset <i className="fas fa-sync"></i>
+                        </small>
                     </div>
                 </div> 
             </div> 

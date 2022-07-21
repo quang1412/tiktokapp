@@ -12,7 +12,7 @@ const SocketConnect = (props) => {
             // setIsLoading(true);
 
             setLog(prevLog => [...prevLog, 'server connecting...']);
-            let socket = io("https://bow-lush-day.glitch.me/obs", { query: `id=${id}` }); 
+            let socket = io(process.env.REACT_APP_SOCKET_URL, { query: `id=${id}` }); 
             socket.on('connect', () => {
                 setLog(prevLog => [...prevLog, ...['server connected', 'tiktok connecting...']]);
             });
